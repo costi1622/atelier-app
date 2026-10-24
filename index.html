@@ -9,20 +9,27 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<!-- Fără fonturi de pe internet (7.39): tipografia vine din stivele de sistem definite în
+     --ff-titlu și --ff-corp, deci aplicația arată la fel de la prima deschidere și offline. -->
 <style>
 :root{
   --fs:1;
-  --zoomIco:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231F2B33' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7'/%3E%3C/svg%3E"); --paper:#F6F7F4; --panel:#FFFFFF; --grid:#D3DDD7; --ink:#1F2B33; --muted:#5A6770;
-  --line:#CBD3CE; --line-f:#808D85; --mat:#2C6A54; --mat-soft:#E3EFE9; --thread:#C0283F; --amber:#8A5D0A;
+  --zoomIco:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231F2B33' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7'/%3E%3C/svg%3E"); --paper:#F3EFE6; --panel:#FBF9F4; --grid:#D6CDBB; --ink:#23201C; --muted:#6B6459;
+  --line:#D9D1C1; --line-f:#8A8170; --mat:#2E5744; --mat-soft:#E4EDE4; --thread:#9B2D3A; --amber:#8E6110;
+  /* ață de indigo: accentul interfeței, separat de verdele materialelor (7.39) */
+  --ata:#2E4057; --ata-soft:#E2E6EC;
   --fab:#D9E5EF; --fabS:#7FA3C2; --fab2:#F0DDB4; --fab2S:#C0913A;
   --tape:#8795A3; --yarn:#9C4E7C; --yarnH:#E0A21A; --hook:#6E7C86; --gap:#B9C3CA;
   --metalHi:#D7DEE3; --metalLit:#EEF2F5; --fabD:#4E7394; --fabLit:#EAF2F8; --fab2D:#8C6322; --fab2Lit:#FBEBC6; --yarnD:#5E2447; --yarnLit:#E6B8D3; --yarnHD:#8A5A00; --yarnHLit:#FFEBB0; --yarnHi:#C173A0; --janome:#1E5140; --janomeD:#17402F;
+  /* 7.41: ața are volum (margine închisă + lumină) și hârtia are fibră */
+  --threadD:#6E1A24; --threadLit:#D97B85; --firJosD:#14453A; --firJosLit:#7FC2AE; --grain-img:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)' opacity='.05'/%3E%3C/svg%3E"); --umbra:rgba(35,32,28,.07);
   --s1:4px; --s2:8px; --s3:12px; --s4:18px; --s5:28px; --s6:44px;
-  --c-masina:#2C6A54; --c-mana:#8A5D0A; --c-croset:#9C4E7C; --c-tricot:#2F6690; --c-stiut:#7A4A3A;
-  --bgdot:rgba(44,106,84,.16); --bgweave:rgba(31,43,51,.035); --bgglow:rgba(44,106,84,.13); --bgedge:rgba(192,40,63,.14);
+  --ff-titlu:"Iowan Old Style","Palatino Linotype",Palatino,"Noto Serif",Georgia,serif;
+  --ff-corp:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+  /* eticheta mică, cu majuscule rărite, folosită peste tot ca supratitlu */
+  --ff-et:var(--ff-corp);
+  --c-masina:#3E5F4C; --c-mana:#8E6110; --c-croset:#9B2D3A; --c-tricot:#2E4057; --c-stiut:#6B4A38; --c-petrol:#2F5F63;
+  --bgdot:rgba(35,32,28,.10); --bgweave:rgba(35,32,28,.040); --bgglow:rgba(62,95,76,.10); --bgedge:rgba(155,45,58,.12);
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
@@ -33,29 +40,46 @@
   :root:not([data-theme="light"]) .sec-tricot{--acc-soft:rgba(127,178,218,.14)}
   :root:not([data-theme="light"]) .sec-stiut{--acc-soft:rgba(199,154,134,.14)}
   :root:not([data-theme="light"]){
-    --zoomIco:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E4EAEE' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7'/%3E%3C/svg%3E"); --paper:#12181C; --panel:#1A2228; --grid:#2A363E; --ink:#E4EAEE; --muted:#9AA8B1;
-    --line:#2F3B44; --line-f:#6A7984; --mat:#72B99B; --mat-soft:#1E3129; --thread:#FF6F86; --amber:#E0B45A;
+    --zoomIco:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E4EAEE' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7'/%3E%3C/svg%3E"); --paper:#17150F; --panel:#211E17; --grid:#38332A; --ink:#EDE7DA; --muted:#A79E8E;
+    --line:#3A352B; --line-f:#7E7565; --mat:#8FBCA3; --mat-soft:#23301F; --thread:#E8808D; --amber:#DDAE5C;
+    --ata:#9DB3CC; --ata-soft:#232A33;
+    /* culorile secțiunilor lipseau din blocul acesta și rămâneau cele de zi: pe fundal întunecat
+       textul de pe plăci ieșea sub pragul de contrast (7.39) */
+    --c-masina:#8FBCA3; --c-mana:#DDAE5C; --c-croset:#E0909B; --c-tricot:#9DB3CC; --c-stiut:#C29C83; --c-petrol:#8FBABD; --c-petrol:#8FBABD;
     --fab:#2A3B4B; --fabS:#6E93B4; --fab2:#4A3F2A; --fab2S:#C9A15A;
     --tape:#6D7D8C; --yarn:#D38DB7; --yarnH:#F2C14E; --hook:#9AA8B1; --gap:#3A4852;
     --metalHi:#7E8D98; --metalLit:#D5DDE3; --fabD:#557A9C; --fabLit:#B7D0E4; --fab2D:#9A7A3A; --fab2Lit:#EAD3A0; --fabD:#557A9C; --fabLit:#B7D0E4; --fab2D:#9A7A3A; --fab2Lit:#EAD3A0; --yarnD:#6E3558; --yarnLit:#F7DCEB; --yarnHD:#8F6A10; --yarnHLit:#FFF1C4; --yarnHi:#E7AFD0; --janome:#1E5140; --janomeD:#17402F;
-    --bgdot:rgba(114,185,155,.13); --bgweave:rgba(255,255,255,.03); --bgglow:rgba(114,185,155,.10); --bgedge:rgba(255,111,134,.14);
+    --threadD:#9E4B55; --threadLit:#FFD3D8; --firJosD:#2C6A54; --firJosLit:#CDEADF; --grain-img:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)' opacity='.07'/%3E%3C/svg%3E"); --umbra:rgba(0,0,0,.32);
+    --bgdot:rgba(237,231,218,.09); --bgweave:rgba(255,255,255,.028); --bgglow:rgba(143,188,163,.09); --bgedge:rgba(232,128,141,.12);
   }
 }
 :root[data-theme="dark"]{
-  --zoomIco:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E4EAEE' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7'/%3E%3C/svg%3E"); --paper:#12181C; --panel:#1A2228; --grid:#2A363E; --ink:#E4EAEE; --muted:#9AA8B1;
-  --line:#2F3B44; --line-f:#6A7984; --mat:#72B99B; --mat-soft:#1E3129; --thread:#FF6F86; --amber:#E0B45A;
+  --zoomIco:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23E4EAEE' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7'/%3E%3C/svg%3E"); --paper:#17150F; --panel:#211E17; --grid:#38332A; --ink:#EDE7DA; --muted:#A79E8E;
+  --line:#3A352B; --line-f:#7E7565; --mat:#8FBCA3; --mat-soft:#23301F; --thread:#E8808D; --amber:#DDAE5C;
+    --ata:#9DB3CC; --ata-soft:#232A33;
   --fab:#2A3B4B; --fabS:#6E93B4; --fab2:#4A3F2A; --fab2S:#C9A15A;
   --tape:#6D7D8C; --yarn:#D38DB7; --yarnH:#F2C14E; --hook:#9AA8B1; --gap:#3A4852;
   --metalHi:#7E8D98; --metalLit:#D5DDE3; --fabD:#557A9C; --fabLit:#B7D0E4; --fab2D:#9A7A3A; --fab2Lit:#EAD3A0; --yarnD:#6E3558; --yarnLit:#F7DCEB; --yarnHD:#8F6A10; --yarnHLit:#FFF1C4; --yarnHi:#E7AFD0; --janome:#1E5140; --janomeD:#17402F;
-  --c-masina:#72B99B; --c-mana:#E0B45A; --c-croset:#D38DB7; --c-tricot:#7FB2DA; --c-stiut:#C79A86;
-  --bgdot:rgba(114,185,155,.13); --bgweave:rgba(255,255,255,.03); --bgglow:rgba(114,185,155,.10); --bgedge:rgba(255,111,134,.14);
+    --threadD:#9E4B55; --threadLit:#FFD3D8; --firJosD:#2C6A54; --firJosLit:#CDEADF; --grain-img:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)' opacity='.07'/%3E%3C/svg%3E"); --umbra:rgba(0,0,0,.32);
+  --c-masina:#8FBCA3; --c-mana:#DDAE5C; --c-croset:#E0909B; --c-tricot:#9DB3CC; --c-stiut:#C29C83; --c-petrol:#8FBABD;
+  --bgdot:rgba(237,231,218,.09); --bgweave:rgba(255,255,255,.028); --bgglow:rgba(143,188,163,.09); --bgedge:rgba(232,128,141,.12);
 }
 *,*::before,*::after{box-sizing:inherit}
 html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--paper);color:var(--ink);
-  font:400 calc(17px*var(--fs))/1.55 "Source Sans 3",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+/* Fonturi de sistem, nu de la Google (7.39): aplicația arată la fel de la prima secundă,
+   offline, fără dependență externă și fără schimbare de font după încărcare. */
+/* 7.41: hârtia are fibră. Prima încercare a fost cu două rețele de linii subțiri, dar oricât
+   de slabe, două rețele aproape perpendiculare se citesc ca hârtie milimetrică, nu ca fibră.
+   Acum e zgomot adevărat (feTurbulence desaturat), dintr-un SVG scris direct în CSS, deci nu
+   se descarcă nimic. 140 px se repetă fără cusătură (stitchTiles) și e fixat pe ecran, ca să
+   nu „curgă” la derulare. */
+body{margin:0;background-color:var(--paper);color:var(--ink);
+  background-image:var(--grain-img);
+  background-size:140px 140px;
+  background-attachment:fixed;
+  font:400 calc(17.5px*var(--fs))/1.55 var(--ff-corp);
   -webkit-text-size-adjust:100%}
-h1,h2,h3{font-family:Bitter,Georgia,"Times New Roman",serif;line-height:1.2;margin:0}
+h1,h2,h3{font-family:var(--ff-titlu);line-height:1.16;margin:0;letter-spacing:-.012em}
 /* fundalul: o singură bandă de hârtie de tipar sub antet, restul curat */
 body::before{content:'';position:fixed;top:0;left:0;right:0;height:230px;z-index:-2;pointer-events:none;
   background-image:
@@ -66,15 +90,29 @@ body::before{content:'';position:fixed;top:0;left:0;right:0;height:230px;z-index
   background-repeat:no-repeat, repeat;
   -webkit-mask-image:linear-gradient(180deg,#000 0,#000 55%,transparent 100%);
   mask-image:linear-gradient(180deg,#000 0,#000 55%,transparent 100%)}
-a{color:var(--mat)}
+a{color:var(--ata)}
 button{font:inherit;color:inherit}
-:focus-visible{outline:3px solid var(--mat);outline-offset:2px;border-radius:4px}
+:focus-visible{outline:3px solid var(--ata);outline-offset:2px;border-radius:2px}
 .wrap{max-width:680px;margin:0 auto;padding:0 var(--s4) var(--s6)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* ---------- home ---------- */
 .mast{padding:var(--s5) 0 var(--s4);border-bottom:2px solid var(--ink);margin-bottom:18px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.mast h1{font-size:calc(31px*var(--fs));font-weight:700;letter-spacing:-.01em}
+/* supratitlul: eticheta de pe tipar (7.39) */
+.et{display:block;font:600 calc(11.5px*var(--fs))/1.25 var(--ff-et);letter-spacing:.17em;text-transform:uppercase;overflow-wrap:anywhere;
+  color:var(--muted);margin:0 0 var(--s2)}
+.mast h1{font-size:calc(36px*var(--fs));font-weight:400}
+/* 7.43: mastheadul cu litera desenată. Litera stă pe linia de bază a textului, iar înălțimea
+   ei e dată în `em`, ca să rămână potrivită la toate cele patru mărimi de text. */
+.mast-brand{display:flex;align-items:baseline;gap:0;line-height:1}
+/* Înălțimea literei desenate e potrivită pe înălțimea majusculelor fontului: desenul are
+   32 de unități de la vârf la picioare dintr-un viewBox de 44, deci 0,99em dau aproximativ
+   0,72em de literă. Marginea negativă coboară picioarele exact pe linia de bază, fiindcă la
+   un element înlocuit linia de bază e marginea lui de jos. */
+.mast-brand .mA{width:.675em;height:.99em;display:block;overflow:visible;
+  margin:0 .035em -.102em 0}
+.mA-p{fill:none;stroke:var(--ink);stroke-width:3.8;stroke-linecap:round;stroke-linejoin:round}
+.mA-t{fill:none;stroke:var(--thread);stroke-width:2.6;stroke-linecap:round;stroke-dasharray:2.4 1.8}
 .mast p{margin:var(--s1) 0 0;color:var(--muted);max-width:34em;font-size:calc(15px*var(--fs))}
 .mast-t{flex:1}
 .gear{flex:none;display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;
@@ -85,17 +123,18 @@ button{font:inherit;color:inherit}
    repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 8px) 0 100%/100% 5px no-repeat,
    repeating-linear-gradient(90deg,var(--ink) 0 1.5px,transparent 1.5px 40px) 0 100%/100% 9px no-repeat;
   opacity:.8}
-.news{margin:0 0 16px;padding:12px 14px;border:1.5px solid var(--mat);border-radius:10px;background:var(--mat-soft)}
+.news{margin:0 0 16px;padding:12px 14px;border:1.5px solid var(--mat);border-radius:2px;background:var(--mat-soft)}
 .news h2{font-size:calc(17px*var(--fs));margin-bottom:4px}
 .news ul{margin:4px 0 8px;padding-left:20px}
 .news button{border:0;background:none;color:var(--mat);font-weight:600;padding:6px 0;cursor:pointer;min-height:40px}
 .search{position:relative;margin:4px 0 12px}
 .search input{width:100%;font:inherit;color:var(--ink);background:var(--panel);
-  border:1.5px solid var(--line-f);border-radius:10px;padding:12px 14px 12px 40px;min-height:48px}
+  border:1.5px solid var(--line-f);border-radius:2px;padding:12px 14px 12px 40px;min-height:48px}
 .search input:focus{border-color:var(--mat);outline:none}
 .search svg{position:absolute;left:13px;top:50%;margin-top:-9px;width:18px;height:18px;stroke:var(--muted);fill:none;stroke-width:2}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
-.chip{border:1.5px solid var(--line-f);background:transparent;border-radius:999px;padding:6px 14px;min-height:40px;cursor:pointer}
+.chip{border:1.5px solid var(--line-f);background:var(--panel);border-radius:2px;padding:8px 13px;min-height:44px;cursor:pointer;
+  font:600 calc(14.5px*var(--fs))/1 var(--ff-corp)}
 .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 .sec{margin-top:var(--s5)}
 .sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;
@@ -103,15 +142,21 @@ button{font:inherit;color:inherit}
 .sec-h h2{font-size:calc(23px*var(--fs));font-weight:600}
 .sec-h span{color:var(--muted);font-size:calc(14px*var(--fs))}
 .list{list-style:none;margin:0;padding:0}
-.row{display:flex;align-items:center;gap:12px;padding:12px 2px;border-bottom:1px dashed var(--line);
+.row{display:flex;align-items:center;gap:14px;padding:var(--s3) 2px;min-height:62px;border-bottom:0;
+  background-image:linear-gradient(90deg,var(--line-f) 0 5px,transparent 5px 11px);
+  background-size:11px 1px;background-repeat:repeat-x;background-position:0 100%;
   text-decoration:none;color:inherit;min-height:52px}
 a.row:hover .row-t{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
-.row-t{flex:1;font-weight:600}
-.lvl{display:inline-flex;align-items:center;gap:5px;font-size:calc(12.5px*var(--fs));padding:2px 9px;
-  border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.row-t{flex:1;font-family:var(--ff-titlu);font-weight:600;font-size:calc(18.5px*var(--fs));line-height:1.2}
+.lvl{display:inline-flex;align-items:center;gap:5px;padding:0;border:0;background:none;
+  font:700 calc(12.5px*var(--fs))/1 var(--ff-corp);letter-spacing:.04em;color:var(--muted);white-space:nowrap}
+.row-t .lvl{margin-top:var(--s2)}
 .lvl i{font-style:normal;font-size:8px;letter-spacing:1px;line-height:1}
 .lvl.u{color:var(--mat)} .lvl.m{color:var(--amber)} .lvl.a{color:var(--thread)}
-.marks{display:flex;gap:6px;color:var(--mat)}
+/* cât ai avansat: o notă discretă, nu un titlu (7.39) */
+.marks{display:flex;gap:6px;flex:none;align-self:flex-start;margin-top:var(--s1);
+  font:700 calc(12.5px*var(--fs))/1 var(--ff-corp);letter-spacing:.04em;color:var(--ata);
+  border-left:3px solid var(--ata);padding-left:var(--s2)}
 .empty{padding:28px 0;color:var(--muted)}
 .foot{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:calc(14px*var(--fs));
   display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
@@ -120,23 +165,28 @@ a.row:hover .row-t{text-decoration:underline;text-decoration-thickness:1px;text-
 .back{display:inline-flex;align-items:center;gap:6px;margin:18px 0 8px;padding:8px 10px 8px 4px;
   text-decoration:none;font-weight:600;min-height:44px}
 .head{padding-bottom:16px;border-bottom:2px solid var(--ink)}
-.head h1{font-size:calc(34px*var(--fs));font-weight:700;margin:4px 0 10px}
-.meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:calc(15px*var(--fs))}
+.head h1{font-size:calc(35px*var(--fs));font-weight:400;margin:4px 0 10px}
+/* rândul de deasupra titlului: eticheta de pe tipar, toată în același font (7.39) */
+.meta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;color:var(--muted);
+  font:600 calc(12.5px*var(--fs))/1.3 var(--ff-et);letter-spacing:.13em;text-transform:uppercase}
+.meta .lvl{letter-spacing:.13em}
 .intro{font-size:calc(18px*var(--fs));margin:16px 0 0}
-.need{margin:var(--s5) 0 0;padding:var(--s3) var(--s4);background:var(--mat-soft);border-radius:10px}
+.need{margin:var(--s5) 0 0;padding:var(--s4);background:var(--panel);border-radius:2px;
+  border-left:5px solid var(--acc,var(--ata));box-shadow:0 1px 0 rgba(35,32,28,.07), 0 0 0 1px var(--line)}
 .need h2{font-size:calc(17px*var(--fs));margin-bottom:6px}
 .need ul{margin:0;padding-left:20px}
 .steps{list-style:none;margin:var(--s5) 0 0;padding:0}
 .step{display:grid;grid-template-columns:44px 1fr;gap:var(--s1) var(--s3);margin-bottom:var(--s5)}
-.step-n{font-family:Bitter,Georgia,serif;font-weight:700;font-size:calc(34px*var(--fs));line-height:1;color:var(--mat)}
+.step-n{font-family:var(--ff-titlu);font-weight:700;font-size:calc(34px*var(--fs));line-height:1;color:var(--mat)}
 .step h3{font-size:calc(19px*var(--fs));font-weight:600;margin:4px 0 6px}
 .step p{margin:0 0 10px}
 .fig{grid-column:1/-1;margin:4px 0 0;background-color:var(--panel);border:1.5px solid var(--ink);border-radius:4px;
   background-image:radial-gradient(circle,var(--grid) 1.1px,transparent 1.4px);background-size:12px 12px;
-  background-position:6px 6px;overflow:hidden}
+  background-position:6px 6px;overflow:hidden;
+  box-shadow:0 2px 6px -1px var(--umbra)}                  /* 7.41: planșa stă pe masă, are umbră */
 .fig svg{display:block;width:100%;height:auto}
 .fig figcaption{border-top:1px solid var(--line);background:var(--panel);padding:6px 10px;font-size:calc(14px*var(--fs));color:var(--muted)}
-.fig figcaption b{font-family:Bitter,Georgia,serif;color:var(--ink);font-weight:600;margin-right:4px}
+.fig figcaption b{font-family:var(--ff-titlu);color:var(--ink);font-weight:600;margin-right:4px}
 @media (min-width:560px){.step{grid-template-columns:56px 1fr}.fig{grid-column:2}}
 .box{margin-top:var(--s1);padding-top:var(--s4);border-top:1px solid var(--line)}
 .box h2{font-size:calc(21px*var(--fs));margin-bottom:8px}
@@ -144,16 +194,16 @@ a.row:hover .row-t{text-decoration:underline;text-decoration-thickness:1px;text-
 .box li{margin-bottom:6px}
 .notes label{display:block;color:var(--muted);margin-bottom:8px}
 .notes textarea{width:100%;min-height:130px;font:inherit;color:var(--ink);background:var(--panel);
-  border:1.5px solid var(--line-f);border-radius:10px;padding:12px;resize:vertical}
+  border:1.5px solid var(--line-f);border-radius:2px;padding:12px;resize:vertical}
 .notes textarea:focus{border-color:var(--mat);outline:none}
 .notes small{display:block;color:var(--muted);margin-top:6px;min-height:1.4em}
 .pn{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
-.pn a{display:block;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink);min-height:48px}
+.pn a{display:block;padding:10px 12px;border:1.5px solid var(--line);border-radius:2px;text-decoration:none;color:var(--ink);min-height:48px}
 .pn a span{display:block;font-size:calc(13px*var(--fs));color:var(--muted)}
 .pn a.nx{text-align:right;grid-column:2}
 .actions{position:sticky;bottom:calc(66px + env(safe-area-inset-bottom,0px));z-index:5;display:flex;gap:10px;margin:26px -18px 0;
   padding:12px 18px calc(12px + env(safe-area-inset-bottom,0px));background:var(--paper);border-top:1px solid var(--line)}
-.act{flex:1;min-height:48px;border-radius:10px;border:1.5px solid var(--ink);background:transparent;cursor:pointer;font-weight:600}
+.act{flex:1;min-height:48px;border-radius:2px;border:1.5px solid var(--ink);background:transparent;cursor:pointer;font-weight:600}
 .act[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
 
 /* ---------- legend, settings ---------- */
@@ -164,8 +214,8 @@ a.row:hover .row-t{text-decoration:underline;text-decoration-thickness:1px;text-
 .set h2{font-size:calc(21px*var(--fs));margin-bottom:10px}
 .set p{margin:0 0 10px;color:var(--muted)}
 .seg{display:flex;gap:8px;flex-wrap:wrap}
-.btn{min-height:48px;padding:10px 16px;border-radius:10px;border:1.5px solid var(--ink);background:transparent;cursor:pointer;font-weight:600}
-.btn.pri{background:var(--ink);color:var(--paper)}
+.btn{min-height:50px;padding:12px 18px;border-radius:2px;border:1.8px solid var(--ink);background:var(--panel);cursor:pointer;font-weight:700}
+.btn.pri{background:var(--ink);color:var(--panel);border-color:var(--ink)}
 .msg{margin-top:10px;color:var(--mat);min-height:1.4em}
 .msg.err{color:var(--thread)}
 
@@ -175,13 +225,13 @@ a.row:hover .row-t{text-decoration:underline;text-decoration-thickness:1px;text-
   animation:ovlIn .16s ease-out}
 .ovl.out{opacity:0;transition:opacity .14s}
 .dlg{width:100%;max-width:440px;background:var(--panel);color:var(--ink);border:1.5px solid var(--ink);
-  border-radius:16px;padding:20px 18px 16px;box-shadow:0 18px 40px rgba(12,18,22,.28);animation:dlgIn .2s cubic-bezier(.2,.9,.3,1)}
+  border-radius:3px;padding:22px 20px 18px;box-shadow:0 18px 40px rgba(35,32,28,.3);animation:dlgIn .2s cubic-bezier(.2,.9,.3,1)}
 .dlg h2{font-size:calc(22px*var(--fs))}
 .dlg p{margin:8px 0 0;color:var(--muted)}
 .dlg-f{display:block;margin-top:14px}
 .dlg-f span{display:block;color:var(--muted);margin-bottom:6px;font-size:calc(15px*var(--fs))}
 .dlg-f input{width:100%;font:inherit;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);
-  border-radius:10px;padding:12px 14px;min-height:48px}
+  border-radius:2px;padding:12px 14px;min-height:48px}
 .dlg-f input:focus{border-color:var(--mat);outline:none}
 .dlg-b{display:flex;gap:10px;margin-top:18px}
 .dlg-b .btn{flex:1}
@@ -204,7 +254,15 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .tb svg .hole{fill:var(--panel)}
 .tb svg .s2{stroke-width:2.1}
 .tb svg .s3{stroke-width:1.3;opacity:.75}
-.tb.on{color:var(--mat);font-weight:600}
+.tb{position:relative}
+.tb.on{color:var(--tb-acc,var(--ata));font-weight:700}
+/* ața de deasupra arată unde ești, și se vede și fără culoare (7.39) */
+/* 7.43: bara de sus a filei active ia accentul secțiunii, pus de baraAcc() în --tb-acc.
+   Trecerea e lină, ca să se vadă că e aceeași bară care își schimbă culoarea. */
+.tb.on::before{content:'';position:absolute;top:0;left:22%;right:22%;height:3px;background:var(--tb-acc,var(--ata))}
+@media (prefers-reduced-motion:no-preference){
+  .tb.on,.tb.on::before{transition:color .22s ease-out, background-color .22s ease-out}
+}
 .tb.on svg .f{fill-opacity:.26}
 .tb.on svg .f2{fill-opacity:.14}
 .tb.on svg{stroke-width:1.9}
@@ -215,15 +273,15 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .simp .list li:last-child .row{border-bottom:0}
 
 /* ---------- pasul evidențiat ---------- */
-.step.hi{background:var(--mat-soft);border-radius:10px;padding:8px;margin-left:-8px;margin-right:-8px}
+.step.hi{background:var(--mat-soft);border-radius:2px;padding:8px;margin-left:-8px;margin-right:-8px}
 
 /* ---------- mod pas cu pas ---------- */
 .pasmod{position:fixed;inset:0;z-index:40;background:var(--paper);display:flex;flex-direction:column;
   padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
 .pm-top{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line)}
 .pm-x{width:44px;height:44px;display:flex;align-items:center;justify-content:center;text-decoration:none;
-  color:var(--ink);font-size:20px;border:1.5px solid var(--line);border-radius:10px}
-.pm-t{flex:1;font-family:Bitter,Georgia,serif;font-size:calc(16px*var(--fs));overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  color:var(--ink);font-size:20px;border:1.5px solid var(--line);border-radius:2px}
+.pm-t{flex:1;font-family:var(--ff-titlu);font-size:calc(16px*var(--fs));overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pm-n{color:var(--muted);font-size:calc(14px*var(--fs));white-space:nowrap}
 .pm-bar{height:5px;background:var(--mat-soft)}
 .pm-bar span{display:block;height:100%;background:var(--mat)}
@@ -234,16 +292,16 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .pm-nav{display:flex;align-items:center;gap:12px;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));
   border-top:1px solid var(--line);background:var(--panel)}
 .pm-b{flex:none;min-width:86px;min-height:60px;display:flex;align-items:center;justify-content:center;
-  border:1.5px solid var(--ink);border-radius:12px;text-decoration:none;color:var(--ink);font-size:26px;font-weight:700}
+  border:1.5px solid var(--ink);border-radius:2px;text-decoration:none;color:var(--ink);font-size:26px;font-weight:700}
 .pm-b.pri{background:var(--ink);color:var(--paper);flex:1}
 .pm-b.off{opacity:.35;pointer-events:none}
 .pm-w{flex:1;text-align:center;color:var(--muted);font-size:calc(13px*var(--fs))}
 
 /* ---------- contor ---------- */
-.ct-big{display:block;width:100%;margin:8px 0 12px;padding:26px 16px;border:2px solid var(--ink);border-radius:18px;
+.ct-big{display:block;width:100%;margin:8px 0 12px;padding:26px 16px;border:2px solid var(--ink);border-radius:2px;
   background:var(--panel);cursor:pointer;-webkit-tap-highlight-color:transparent}
 .ct-big:active{background:var(--mat-soft)}
-.ct-big b{display:block;font-family:Bitter,Georgia,serif;font-size:calc(84px*var(--fs));line-height:1;color:var(--ink)}
+.ct-big b{display:block;font-family:var(--ff-titlu);font-size:calc(84px*var(--fs));line-height:1;color:var(--ink)}
 .ct-big span{display:block;margin-top:10px;color:var(--muted);font-size:calc(15px*var(--fs))}
 .ct-g{margin:0 0 12px;color:var(--mat);font-size:calc(17px*var(--fs))}
 .ct-s{margin-bottom:10px}
@@ -253,8 +311,12 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
   .view.intra{animation:adIn .2s cubic-bezier(.2,.8,.3,1)}
   .view.iese{animation:adOut .2s cubic-bezier(.2,.8,.3,1)}
 }
-@keyframes adIn{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
-@keyframes adOut{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
+/* 7.42: tranzițiile existau din 7.x, dar erau o alunecare laterală de 16 px, la fel în
+   ambele sensuri. Acum se citesc ca adâncime: intrând mai adânc, pagina vine spre tine
+   (pornește puțin mai mică și din dreapta); la „înapoi”, pagina se retrage (pornește puțin
+   mai mare și din stânga). Scara e de 1,5%, cât să se simtă fără să se vadă. */
+@keyframes adIn{from{opacity:0;transform:translateX(22px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes adOut{from{opacity:0;transform:translateX(-22px) scale(1.015)}to{opacity:1;transform:none}}
 
 /* ---------- sari la un pas ---------- */
 .pasdots{display:flex;flex-wrap:wrap;gap:var(--s2);margin:var(--s4) 0 0}
@@ -268,11 +330,11 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
   margin:var(--s4) calc(var(--s4)*-1) 0;padding:var(--s2) var(--s4);
   background:var(--panel);border-top:1.5px solid var(--line);border-bottom:1.5px solid var(--line);
   font-size:calc(14.5px*var(--fs));color:var(--muted)}
-.sumar b{font-family:Bitter,Georgia,serif;color:var(--ink);font-size:calc(16px*var(--fs))}
+.sumar b{font-family:var(--ff-titlu);color:var(--ink);font-size:calc(16px*var(--fs))}
 .sumar-w{display:inline-flex;align-items:center;gap:2px}
 .sumar-w i{font-style:normal;margin-left:2px}
 .wch{min-width:38px;min-height:34px;padding:2px 6px;border:1.5px solid var(--line-f);background:transparent;
-  border-radius:8px;color:var(--muted);font-size:calc(13.5px*var(--fs));cursor:pointer}
+  border-radius:2px;color:var(--muted);font-size:calc(13.5px*var(--fs));cursor:pointer}
 .wch+.wch{margin-left:2px}
 .wch.on{background:var(--ink);border-color:var(--ink);color:var(--paper);font-weight:600}
 .sumar-m{color:var(--mat);font-weight:600}
@@ -289,7 +351,7 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 
 /* ---------- pictograme în rânduri ---------- */
 .ric{flex:none;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;
-  border-radius:13px;background:var(--mat-soft);color:var(--mat)}
+  border-radius:2px;background:var(--mat-soft);color:var(--mat)}
 .ric svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .ric svg .f{fill:currentColor;fill-opacity:.18}
 .ric svg .f2{fill:currentColor;fill-opacity:.10}
@@ -304,35 +366,137 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .row .ric{margin-right:var(--s1)}
 
 /* ---------- ecrane goale ---------- */
-.gol{margin:var(--s5) 0;padding:var(--s4);border:1.5px dashed var(--line);border-radius:14px;text-align:center}
+/* 7.43: inelul lupei, pentru desenele ecranelor goale. Fără umplere, ca materialul de
+   dedesubt să se vadă prin el. */
+.d .lupa{fill:none;stroke:var(--hook);stroke-width:4.4}
+.gol{margin:var(--s5) 0;padding:var(--s4);border:1.5px dashed var(--line);border-radius:2px;text-align:center}
 .gol svg{width:190px;max-width:70%;height:auto;margin:0 auto;display:block;opacity:.85}
 .gol p{margin:var(--s3) auto 0;color:var(--muted);max-width:32em}
 
-/* ---------- cartonașe: două tipuri, atât ---------- */
-.card{display:block;position:relative;padding:var(--s4) var(--s4) var(--s4) var(--s4);margin:0 0 var(--s3);
-  border:1.5px solid var(--line-f);border-left:4px solid var(--mat);border-radius:12px;background:var(--panel);
+/* ---------- modul „la mașină” (7.39) ----------
+   Cifrele se citesc de la o jumătate de metru, cu telefonul pe masă. */
+.masina-mod{padding-top:var(--s2)}
+.mm-top{display:flex;align-items:center;gap:var(--s3);margin:0 0 var(--s4)}
+.mm-t{flex:1;min-width:0;font-family:var(--ff-titlu);font-size:calc(16px*var(--fs));
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mm-led{border:1.8px solid var(--ink);background:var(--panel);border-radius:2px;padding:10px 12px;
+  min-height:44px;font:700 calc(13px*var(--fs))/1 var(--ff-corp);cursor:pointer;flex:none}
+.mm-led[aria-pressed="true"]{background:var(--ink);color:var(--panel)}
+/* minmax(0,1fr), nu 1fr: altfel coloana nu coboară sub lățimea minimă a etichetei (7.39) */
+.cadrane{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--s2);margin:0 0 var(--s4)}
+.cd{border:2px solid var(--ink);background:var(--panel);padding:var(--s3) var(--s4) var(--s4)}
+.cd .et{margin:0 0 var(--s1)}
+/* cifra e cât se poate de mare, dar nu mai lată decât ecranul: la text mărit, „2,5–3 mm”
+   ieșea din cadru pe un telefon de 320 px (7.39) */
+.cd b{display:block;font-weight:700;font-family:var(--ff-corp);line-height:1;letter-spacing:-.03em;
+  font-size:min(calc(58px*var(--fs)),15vw);overflow-wrap:anywhere}
+.cd span{display:block;margin-top:var(--s1);color:var(--muted);font-size:calc(14.5px*var(--fs))}
+.cd2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s2)}
+.cd2 .cd b{font-size:min(calc(44px*var(--fs)),11vw)}
+
+/* ---------- siluetele lucrurilor gata (7.39) ---------- */
+/* antetul proiectului: titlul la stânga, lucrul gata la dreapta */
+.hero{display:flex;align-items:flex-end;gap:var(--s4);justify-content:space-between}
+.hero-t{flex:1;min-width:0}
+.hero .sl{margin-bottom:-4px;opacity:.95}
+/* în rândurile de listă, silueta stă în stânga numelui */
+.row .sl{margin:-2px 0}
+.sl{display:block;flex:none;overflow:visible}
+.sl .sl-o{fill:var(--panel);stroke:var(--ink);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.sl .sl-l{fill:none;stroke:var(--muted);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.sl .sl-l2{fill:none;stroke:var(--muted);stroke-width:1.2;stroke-dasharray:3 2.5;stroke-linecap:round}
+.sl .sl-f{fill:var(--muted);stroke:none}
+/* pe placa de culoare silueta se desenează în alb */
+.card.plin .sl .sl-o{fill:rgba(255,255,255,.14);stroke:#fff}
+.card.plin .sl .sl-l,.card.plin .sl .sl-l2{stroke:rgba(255,255,255,.8)}
+.card.plin .sl .sl-f{fill:#fff}
+
+/* o pagină de fișă poartă culoarea secțiunii ei peste tot, nu doar în antet (7.39) */
+.view.sec-masina,.view.sec-mana,.view.sec-croset,.view.sec-tricot,.view.sec-stiut{--ata:var(--acc)}
+
+/* ---------- cusătura de însăilare, separatorul casei (7.39) ----------
+   Înlocuiește chenarul: două conținuturi se despart printr-o cusătură, nu printr-o cutie. */
+.cus{height:1px;border:0;margin:var(--s4) 0;
+  background:repeating-linear-gradient(90deg,var(--line-f) 0 5px,transparent 5px 11px)}
+
+/* ---------- cartonașe: două tipuri, atât ----------
+   Nu mai e o cutie albă cu chenar, ci o bucată de hârtie așezată pe masă, cu marginea
+   vopsită în culoarea secțiunii. Cardul plin (.card.plin) poartă culoarea pe toată suprafața. */
+.card{display:block;position:relative;padding:var(--s4) 64px var(--s4) var(--s4);margin:0 0 var(--s3);
+  border:0;border-left:5px solid var(--acc,var(--ata));border-radius:2px;background:var(--panel);
+  /* 7.41: umbră caldă în loc de chenar dur, ca să pară file de hârtie puse una peste alta */
+  box-shadow:0 1px 1px var(--umbra), 0 3px 8px -2px var(--umbra), 0 0 0 1px var(--line);
   text-decoration:none;color:var(--ink);overflow:hidden}
-.card b{display:block;font-family:Bitter,Georgia,serif;font-size:calc(20px*var(--fs));line-height:1.25}
+.card b{display:block;font-family:var(--ff-titlu);font-size:calc(21px*var(--fs));line-height:1.2}
 .card span{display:block;color:var(--muted);font-size:calc(14.5px*var(--fs));margin-top:var(--s1)}
-.card i{display:inline-block;margin-top:var(--s2);font-style:normal;font-size:calc(14px*var(--fs));color:var(--mat)}
-.card em{position:absolute;left:0;bottom:0;height:3px;background:var(--acc,var(--mat));display:block;border-radius:0 3px 0 0}
+.card i{display:inline-block;margin-top:var(--s2);font-style:normal;font-size:calc(14px*var(--fs));color:var(--acc,var(--ata))}
+.card em{position:absolute;left:0;bottom:0;height:3px;background:var(--acc,var(--ata));display:block}
 .card .ic{position:absolute;right:var(--s4);top:50%;transform:translateY(-50%);width:46px;height:46px;
-  margin:0;border:0;border-radius:13px;background:var(--acc-soft,var(--mat-soft));color:var(--acc,var(--mat));
+  margin:0;border:0;border-radius:2px;background:var(--acc-soft,var(--ata-soft));color:var(--acc,var(--ata));
   display:flex;align-items:center;justify-content:center}
 .card .ic svg{width:27px;height:27px;display:block;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.card.mare{border-left-color:var(--ink);border-width:1.5px 1.5px 1.5px 4px}
-.card.mare b{font-size:calc(24px*var(--fs));margin-top:var(--s1)}
+.card.mare b{font-size:calc(25px*var(--fs));margin-top:var(--s1)}
+
+/* cardul plin: culoarea secțiunii pe toată suprafața, pentru cele patru secțiuni ale manualului */
+.card.plin{background:var(--acc,var(--ata));border-left:0;color:#fff;padding:var(--s4);min-height:112px;
+  display:flex;flex-direction:column;justify-content:space-between;box-shadow:none}
+.card.plin b{color:#fff;font-size:calc(23px*var(--fs))}
+.card.plin span,.card.plin i{color:rgba(255,255,255,.92)}
+.card.plin .ic{position:static;transform:none;width:30px;height:30px;background:none;color:rgba(255,255,255,.92);
+  align-self:flex-end;margin-top:var(--s2)}
+.card.plin .ic svg{width:30px;height:30px;stroke-width:1.6}
+/* altfel gaura din iconiță rămâne albă pe placa colorată și arată a semn de interdicție */
+.card.plin .ic svg .hole{fill:var(--acc)}
+/* umplerile din iconițe se întunecă pe placă; cu alb translucid ieșeau ca niște pete deschise */
+.card.plin .ic svg .f{fill:#000;fill-opacity:.2}
+.card.plin .ic svg .f2{fill:#000;fill-opacity:.11}
+/* la 30 px pe culoare, detaliul fin din iconiță se citește greșit: croșeta ajungea să semene
+   cu un semn de interdicție. Pe placă rămâne doar silueta. */
+.card.plin .ic svg .hole{fill:none}
+.card.plin .ic svg .hole-s{display:none}
+.card.plin em{background:rgba(255,255,255,.5)}
+.card.plin .pt{display:block}
+.card.plin .pt b{margin-bottom:2px}
+.card.plin .trk{display:block;position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.28)}
+.card.plin .trk em{position:static;display:block;height:100%;background:#fff}
+:root[data-theme="dark"] .card.plin{color:#16140F}
+:root[data-theme="dark"] .card.plin b{color:#16140F}
+:root[data-theme="dark"] .card.plin span,:root[data-theme="dark"] .card.plin i{color:rgba(22,20,15,.78)}
+:root[data-theme="dark"] .card.plin .ic{color:rgba(22,20,15,.85)}
+:root[data-theme="dark"] .card.plin em{background:rgba(22,20,15,.4)}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .card.plin{color:#16140F}
+  :root:not([data-theme="light"]) .card.plin b{color:#16140F}
+  :root:not([data-theme="light"]) .card.plin span,:root:not([data-theme="light"]) .card.plin i{color:rgba(22,20,15,.78)}
+  :root:not([data-theme="light"]) .card.plin .ic{color:rgba(22,20,15,.85)}
+  :root:not([data-theme="light"]) .card.plin em{background:rgba(22,20,15,.4)}
+}
 .big-k{display:block;font-size:calc(12px*var(--fs));letter-spacing:.1em;text-transform:uppercase;color:var(--mat);font-weight:600}
 .big-s{display:block;color:var(--muted);font-size:calc(14.5px*var(--fs));margin-top:var(--s1)}
 .grid{list-style:none;padding:0;margin:var(--s4) 0 0;display:grid;gap:0}
+/* secțiunile stau două pe rând chiar și pe telefon, ca niște plăci de culoare (7.39) */
+.grid.doi{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s2)}
+/* fără min-width:0, un titlu lung împinge coloana peste lățimea ecranului (7.39) */
+.grid.doi>li{min-width:0}
+.card.plin b{overflow-wrap:break-word;hyphens:auto}
+.grid.doi .card{margin:0;height:100%}
+.grid.doi .lat{grid-column:1/-1}
+.grid.doi .lat .card{min-height:92px}
 @media (min-width:520px){.grid{grid-template-columns:1fr 1fr;gap:var(--s3)}.grid .card{margin:0}}
 
 /* accentul fiecărei secțiuni */
-.sec-masina{--acc:var(--c-masina);--acc-soft:rgba(44,106,84,.13);border-left-color:var(--c-masina)} .sec-masina .ic{color:var(--c-masina)}
-.sec-mana{--acc:var(--c-mana);--acc-soft:rgba(138,93,10,.12);border-left-color:var(--c-mana)} .sec-mana .ic{color:var(--c-mana)}
-.sec-croset{--acc:var(--c-croset);--acc-soft:rgba(156,78,124,.12);border-left-color:var(--c-croset)} .sec-croset .ic{color:var(--c-croset)}
-.sec-tricot{--acc:var(--c-tricot);--acc-soft:rgba(47,102,144,.12);border-left-color:var(--c-tricot)} .sec-tricot .ic{color:var(--c-tricot)}
-.sec-stiut{--acc:var(--c-stiut);--acc-soft:rgba(122,74,58,.12);border-left-color:var(--c-stiut)} .sec-stiut .ic{color:var(--c-stiut)}
+.sec-masina{--acc:var(--c-masina);--acc-soft:rgba(62,95,76,.13)} .sec-masina .ic{color:var(--c-masina)}
+.sec-mana{--acc:var(--c-mana);--acc-soft:rgba(142,97,16,.13)} .sec-mana .ic{color:var(--c-mana)}
+.sec-croset{--acc:var(--c-croset);--acc-soft:rgba(155,45,58,.12)} .sec-croset .ic{color:var(--c-croset)}
+.sec-tricot{--acc:var(--c-tricot);--acc-soft:rgba(46,64,87,.12)} .sec-tricot .ic{color:var(--c-tricot)}
+.sec-stiut{--acc:var(--c-stiut);--acc-soft:rgba(107,74,56,.12)} .sec-stiut .ic{color:var(--c-stiut)}
+/* grupurile din „Fac”, fiecare cu ața lui, ca secțiunile din „Învăț” (7.39) */
+.grp-fuste{--acc:var(--c-tricot);--acc-soft:rgba(46,64,87,.12)}
+.grp-purtat{--acc:var(--c-masina);--acc-soft:rgba(62,95,76,.13)}
+.grp-genti{--acc:var(--c-stiut);--acc-soft:rgba(107,74,56,.12)}
+.grp-copii{--acc:var(--c-mana);--acc-soft:rgba(142,97,16,.13)}
+.grp-casa{--acc:var(--c-croset);--acc-soft:rgba(155,45,58,.12)}
+.grp-jucarii{--acc:var(--c-petrol);--acc-soft:rgba(47,95,99,.13)}
 .head.sec-masina,.head.sec-mana,.head.sec-croset,.head.sec-tricot,.head.sec-stiut{border-bottom-color:var(--ink)}
 .meta .ic{display:inline-flex;align-items:center;width:20px;height:20px;border:0;background:none;padding:0}
 .meta .ic svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round}
@@ -341,40 +505,50 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .head.sec-stiut .meta .ic{color:var(--c-stiut)}
 
 /* ---------- cartonaș de atenție ---------- */
-.alert{margin:0 0 var(--s4);padding:var(--s3) var(--s4);border:1.5px solid var(--amber);
-  border-left-width:4px;border-radius:12px;background:var(--panel)}
-.alert h2{font-size:calc(17px*var(--fs));margin-bottom:var(--s1)}
+.alert{margin:0 0 var(--s4);padding:var(--s4);border:0;border-left:5px solid var(--amber);
+  box-shadow:0 1px 0 rgba(35,32,28,.07), 0 0 0 1px var(--line);
+  border-left-width:4px;border-radius:2px;background:var(--panel)}
+.alert h2{font-size:calc(19px*var(--fs));margin-bottom:var(--s1)}
 .alert p{margin:var(--s1) 0 var(--s3);color:var(--muted)}
 .alert ul{margin:var(--s1) 0 var(--s2);padding-left:20px}
-.alert button{border:0;background:none;color:var(--mat);font-weight:600;padding:var(--s2) 0;cursor:pointer;min-height:40px}
-.alert.ok{border-color:var(--mat)}
-.alert.warn{border-color:var(--thread)}
+.alert button{border:0;background:none;color:var(--ata);font-weight:700;padding:var(--s2) 0;cursor:pointer;min-height:44px}
+.alert.ok{border-left-color:var(--mat)}
+.alert.warn{border-left-color:var(--thread)}
 .alert .list li:last-child .row{border-bottom:0}
 
 /* ---------- Acasă: cele trei acțiuni ---------- */
 .a3s{display:grid;gap:var(--s2);margin:0 0 var(--s5)}
 @media (min-width:480px){.a3s{grid-template-columns:1fr 1fr 1fr}}
-.a3{display:flex;align-items:center;gap:var(--s3);
-  padding:var(--s3) var(--s4);border:1.5px solid var(--line-f);border-radius:12px;
-  background:var(--panel);text-decoration:none;color:var(--ink);min-height:68px}
-.a3 .txt b{display:block;font-family:Bitter,Georgia,serif;font-size:calc(18px*var(--fs));line-height:1.2}
+.a3{display:flex;align-items:center;gap:var(--s4);
+  padding:var(--s4);border:0;border-left:5px solid var(--poarta,var(--ata));border-radius:2px;
+  box-shadow:0 1px 0 rgba(35,32,28,.07), 0 0 0 1px var(--line);
+  background:var(--panel);text-decoration:none;color:var(--ink);min-height:76px}
+/* fiecare poartă are ața ei, ca să se deosebească dintr-o privire (7.39) */
+.a3s>.a3:nth-of-type(1){--poarta:var(--ata)}
+.a3s>.a3:nth-of-type(2){--poarta:var(--c-mana)}
+.a3s>.a3:nth-of-type(3){--poarta:var(--c-croset)}
+.a3 .ic,.a3 .ric{color:var(--poarta,var(--ata));background:none;border:0;width:30px;height:30px;flex:none;
+  display:flex;align-items:center;justify-content:center;border-radius:0}
+.a3 .ic svg,.a3 .ric svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.a3 .ic svg .hole,.a3 .ric svg .hole{fill:var(--panel)}
+.a3 .txt b{display:block;font-family:var(--ff-titlu);font-size:calc(19.5px*var(--fs));line-height:1.2}
 .a3 .txt span{display:block;color:var(--muted);font-size:calc(14px*var(--fs));margin-top:2px}
 .a3 .txt{min-width:0}
 .idee{margin:0 0 var(--s5)}
 .idee h2{font-size:calc(18px*var(--fs));margin-bottom:var(--s1)}
-.mini{display:block;height:6px;margin-top:var(--s2);border-radius:999px;background:var(--mat-soft);overflow:hidden}
-.mini span{display:block;height:100%;background:var(--mat)}
+.mini{display:block;height:5px;margin-top:var(--s2);border-radius:0;background:var(--line);overflow:hidden}
+.mini span{display:block;height:100%;background:var(--acc,var(--ata))}
 .grp{margin:var(--s5) 0 var(--s1);font-size:calc(14px*var(--fs));text-transform:uppercase;letter-spacing:.08em;
-  color:var(--muted);font-family:"Source Sans 3",sans-serif;font-weight:600}
+  color:var(--muted);font-family:var(--ff-et);font-weight:600;letter-spacing:.17em}
 .prog{margin:var(--s1) 0 var(--s3)}
-.prog-b{height:10px;border:1.5px solid var(--line-f);border-radius:999px;overflow:hidden;background:var(--mat-soft)}
-.prog-b span{display:block;height:100%;background:var(--mat)}
+.prog-b{height:8px;border:0;border-radius:0;overflow:hidden;background:var(--line)}
+.prog-b span{display:block;height:100%;background:var(--ata)}
 .prog p{margin:var(--s2) 0 0;color:var(--muted)}
 
 /* ---------- comutator Învăț / Fac ---------- */
 .tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 18px}
-.tab{display:block;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);min-height:62px}
-.tab b{display:block;font-family:Bitter,Georgia,serif;font-size:calc(19px*var(--fs))}
+.tab{display:block;padding:12px 14px;border:1.5px solid var(--line);border-radius:2px;text-decoration:none;color:var(--ink);min-height:62px}
+.tab b{display:block;font-family:var(--ff-titlu);font-size:calc(19px*var(--fs))}
 .tab span{display:block;color:var(--muted);font-size:calc(14px*var(--fs));line-height:1.35;margin-top:2px}
 .tab.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 .tab.on span{color:var(--paper);opacity:.75}
@@ -387,7 +561,7 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .mm-r{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line)}
 .mm-r span{flex:1}
 .mm-r small{display:block;color:var(--muted);font-size:calc(14px*var(--fs))}
-.mm-r input{width:5.5em;min-height:46px;font:inherit;color:var(--ink);background:var(--panel);border:1.5px solid var(--line-f);border-radius:10px;padding:8px 10px;text-align:right}
+.mm-r input{width:5.5em;min-height:46px;font:inherit;color:var(--ink);background:var(--panel);border:1.5px solid var(--line-f);border-radius:2px;padding:8px 10px;text-align:right}
 .mm-r input:focus{border-color:var(--mat);outline:none}
 .mm-r b{color:var(--muted);font-weight:400}
 .mm-l{margin:14px 0 6px;color:var(--muted)}
@@ -395,7 +569,7 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .mm-p span{grid-column:1;color:var(--muted);font-size:calc(15px*var(--fs))}
 .mm-p button{grid-row:1/3;grid-column:2;min-height:44px;padding:8px 12px}
 .pt{width:100%;border-collapse:collapse;margin-top:12px}
-.pt th{text-align:left;font-family:Bitter,Georgia,serif;font-size:calc(15px*var(--fs));border-bottom:1.5px solid var(--ink);padding:6px 6px 6px 0}
+.pt th{text-align:left;font-family:var(--ff-titlu);font-size:calc(15px*var(--fs));border-bottom:1.5px solid var(--ink);padding:6px 6px 6px 0}
 .pt td{border-bottom:1px dashed var(--line);padding:8px 6px 8px 0;vertical-align:top}
 .pt td:last-child{text-align:right;white-space:nowrap}
 .pt small{display:block;color:var(--muted);font-size:calc(14px*var(--fs))}
@@ -404,19 +578,19 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .pl li{border-bottom:1px dashed var(--line)}
 .pl label{display:flex;gap:12px;align-items:flex-start;padding:12px 2px;cursor:pointer}
 .pl input{width:24px;height:24px;margin-top:2px;accent-color:var(--mat);flex:none}
-.pl b{display:block;font-family:Bitter,Georgia,serif}
+.pl b{display:block;font-family:var(--ff-titlu)}
 .pl li.ok span{color:var(--muted)}
 .pl li.ok b{text-decoration:line-through}
 .pl a{display:inline-block;margin-top:4px}
 .d .cut{fill:var(--paper);stroke:var(--ink);stroke-width:1.5;stroke-dasharray:4 3}
 
 /* ---------- reamintirea copiei de siguranță ---------- */
-.bk{margin:0 0 18px;padding:14px 16px;border:1.5px solid var(--amber);border-left-width:5px;border-radius:12px;background:var(--panel)}
+.bk{margin:0 0 18px;padding:14px 16px;border:1.5px solid var(--amber);border-left-width:5px;border-radius:2px;background:var(--panel)}
 .bk h2{font-size:calc(18px*var(--fs))}
 .bk p{margin:6px 0 12px;color:var(--muted)}
 
 /* ---------- continuă de unde ai rămas ---------- */
-.cont{margin:0 0 18px;padding:12px 14px 4px;border:1.5px solid var(--line);border-radius:12px;background:var(--panel)}
+.cont{margin:0 0 18px;padding:12px 14px 4px;border:1.5px solid var(--line);border-radius:2px;background:var(--panel)}
 .cont h2{font-size:calc(18px*var(--fs));margin-bottom:2px}
 .cont .row{border-bottom:1px dashed var(--line)}
 .cont .list li:last-child .row{border-bottom:0}
@@ -511,11 +685,11 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .d text.lytm{font-size:10px;font-weight:400;fill:var(--muted);stroke-width:3px}
 
 /* ---------- copiez din poză ---------- */
-.card-cta{display:block;margin:0 0 18px;padding:14px 16px;border:1.5px dashed var(--mat);border-radius:12px;
+.card-cta{display:block;margin:0 0 18px;padding:14px 16px;border:1.5px dashed var(--mat);border-radius:2px;
   background:var(--mat-soft);text-decoration:none;color:var(--ink)}
-.card-cta b{display:block;font-family:Bitter,Georgia,serif;font-size:calc(19px*var(--fs))}
+.card-cta b{display:block;font-family:var(--ff-titlu);font-size:calc(19px*var(--fs))}
 .card-cta span{display:block;color:var(--muted);font-size:calc(15px*var(--fs));margin-top:2px}
-.ph{position:relative;margin:12px 0 8px;border:1.5px solid var(--ink);border-radius:8px;overflow:hidden;background:var(--panel);touch-action:manipulation}
+.ph{position:relative;margin:12px 0 8px;border:1.5px solid var(--ink);border-radius:2px;overflow:hidden;background:var(--panel);touch-action:manipulation}
 .ph img{display:block;width:100%;height:auto;user-select:none;-webkit-user-select:none}
 .ph{touch-action:none}
 .ph-ov{position:absolute;inset:0;width:100%;height:100%}
@@ -542,17 +716,17 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 
 /* ---------- persoane ---------- */
 .pl-people .pers{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px dashed var(--line)}
-.pers-sel{flex:1;text-align:left;background:none;border:0;padding:10px 8px;border-radius:10px;cursor:pointer;min-height:56px}
+.pers-sel{flex:1;text-align:left;background:none;border:0;padding:10px 8px;border-radius:2px;cursor:pointer;min-height:56px}
 .pers.on .pers-sel{background:var(--mat-soft)}
-.pers-sel b{display:block;font-family:Bitter,Georgia,serif;font-size:calc(18px*var(--fs))}
+.pers-sel b{display:block;font-family:var(--ff-titlu);font-size:calc(18px*var(--fs))}
 .pers-sel span{display:block;color:var(--muted);font-size:calc(14px*var(--fs))}
 .pers-a{display:flex;gap:6px;flex:none}
-.icb{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:var(--ink);width:46px;height:46px;border:1.5px solid var(--line-f);background:transparent;border-radius:10px;cursor:pointer;font-size:18px;line-height:1}
+.icb{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:var(--ink);width:46px;height:46px;border:1.5px solid var(--line-f);background:transparent;border-radius:2px;cursor:pointer;font-size:18px;line-height:1}
 .icb.dgr{border-color:var(--thread);color:var(--thread)}
 
 /* ---------- desen mărit ---------- */
 .zoom{align-items:center}
-.zbox{width:100%;max-width:640px;background:var(--panel);border:1.5px solid var(--ink);border-radius:16px;padding:14px}
+.zbox{width:100%;max-width:640px;background:var(--panel);border:1.5px solid var(--ink);border-radius:2px;padding:14px}
 .zsvg{background-color:var(--panel);background-image:radial-gradient(circle,var(--grid) 1.1px,transparent 1.4px);
   background-size:16px 16px;border:1.5px solid var(--ink);border-radius:6px;overflow:hidden}
 .zsvg svg{display:block;width:100%;height:auto}
@@ -596,10 +770,10 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 
 /* ---------- update bar ---------- */
 #updbar{position:fixed;left:12px;right:12px;bottom:calc(78px + env(safe-area-inset-bottom,0px));z-index:30;display:none;
-  align-items:center;gap:12px;justify-content:space-between;padding:12px 14px;border-radius:12px;background:var(--ink);color:var(--paper);
+  align-items:center;gap:12px;justify-content:space-between;padding:12px 14px;border-radius:2px;background:var(--ink);color:var(--paper);
   max-width:656px;margin:0 auto}
 #updbar.on{display:flex}
-#updbar button{border:0;border-radius:8px;padding:10px 14px;min-height:44px;background:var(--paper);color:var(--ink);font-weight:600;cursor:pointer}
+#updbar button{border:0;border-radius:2px;padding:10px 14px;min-height:44px;background:var(--paper);color:var(--ink);font-weight:600;cursor:pointer}
 
 /* ---------- diagram vocabulary ---------- */
 .d text{font:600 13px "Source Sans 3",system-ui,sans-serif;fill:var(--ink);
@@ -685,10 +859,59 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .d .yO7{stroke-width:9.6}.d .yO4{stroke-width:6}.d .yO3{stroke-width:5.2}
 .d .yL{fill:none;stroke:var(--yarnLit);stroke-linecap:round;stroke-linejoin:round;opacity:.6}
 .d .yL7{stroke-width:2}.d .yL4{stroke-width:1.2}.d .yL3{stroke-width:.9}
+/* 7.41: volumul aței de cusut. Aceleași trei straturi ca la fir, dar subțiri: ața e mai
+   fină decât firul de croșetat, deci marginea e de 4,2 px, nu de 9,6. */
+.d .tO{fill:none;stroke:var(--threadD);stroke-width:4.2;stroke-linecap:round;stroke-linejoin:round}
+.d .tL{fill:none;stroke:var(--threadLit);stroke-width:.9;stroke-linecap:round;stroke-linejoin:round;opacity:.7}
+.d .tjO{fill:none;stroke:var(--firJosD);stroke-width:4.4;stroke-linecap:round;stroke-linejoin:round}
+.d .tjL{fill:none;stroke:var(--firJosLit);stroke-width:1;stroke-linecap:round;stroke-linejoin:round;opacity:.7}
+/* firele scăpate la marginea tăiată: subțiri, în culoarea urzelii, niciodată în prim-plan */
+.d .destr{fill:none;stroke:var(--fabS);stroke-width:.9;stroke-linecap:round;opacity:.85}
 .d .yOH{fill:none;stroke:var(--yarnHD);stroke-width:5.6;stroke-linecap:round}
 .d .yLH{fill:none;stroke:var(--yarnHLit);stroke-width:1.2;stroke-linecap:round}
 /* în desenele mărite cu Z(), săgețile rămân de grosimea obișnuită */
 .d .zg .arr{stroke-width:1.1}.d .zg .arrt{stroke-width:1.25}.d .zg .dim{stroke-width:.8}
+
+/* ---------- animația continuă (motorul din anim.js, 7.40) ---------- */
+.anb{display:flex;align-items:center;gap:var(--s3);padding:var(--s2) var(--s3) var(--s3);
+  background:var(--panel);border-top:1px solid var(--line)}
+.anb-p{flex:none}
+.anb-s{flex:1;min-width:0;height:44px;accent-color:var(--ata);cursor:pointer}
+.anb-t{flex:1.4;min-width:0;text-align:right;color:var(--muted);
+  font:600 calc(12.5px*var(--fs))/1.25 var(--ff-corp)}
+@media (max-width:380px){.anb{flex-wrap:wrap}.anb-t{flex-basis:100%;text-align:left;order:3}}
+
+/* bancul de probă: trei reglaje sub desen (7.40) */
+.banc{margin:var(--s5) 0 0}
+.bsl{display:grid;gap:var(--s2);margin:var(--s3) 0}
+.bsl label{display:grid;gap:2px}
+.bsl label span{display:flex;justify-content:space-between;align-items:baseline;
+  font:600 calc(13.5px*var(--fs))/1.2 var(--ff-corp);color:var(--muted)}
+.bsl label span b{font:700 calc(16px*var(--fs))/1 var(--ff-corp);color:var(--ink)}
+.bsl input[type=range]{width:100%;height:44px;accent-color:var(--ata);cursor:pointer}
+
+/* piesele mașinii, în secțiune */
+.d .placa{fill:var(--metalHi);stroke:var(--ink);stroke-width:1.3}
+.d .dinti{fill:var(--hook);stroke:var(--ink);stroke-width:1}
+.d .bobina{fill:var(--fab2);stroke:var(--ink);stroke-width:1.3}
+.d .carlig{fill:none;stroke:var(--hook);stroke-width:5;stroke-linecap:round}
+.d .carligV{fill:var(--ink);stroke:none}
+.d .levier{fill:var(--metalHi);stroke:var(--ink);stroke-width:1.3;stroke-linejoin:round}
+.d .nod{fill:var(--thread);stroke:none}
+/* firul din suveică, ieșit la suprafață: are culoarea lui, ca să se vadă care fir e */
+.d .punctJos{fill:var(--c-tricot);stroke:none}
+/* 7.41: redenumită din .thrF, care se bătea cap în cap cu clasa cu același nume din fișele
+   Janome (linia 1020) și, fiind definită mai jos, câștiga ea: ața mecanismului se desena de
+   1,3 px în loc de 2,4. Acum poartă nume propriu și primește volum prin YV. */
+.d .thrSus{fill:none;stroke:var(--thread);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+/* firul din suveică, în scenele de mecanism. Clasa thrB există deja, în fișa Janome,
+   deci aici e nevoie de un nume propriu (7.40). */
+.d .firJos{fill:none;stroke:var(--c-tricot);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+/* cele două straturi: culori diferite, ca să se vadă între care dintre ele stă nodul */
+.d .matSus{fill:var(--fab);stroke:var(--fabS);stroke-width:1.2}
+.d .matJos{fill:var(--fab2);stroke:var(--fab2S);stroke-width:1.2}
+.d .piciorusB{stroke:var(--hook);stroke-width:3;stroke-linecap:round}
+.d .ochiAc{fill:var(--panel);stroke:var(--ink);stroke-width:.9}
 
 /* animația pe cadre (flip în lib.js, 7.14): patru cadre de câte 2 secunde, doar opacitate */
 .d .aFa,.d .aFc{display:none}
@@ -717,12 +940,37 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 .seg.g2{grid-template-columns:1fr 1fr}
 .seg.g3{grid-template-columns:1fr 1fr 1fr}
 .seg.g2 .btn,.seg.g3 .btn{width:100%;padding-left:6px;padding-right:6px;white-space:normal;line-height:1.2}
-.fsprev{margin:12px 0 0;padding:12px 14px;border:1px dashed var(--line);border-radius:10px;background:var(--panel);font-size:calc(17px*var(--fs))}
+.fsprev{margin:12px 0 0;padding:12px 14px;border:1px dashed var(--line);border-radius:2px;background:var(--panel);font-size:calc(17px*var(--fs))}
 /* bara de progres pe carduri, doar când există progres */
-.card .trk{position:absolute;left:var(--s4);right:calc(var(--s4) + 60px);bottom:12px;height:5px;border-radius:3px;background:var(--line);display:block}
-.card .trk em{position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:var(--acc,var(--mat))}
-.card.pgc{border-left:5px solid var(--mat);padding-right:84px}
-.card.pgc .ic{color:var(--mat);background:var(--acc-soft,rgba(44,106,84,.12))}
+/* 7.42: bara de progres nu mai e o bară plină, ci un tiv: puncte de cusătură pe o linie.
+   Partea făcută e cusută, restul e doar linia de însăilare. Se trage de la stânga, o dată,
+   la fiecare randare a cardului. */
+.card .trk{position:absolute;left:var(--s4);right:calc(var(--s4) + 60px);bottom:12px;height:5px;display:block;
+  background:repeating-linear-gradient(90deg,var(--line) 0 3px,transparent 3px 7px);
+  background-position:0 50%;background-size:100% 1.5px;background-repeat:repeat-x}
+.card .trk em{position:absolute;left:0;top:0;bottom:0;transform-origin:left center;
+  background:repeating-linear-gradient(90deg,var(--acc,var(--mat)) 0 5px,transparent 5px 9px);
+  background-position:0 50%;background-size:100% 3px;background-repeat:repeat-x}
+@media (prefers-reduced-motion:no-preference){
+  .card .trk em{animation:tiv .6s cubic-bezier(.2,.8,.3,1) both}
+}
+@keyframes tiv{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* 7.42: „Am exersat” se bifează cu o cusătură care se trage peste buton, o dată, la apăsare. */
+.act.cusut{position:relative;overflow:hidden}
+.act.cusut::after{content:'';position:absolute;left:8px;right:8px;bottom:9px;height:2px;
+  background:repeating-linear-gradient(90deg,var(--mat) 0 6px,transparent 6px 11px);
+  transform-origin:left center;animation:cusePe .42s cubic-bezier(.2,.8,.3,1) both}
+@keyframes cusePe{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* 7.42: numărul contorului sare puțin la fiecare rând, ca să se vadă că a fost înregistrat. */
+@media (prefers-reduced-motion:no-preference){
+  .ct-big b.salt{animation:salt .22s cubic-bezier(.3,1.4,.5,1)}
+}
+@keyframes salt{0%{transform:translateY(0)}40%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+/* grupul își ia ața din clasa .grp-*, nu verdele fix de dinainte (7.39) */
+.card.pgc{border-left:5px solid var(--acc,var(--ata));padding-right:84px}
+.card.pgc .ic{color:var(--acc,var(--ata));background:var(--acc-soft,var(--ata-soft))}
 .a3one{grid-template-columns:1fr !important;margin-bottom:0}
 
 /* conturul de tăiere pe balot, în animația așezării (7.23) */
@@ -747,6 +995,15 @@ body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 
 /* mărirea pe tot ecranul (7.26) */
 .zfull{position:fixed;inset:0;z-index:70;background:var(--paper);display:flex;flex-direction:column}
+/* 7.42: lupa crește din figura pe care ai atins-o, nu apare dintr-o dată. Punctul de pornire
+   e centrul acelei figuri, scris de zoomFig() în --zx și --zy, deci creșterea pleacă exact
+   de acolo. Fundalul se stinge separat, ca să nu clipească tot ecranul. */
+@media (prefers-reduced-motion:no-preference){
+  .zfull{animation:zfFond .16s ease-out}
+  .zfull .zf-sc{animation:zfCreste .24s cubic-bezier(.2,.8,.3,1);transform-origin:var(--zx,50%) var(--zy,50%)}
+}
+@keyframes zfFond{from{opacity:0}to{opacity:1}}
+@keyframes zfCreste{from{opacity:.2;transform:scale(.82)}to{opacity:1;transform:none}}
 body.zf-on{overflow:hidden}
 .zf-top{display:flex;align-items:center;gap:10px;padding:calc(8px + env(safe-area-inset-top,0px)) 10px 8px 16px;border-bottom:1px solid var(--line);background:var(--panel)}
 .zf-cap{flex:1;margin:0;color:var(--muted);font-size:calc(14.5px*var(--fs));line-height:1.35}
@@ -835,7 +1092,7 @@ svg.d.fl .aFd,svg.d.fl .aFs{display:none}
 
 /* copie din poză (7.31): poza nu mai umple tot ecranul, instrucțiunea stă pe poză, pasul următor sub ea */
 .ph{margin-left:auto;margin-right:auto}
-.ph-hint{position:absolute;left:8px;right:8px;top:8px;margin:0;padding:8px 12px;border-radius:10px;background:var(--panel);color:var(--ink);
+.ph-hint{position:absolute;left:8px;right:8px;top:8px;margin:0;padding:8px 12px;border-radius:2px;background:var(--panel);color:var(--ink);
   font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,.2);z-index:3;pointer-events:none;text-align:center}
 .ph-hint:empty{display:none}
 .next-st{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:10px 0;padding:10px 12px;border-left:4px solid var(--mat);background:var(--panel);border-radius:0 10px 10px 0}
@@ -847,10 +1104,10 @@ svg.d.fl .aFd,svg.d.fl .aFs{display:none}
 
 /* copiez ceva ce am deja, modelul nou (7.32) */
 .tipuri{list-style:none;padding:0;margin:8px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:8px}
-.tipb{width:100%;min-height:72px;text-align:left;padding:10px 12px;border:1.5px solid var(--line-f,var(--line));border-radius:12px;background:var(--panel);color:var(--ink);cursor:pointer;font:inherit}
+.tipb{width:100%;min-height:72px;text-align:left;padding:10px 12px;border:1.5px solid var(--line-f,var(--line));border-radius:2px;background:var(--panel);color:var(--ink);cursor:pointer;font:inherit}
 .tipb b{display:block}.tipb span{display:block;color:var(--muted);font-size:calc(14px*var(--fs));margin-top:2px}
 .lnk{border:0;background:none;padding:10px 0;margin:-10px 0;color:var(--mat);font:inherit;font-weight:600;text-decoration:underline;cursor:pointer}
-.cop-img{display:block;max-width:100%;max-height:40vh;margin:8px auto;border-radius:8px;border:1.5px solid var(--ink)}
+.cop-img{display:block;max-width:100%;max-height:40vh;margin:8px auto;border-radius:2px;border:1.5px solid var(--ink)}
 
 /* broderie și straturi, pentru tehnicile noi (7.33) */
 .d .thrB{stroke:var(--thread);stroke-width:3.2;stroke-linecap:round}
@@ -875,7 +1132,7 @@ svg.d.fl .aFd,svg.d.fl .aFs{display:none}
 /* bifa lecției: eticheta întreagă e suprafața de atins, nu doar pătrățelul (7.38) */
 .lct-b{display:flex;align-items:center;gap:8px;margin-top:6px;min-height:44px;padding:2px 0;font-size:calc(14.5px*var(--fs));cursor:pointer}
 .lct-b input{width:24px;height:24px;flex:none}
-.crs-bar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:22px;padding:10px;border:1.5px solid var(--mat);border-radius:12px;background:var(--panel)}
+.crs-bar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:22px;padding:10px;border:1.5px solid var(--mat);border-radius:2px;background:var(--panel)}
 .crs-bar a{display:block;text-decoration:none;color:var(--ink);overflow-wrap:anywhere}
 .crs-bar a span{display:block;font-size:calc(13px*var(--fs));color:var(--mat);font-weight:600}
 .crs-bar a.nx{text-align:right}
@@ -910,16 +1167,20 @@ var PORNIT=false;
       <rect width="7" height="7" style="fill:var(--panel)"/>
       <line x1="0" y1="0" x2="0" y2="7" style="stroke:var(--fab);stroke-width:3.5"/>
     </pattern>
-    <!-- țesătura: fir peste fir, ca într-un material real -->
-    <pattern id="weave" width="6" height="6" patternUnits="userSpaceOnUse">
-      <rect width="6" height="6" style="fill:var(--fab)"/>
-      <path d="M0 1.5 H6 M0 4.5 H6" style="stroke:var(--fabS);stroke-width:.7;opacity:.5"/>
-      <path d="M1.5 0 V6 M4.5 0 V6" style="stroke:var(--fabS);stroke-width:.7;opacity:.28"/>
+    <!-- Țesătura, 7.41: pânză adevărată, nu hașură. Un fir de bătătură trece PESTE urzeală,
+         următorul pe DEDESUBT, deci celula de 7 px conține o încrucișare întreagă. Firele de
+         bătătură sunt mai deschise (prind lumina de sus), cele de urzeală mai închise. -->
+    <pattern id="weave" width="7" height="7" patternUnits="userSpaceOnUse">
+      <rect width="7" height="7" style="fill:var(--fab)"/>
+      <!-- urzeala: fire verticale continue, mai închise, stau dedesubt pe toată înălțimea -->
+      <path d="M1.75 0 V7 M5.25 0 V7" style="stroke:var(--fabS);stroke-width:3.4;opacity:.36"/>
+      <!-- bătătura: fire orizontale care se văd doar pe jumătatea unde trec PESTE urzeală -->
+      <path d="M0 1.75 H3.5 M3.5 5.25 H7" style="stroke:var(--fabLit);stroke-width:3.3;opacity:.8"/>
     </pattern>
-    <pattern id="weave2" width="6" height="6" patternUnits="userSpaceOnUse">
-      <rect width="6" height="6" style="fill:var(--fab2)"/>
-      <path d="M0 1.5 H6 M0 4.5 H6" style="stroke:var(--fab2S);stroke-width:.7;opacity:.45"/>
-      <path d="M1.5 0 V6 M4.5 0 V6" style="stroke:var(--fab2S);stroke-width:.7;opacity:.25"/>
+    <pattern id="weave2" width="7" height="7" patternUnits="userSpaceOnUse">
+      <rect width="7" height="7" style="fill:var(--fab2)"/>
+      <path d="M1.75 0 V7 M5.25 0 V7" style="stroke:var(--fab2S);stroke-width:3.4;opacity:.34"/>
+      <path d="M0 1.75 H3.5 M3.5 5.25 H7" style="stroke:var(--fab2Lit);stroke-width:3.3;opacity:.78"/>
     </pattern>
     <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" style="stop-color:var(--panel)"/>
@@ -949,7 +1210,7 @@ var PORNIT=false;
 <div id="updbar" role="status"><span>Există o versiune nouă a Atelierului.</span><button id="updgo">Actualizează</button></div>
 <script>
 "use strict";
-const APP_VER='7.38';
+const APP_VER='7.43.5';
 const KEY='atelier_v1';
 const TECH=[];
 /*@@CONTENT_START@@*/
@@ -983,7 +1244,10 @@ const L=(x1,y1,x2,y2,c)=>{if(YV[c])return vol('line',c,`x1="${x1}" y1="${y1}" x2
    Orice formă cu o clasă de fir (yarn, yarn2, yarn3, yarnH) primește automat cele trei straturi. */
 const YV={yarn:['yO yO7','yL yL7'],yarn2:['yO yO4','yL yL4'],yarn3:['yO yO3','yL yL3'],yarnH:['yOH','yLH'],
   /* materialul în secțiune are și el margine și lumină, ca o fâșie de stofă (7.15) */
-  lay:['lO','lL'],lay2:['lO2','lL2']};
+  lay:['lO','lL'],lay2:['lO2','lL2'],
+  /* 7.41: și ața de cusut are volum, nu e o linie. Același mecanism ca la fir, deci
+     fiecare desen de cusătură din aplicație câștigă relief fără să fie redesenat. */
+  thr:['tO','tL'],thrSus:['tO','tL'],firJos:['tjO','tjL']};
 const vol=(tag,c,att)=>YV[c]?`<${tag} class="${YV[c][0]}" ${att}/><${tag} class="${c}" ${att}/><${tag} class="${YV[c][1]}" ${att}/>`:`<${tag} class="${c}" ${att}/>`;
 const P=(d,c)=>vol('path',c,`d="${d}"`);
 const C=(x,y,r,c)=>vol('circle',c,`cx="${x}" cy="${y}" r="${r}"`);
@@ -999,6 +1263,20 @@ const dimH=(y,x1,x2)=>L(x1,y,x2,y,'dim')+L(x1,y-4,x1,y+4,'dim')+L(x2,y-4,x2,y+4,
 function zigH(y,x1,x2,a=4,s=6,c='thr'){let d=`M${x1} ${y}`,k=0;for(let x=x1+s;x<=x2;x+=s){d+=` L${x} ${y+(k%2?-a:a)}`;k++}return P(d,c)}
 function pin(x1,y,x2){return L(x1,y,x2,y,'pin')+C(x2,y,3.6,'pinh')}
 function pinV(x,y1,y2){return L(x,y1,x,y2,'pin')+C(x,y1,3.6,'pinh')}
+/* 7.41: marginea tăiată se destramă. Fire scăpate, scurte și neregulate, desenate pe muchia
+   dată. `spre` = 1 la dreapta/în jos, -1 la stânga/în sus. Neregularitatea e fixă pentru
+   aceeași muchie (rnd pe coordonate), deci desenul nu se schimbă de la o redesenare la alta.
+   Se pune numai acolo unde fișa chiar vorbește despre o margine netivită. */
+function destramV(x,y1,y2,spre=1,pas=7){let o='';
+  for(let y=y1+2,i=0;y<y2-1;y+=pas,i++){const s=x*3+y;
+    const lg=3.2+rnd(s)*4.4, dy=(rnd(s+9)-.5)*4.2, mijx=x+spre*lg*0.55, mijy=y+dy*0.5;
+    o+=`<path class="destr" d="M${x.toFixed(1)} ${y.toFixed(1)} Q${mijx.toFixed(1)} ${mijy.toFixed(1)} ${(x+spre*lg).toFixed(1)} ${(y+dy).toFixed(1)}"/>`}
+  return o}
+function destramH(y,x1,x2,spre=1,pas=7){let o='';
+  for(let x=x1+2,i=0;x<x2-1;x+=pas,i++){const s=y*3+x;
+    const lg=3.2+rnd(s)*4.4, dx=(rnd(s+9)-.5)*4.2, mijy=y+spre*lg*0.55, mijx=x+dx*0.5;
+    o+=`<path class="destr" d="M${x.toFixed(1)} ${y.toFixed(1)} Q${mijx.toFixed(1)} ${mijy.toFixed(1)} ${(x+dx).toFixed(1)} ${(y+spre*lg).toFixed(1)}"/>`}
+  return o}
 function svg(inner,h=190){return `<svg viewBox="0 0 320 ${h}" class="d" aria-hidden="true" focusable="false">${inner}</svg>`}
 
 /* ---- material și cusături ---- */
@@ -1092,7 +1370,526 @@ function flip(cadre,{h=190,fix=3,eticheta,sus=''}={}){
 }
 
 
+/* ================= SILUETELE LUCRURILOR GATA (7.39) =================
+   Până acum aplicația desena doar bucățile de tăiat. Lipsea tocmai ce vede Irina
+   în minte când alege: obiectul terminat. Fiecare proiect are aici silueta lui,
+   desenată în același dreptunghi, 120 × 112, ca să stea la fel în orice listă.
+
+   Clase: sl-o conturul, sl-l o linie de detaliu, sl-l2 o linie întreruptă (cusătură),
+   sl-f o suprafață umplută discret. Culorile vin din CSS, deci merg în ambele teme. */
+
+const SILP = {
+ /* ---- fuste ---- */
+ 'fusta-cerc':`<path class="sl-o" d="M46 16h28l26 74a48 19 0 0 1-80 0Z"/><path class="sl-l" d="M46 16h28M42 46q18 7 36 0"/>`,
+ 'fusta-increțita':`<path class="sl-o" d="M44 16h32l20 76a46 15 0 0 1-72 0Z"/><path class="sl-l" d="M44 22h32"/>
+   <path class="sl-l2" d="M49 24l-3 20M57 24l-2 22M65 24v22M73 24l2 22M80 24l3 20"/>`,
+ 'fusta-clini':`<path class="sl-o" d="M46 16h28l22 76a46 15 0 0 1-72 0Z"/><path class="sl-l" d="M46 16h28"/>
+   <path class="sl-l" d="M54 18l-10 76M63 18v78M72 18l10 76"/>`,
+ 'fusta-dreapta':`<path class="sl-o" d="M44 16h32l6 78H38Z"/><path class="sl-l" d="M44 22h32"/>
+   <path class="sl-l" d="M54 28l-1.5 16M66 28l1.5 16"/><path class="sl-l2" d="M78 22v26"/>`,
+ 'fusta-copil':`<path class="sl-o" d="M50 34h20l16 48a32 11 0 0 1-52 0Z"/><path class="sl-l" d="M50 38h20"/>
+   <path class="sl-l2" d="M55 40l-2 14M62 40v14M69 40l2 14"/>`,
+
+ /* ---- de purtat ---- */
+ 'rochie-elastic':`<path class="sl-o" d="M44 14l-10 8 6 10 6-4v18h36V28l6 4 6-10-10-8H70a10 6 0 0 1-20 0Z"/>
+   <path class="sl-o" d="M42 46h36l14 48a44 14 0 0 1-64 0Z"/><path class="sl-l2" d="M42 46h36"/>`,
+ 'rochie-bretele':`<path class="sl-l" d="M50 14v12M70 14v12"/>
+   <path class="sl-o" d="M44 26h32v16H44Z"/><path class="sl-o" d="M44 42h32l14 50a44 14 0 0 1-60 0Z"/>
+   <path class="sl-l2" d="M44 42h32"/>`,
+ 'rochie-copil':`<path class="sl-l" d="M52 26v10M68 26v10"/>
+   <path class="sl-o" d="M48 36h24v12H48Z"/><path class="sl-o" d="M48 48h24l12 36a32 10 0 0 1-48 0Z"/>`,
+ 'bluza':`<path class="sl-o" d="M42 22H54q6 8 12 0h12l-4 8q-2 4-2 10v40H48V40q0-6-2-10Z"/>
+   <path class="sl-l2" d="M48 76h24"/>`,
+ 'bluza-maneca':`<path class="sl-o" d="M44 20h32l16 10-8 14-8-6v42H44V38l-8 6-8-14Z"/>
+   <path class="sl-l" d="M52 20a10 7 0 0 0 16 0"/><path class="sl-l2" d="M44 76h32"/>`,
+ 'bluza-maneca-lunga':`<path class="sl-o" d="M44 24H76L84 28L102 66L94 72L76 44V88H44V44L26 72L18 66L36 28Z"/>
+   <path class="sl-l" d="M52 24a10 7 0 0 0 16 0"/>
+   <path class="sl-l2" d="M44 82h32"/><path class="sl-l" d="M95 70 85 56M25 70 35 56"/>`,
+ 'pantaloni-casa':`<path class="sl-o" d="M38 18h44l-3 76H62l-2-38-2 38H41Z"/>
+   <path class="sl-l" d="M38 28h44"/><path class="sl-l2" d="M60 30v26"/>`,
+
+ /* ---- genți ---- */
+ 'poseta-tote':`<path class="sl-o" d="M32 44h56l-6 50H38Z"/>
+   <path class="sl-l" d="M46 44V32a14 10 0 0 1 12 0v12M62 44V32a14 10 0 0 1 12 0v12"/>`,
+ 'geanta-fermoar':`<path class="sl-o" d="M30 46h60l-5 46H35Z"/><path class="sl-l2" d="M30 52h60"/>
+   <path class="sl-l" d="M48 46V36a12 8 0 0 1 24 0v10"/><path class="sl-f" d="M84 50h6v6h-6z"/>`,
+ 'geanta-plaja':`<path class="sl-o" d="M22 40h76l-8 58H30Z"/>
+   <path class="sl-l" d="M42 40V24a18 13 0 0 1 16 0v16M62 40V24a18 13 0 0 1 16 0v16"/>
+   <path class="sl-l" d="M27 58h66M28 70h64M29 82h62"/>`,
+ 'penar':`<path class="sl-o" d="M24 56h72a8 8 0 0 1 0 24H24a8 8 0 0 1 0-24Z"/>
+   <path class="sl-l2" d="M24 60h72"/><path class="sl-f" d="M88 62h8v6h-8z"/>`,
+ 'saculet':`<path class="sl-o" d="M40 38h40l6 42a26 12 0 0 1-52 0Z"/>
+   <path class="sl-l2" d="M40 48h40"/><path class="sl-l" d="M36 44q-6-8 4-10M84 44q6-8-4-10"/>`,
+ 'saculeti-cadou':`<path class="sl-o" d="M30 46h28l4 34a16 8 0 0 1-36 0Z"/><path class="sl-l2" d="M30 54h28"/>
+   <path class="sl-o" d="M66 54h24l3 28a14 7 0 0 1-30 0Z"/><path class="sl-l2" d="M66 61h24"/>`,
+
+ /* ---- pentru copii ---- */
+ 'sac-dormit':`<path class="sl-o" d="M44 22h32l4 10-8 4 8 54a28 10 0 0 1-48 0l8-54-8-4Z"/>
+   <path class="sl-l" d="M52 22a10 7 0 0 0 16 0"/><path class="sl-l2" d="M60 42v46"/>`,
+ 'baveta':`<path class="sl-o" d="M48 28a14 14 0 0 0 24 0 32 32 0 0 1 10 46 26 18 0 0 1-44 0 32 32 0 0 1 10-46Z"/>
+   <path class="sl-l" d="M48 28q-10-4-12 2M72 28q10-4 12 2"/>`,
+
+ /* ---- pentru casă ---- */
+ 'sort':`<path class="sl-o" d="M50 24h20v14l14 6 4 46H32l4-46 14-6Z"/>
+   <path class="sl-l" d="M50 24q-6-10 10-10t10 10"/><path class="sl-l2" d="M36 58h48"/>
+   <path class="sl-l" d="M44 62h32v20H44z"/>`,
+ 'fata-perna':`<path class="sl-o" d="M20 38h80v42H20z"/><path class="sl-l2" d="M84 38v42"/>
+   <path class="sl-l" d="M20 44h64"/>`,
+ 'perna-fermoar':`<path class="sl-o" d="M26 30h68v62H26z"/><path class="sl-l2" d="M26 86h68"/>
+   <path class="sl-l" d="M34 38h52v46H34z"/>`,
+ 'husa-perna-canapea':`<path class="sl-o" d="M24 34h64a10 10 0 0 1 10 10v24a10 10 0 0 1-10 10H24a10 10 0 0 1-10-10V44a10 10 0 0 1 10-10Z"/>
+   <path class="sl-l2" d="M86 36v40"/><path class="sl-l" d="M24 44h58"/>`,
+ 'husa-scaun':`<path class="sl-o" d="M38 16h40v44h10l4 36H30l4-36h4Z"/>
+   <path class="sl-l" d="M38 56h40"/><path class="sl-l2" d="M34 60h52"/>`,
+ 'suport-oale':`<path class="sl-o" d="M30 34h60v56H30z"/><path class="sl-l2" d="M36 40h48v44H36z"/>
+   <path class="sl-l" d="M60 34V22a7 7 0 0 1 0-6"/>
+   <path class="sl-l" d="M44 40 36 50M58 40 36 66M72 40 36 82M84 44 48 88M84 60 62 88M84 76 76 88"/>`,
+ 'fata-masa':`<path class="sl-o" d="M14 40h92v10H14Z"/><path class="sl-o" d="M20 50h80l-5 36H25Z"/>
+   <path class="sl-l2" d="M25 80h70"/><path class="sl-l" d="M38 50v34M82 50v34"/>`,
+ 'fata-masa-rotunda':`<ellipse class="sl-o" cx="60" cy="48" rx="42" ry="16"/>
+   <path class="sl-o" d="M18 48v8a42 18 0 0 0 84 0v-8"/><ellipse class="sl-l2" cx="60" cy="48" rx="28" ry="10"/>`,
+ 'cos-depozitare':`<path class="sl-o" d="M30 38h60l-4 54H34Z"/><path class="sl-o" d="M30 38l-4-10h68l-4 10"/>
+   <path class="sl-l" d="M44 56h32v10H44z"/>`,
+
+ /* ---- jucării ---- */
+ 'pisica-agatat':`<path class="sl-o" d="M40 34 46 12l14 14q6-3 12 0l14-14 6 22q7 16 7 34-1 14-8 20H41q-7-6-8-20 0-18 7-34Z"/>
+   <path class="sl-l" d="M52 52q4 4 8 0M68 52q4 4 8 0"/><path class="sl-f" d="M58 60h4l-2 4z"/>
+   <path class="sl-l" d="M40 60h10M70 60h10"/><path class="sl-l2" d="M40 74h40"/>
+   <path class="sl-l" d="M56 20a5 5 0 0 1 8 0"/>`
+};
+
+/* silueta unui proiect, la mărimea cerută; fără siluetă, nu se desenează nimic */
+function silueta(id,w=84){
+  const d=SILP[id]; if(!d)return '';
+  return `<svg viewBox="0 0 120 112" width="${w}" height="${Math.round(w*112/120)}" class="sl" aria-hidden="true" focusable="false">${d}</svg>`;
+}
+const areSilueta=id=>!!SILP[id];
+
+/* ================= MOTORUL DE ANIMAȚIE CONTINUĂ (7.40) =================
+   flip() din lib.js arată patru desene fixe, cu opacitate. E bun pentru „întâi asta,
+   apoi asta”, dar nu poate arăta un mecanism: între cadrul 2 și 3 nu se întâmplă nimic,
+   iar ochiul nu are ce urmări.
+
+   Aici o animație e o singură funcție de geometrie, scena(t), cu t între 0 și 1.
+   Motorul o cheamă de 30 de ori pe secundă și îi pune rezultatul în același <svg>.
+   Consecințele care contează:
+   - cadrul fix de la „fără mișcare” e aceeași funcție, la un t ales, deci desenul fix
+     și cel animat nu pot ajunge niciodată să arate lucruri diferite;
+   - utilizatoarea poate trage cu degetul prin mișcare, oricât de încet, și se poate opri
+     exact în momentul care o interesează;
+   - animația stă pe loc cât nu e pe ecran, ca să nu mănânce bateria.
+
+   scena(t) primește și al doilea argument, un obiect cu parametri (tensiune, pas…),
+   ceea ce face ca aceeași scenă să servească și bancul de probă. */
+
+/* iconițele proprii: anim.js se încarcă înaintea lui app.js, deci nu se poate baza pe FLI */
+const ANB={play:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" class="pf"/></svg>',
+  pauza:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13M16 5.5v13"/></svg>'};
+let ANIM_N=0;
+const ANIM_VII=new Map();      /* animațiile de pe ecran, după id */
+
+/* Registrul scenelor: anim() e chemată în timp ce se construiește HTML-ul, iar legarea
+   butoanelor se face după ce HTML-ul a intrat în pagină. Registrul ține legătura dintre ele. */
+const ANIM_REG={};
+
+/* Întoarce DOAR desenul, ca orice alt desen din aplicație: așa pasul rămâne un <svg>,
+   iar figura din jur o pune tot app.js, fără figuri imbricate. Bara de comandă
+   e adăugată după desen de animLeaga(). */
+function anim(scena,{h=190,eticheta='',tFix=0.5,durata=4200,par={},legenda=null}={}){
+  const id='an'+(++ANIM_N);
+  const fix=`<svg viewBox="0 0 320 ${h}" class="d" role="img"${eticheta?` aria-label="${esc(eticheta)}"`:' aria-hidden="true" focusable="false"'}>${scena(tFix,par)}</svg>`;
+  if(!animOn())return fix;                       /* fără mișcare: un cadru, din aceeași funcție */
+  ANIM_REG[id]={scena,par,durata,legenda,tFix,h};
+  return `<svg viewBox="0 0 320 ${h}" class="d" role="img" data-anim="${id}"${eticheta?` aria-label="${esc(eticheta)}"`:''}>${scena(tFix,par)}</svg>`;
+}
+
+/* Leagă butoanele pentru desenele animate ajunse în pagină. Se poate chema de câte ori e nevoie:
+   un desen deja legat e sărit. */
+function animLeaga(){
+  document.querySelectorAll('svg[data-anim]').forEach(svg=>{
+    const id=svg.dataset.anim, def=ANIM_REG[id];
+    if(!def||svg._legat)return;
+    svg._legat=1;
+    const bara=document.createElement('div');
+    bara.className='anb';
+    bara.innerHTML=`<button class="flb anb-p" type="button" aria-label="Pornește mișcarea">${ANB.play}</button>
+      <input class="anb-s" type="range" min="0" max="1000" value="${Math.round(def.tFix*1000)}" step="1" aria-label="Trage prin mișcare">
+      <span class="anb-t"></span>`;
+    svg.after(bara);
+    /* figura întreagă e un buton care deschide lupa (bindZoom). Fără oprirea propagării,
+       orice atingere pe bara de comandă ar deschide lupa în loc să pornească mișcarea. */
+    ['click','pointerdown','keydown','input'].forEach(ev=>
+      bara.addEventListener(ev,e=>e.stopPropagation()));
+    const bp=bara.querySelector('.anb-p'), sl=bara.querySelector('.anb-s'), et=bara.querySelector('.anb-t');
+    /* Legenda momentului stă în bara de comandă, nu în textul figurii: acolo s-ar dubla
+       cu descrierea pasului, care spune deja același lucru (7.40). */
+    const st={t:def.tFix,ruleaza:false,ultim:0,vizibil:true};
+    const deseneaza=()=>{
+      svg.innerHTML=def.scena(st.t,def.par);
+      et.textContent=def.legenda?def.legenda(st.t,def.par):Math.round(st.t*100)+'%';
+    };
+    const cadru=acum=>{
+      if(!st.ruleaza)return;
+      if(st.ultim){st.t=(st.t+(acum-st.ultim)/def.durata)%1;sl.value=Math.round(st.t*1000);deseneaza()}
+      st.ultim=acum;
+      if(st.vizibil)requestAnimationFrame(cadru); else{st.ruleaza=false;porneste(false)}
+    };
+    function porneste(on){
+      st.ruleaza=on;st.ultim=0;
+      bp.innerHTML=on?ANB.pauza:ANB.play;
+      bp.setAttribute('aria-label',on?'Oprește mișcarea':'Pornește mișcarea');
+      if(on)requestAnimationFrame(cadru);
+    }
+    bp.onclick=()=>porneste(!st.ruleaza);
+    sl.addEventListener('input',()=>{if(st.ruleaza)porneste(false);st.t=sl.value/1000;deseneaza()});
+    /* nu se mișcă nimic cât desenul nu e pe ecran, ca să nu mănânce bateria */
+    if('IntersectionObserver' in window){
+      const io=new IntersectionObserver(es=>es.forEach(e=>{st.vizibil=e.isIntersecting}),{threshold:.2});
+      io.observe(svg);
+    }
+    deseneaza();
+  });
+}
+
+/* ---- ajutoare de interpolare, ca scenele să rămână citibile ---- */
+/* amestec liniar */
+/* 7.42: un arc desenat parțial, de la unghiul a0 spre a1 (grade), cât spune f.
+   Folosit oriunde o linie „se trasează singură”: compasul fustei cerc, rotița de tensiune. */
+function arcP(cx,cy,r,a0,a1,f,c='st'){
+  const u=Math.max(0,Math.min(1,f)); if(u<=.004)return '';
+  const au=a0+(a1-a0)*u, pe=a=>[cx+r*Math.cos(a*Math.PI/180),cy+r*Math.sin(a*Math.PI/180)];
+  const [sx,sy]=pe(a0),[ex,ey]=pe(au);
+  const mare=Math.abs(au-a0)>180?1:0, dir=a1>a0?1:0;
+  return P(`M${sx.toFixed(1)} ${sy.toFixed(1)} A${r} ${r} 0 ${mare} ${dir} ${ex.toFixed(1)} ${ey.toFixed(1)}`,c);
+}
+const lerp=(a,b,t)=>a+(b-a)*t;
+/* t readus în intervalul [a,b] și limitat la 0..1: „cât de departe suntem în faza asta” */
+const faza=(t,a,b)=>Math.max(0,Math.min(1,(t-a)/(b-a)));
+/* pornire și oprire line, ca mișcarea să nu pară mecanică */
+const lin=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+/* o mișcare dus-întors în intervalul dat */
+const dute=(t,a,b)=>{const u=faza(t,a,b);return u<.5?u*2:2-u*2};
+
+/* ================= FORMAREA CUSĂTURII DREPTE (7.40) =================
+   Ce se întâmplă de fapt la o singură împunsătură, în secțiune, văzut din lateral.
+   Ordinea e cea reală, nu una simplificată:
+     1. acul coboară și duce firul de sus prin material, sub placa acului;
+     2. acul urcă puțin, iar firul rămâne în urmă și face o buclă lângă vârf;
+     3. vârful cârligului rotativ intră în buclă și o duce în jurul suveicii;
+     4. bucla trece complet peste suveică, deci firul de sus înconjoară firul de jos;
+     5. maneta de tragere urcă și strânge nodul exact între straturile de material;
+     6. transportorul împinge materialul mai departe, cu lungimea unui pas.
+   Nodul e scopul: dacă ajunge sus sau jos, nu la mijloc, cusătura e greșită.
+   Aceeași geometrie e folosită și de bancul de probă, cu alt t și alți parametri. */
+
+const CUS_FAZE=[
+  [0.00,'acul coboară și duce firul prin material'],
+  [0.22,'acul urcă puțin, iar firul face o buclă'],
+  [0.34,'cârligul intră în buclă'],
+  [0.50,'bucla e dusă în jurul suveicii'],
+  [0.68,'bucla trece peste firul de jos'],
+  [0.78,'maneta strânge nodul în material'],
+  [0.90,'transportorul avansează materialul']
+];
+const cusFaza=t=>{let f=CUS_FAZE[0];CUS_FAZE.forEach(x=>{if(t>=x[0])f=x});return f[1]};
+
+function scenaCusatura(t,par){
+  /* atenție: nu „P”, care e funcția de path din lib.js (7.40) */
+  const cfg=Object.assign({tens:4,pas:2.5,gros:1},par||{});
+  const XAC=170, Y_PLACA=122, STRAT=Math.max(6,9*cfg.gros);
+  const Y_JOS=Y_PLACA-STRAT, Y_SUS=Y_JOS-STRAT;        /* fețele celor două straturi */
+  const PAS=Math.max(9,16*cfg.pas/2.5);                /* un pas pe desen */
+  const o=[];
+
+  /* --- acul: coboară, urcă puțin (atunci se face bucla), apoi urcă de tot --- */
+  const JOS=Y_PLACA+34, SUS=34;
+  const acY = t<0.22 ? lerp(SUS,JOS,lin(faza(t,0,0.22)))
+            : t<0.34 ? lerp(JOS,JOS-18,lin(faza(t,0.22,0.34)))
+            : lerp(JOS-18,SUS,lin(faza(t,0.34,1)));
+  const ochi=acY-13;
+  /* --- maneta: coboară cât se formează bucla, urcă brusc când strânge nodul --- */
+  const levY = t<0.78 ? lerp(22,40,lin(faza(t,0,0.42))) : lerp(40,18,lin(faza(t,0.78,0.92)));
+  /* --- avansul materialului, la finalul ciclului --- */
+  const avans = lerp(0,PAS,lin(faza(t,0.90,1)));
+  /* --- unde stă nodul pe grosime: tensiunea mare îl trage spre suprafață --- */
+  const rel = Math.max(0.1,Math.min(0.9,(cfg.tens-1)/6));
+  const nodY = Y_PLACA-STRAT*2*rel;
+
+  /* ---------- placa acului ---------- */
+  o.push(R(0,Y_PLACA,320,7,'placa'));
+  o.push(R(XAC-9,Y_PLACA,18,7,'gaura'));               /* gaura acului */
+
+  /* ---------- transportorul: urcă, împinge, coboară ---------- */
+  const dSus=t>0.88||t<0.06?-4:1, dX=lerp(0,PAS,lin(faza(t,0.90,1)));
+  for(let i=0;i<3;i++)o.push(R(96+i*17+dX,Y_PLACA+dSus,11,4,'dinti'));
+
+  /* ---------- cele două straturi de material ---------- */
+  o.push(R(20-avans,Y_SUS,276,STRAT,'matSus'));
+  o.push(R(20-avans,Y_JOS,276,STRAT,'matJos'));
+
+  /* ---------- cusătura deja făcută, în stânga acului ----------
+     Firul de sus merge pe fața de deasupra și coboară la fiecare nod.
+     Firul din suveică merge pe fața de dedesubt și urcă la fiecare nod.
+     Unde se întâlnesc e nodul: acolo se vede dacă tensiunea e bună. */
+  const xUlt=XAC-5*PAS-avans, xStg=Math.max(24,xUlt);
+  /* firele merg drept pe cele două fețe, iar la fiecare nod coboară sau urcă până la el.
+     Segmente separate, nu o singură cale: o cale cu „M” în interior ieșea ca o spirală. */
+  o.push(L(xStg,Y_SUS,XAC-avans,Y_SUS,'thrSus'));
+  o.push(L(xStg,Y_PLACA,XAC-avans,Y_PLACA,'firJos'));
+  for(let i=1;i<=5;i++){
+    const x=XAC-i*PAS-avans; if(x<26)break;
+    o.push(L(x,Y_SUS,x,nodY,'thrSus'));
+    o.push(L(x,Y_PLACA,x,nodY,'firJos'));
+    o.push(C(x,nodY,2.8,'nod'));
+  }
+
+  /* ---------- suveica și cârligul rotativ ---------- */
+  const SX=XAC, SY=Y_PLACA+46, SR=23;
+  o.push(C(SX,SY,SR,'suveicaJ'));
+  o.push(C(SX,SY,12,'bobina'));
+  o.push(P(`M${SX-6} ${SY-11} C ${SX-10} ${SY-26}, ${XAC-6} ${Y_PLACA+6}, ${XAC-2} ${Y_PLACA}`,'firJos'));
+  /* vârful cârligului face o tură, exact cât ține bucla */
+  const ung=-115+360*faza(t,0.30,0.80);
+  const pe=(a,r)=>[SX+Math.cos(a*Math.PI/180)*r,SY+Math.sin(a*Math.PI/180)*r];
+  const [cx,cy]=pe(ung,SR+2);
+  o.push(P(`M${pe(ung-22,SR-1)[0]} ${pe(ung-22,SR-1)[1]} A${SR} ${SR} 0 0 1 ${cx} ${cy}`,'carlig'));
+  o.push(C(cx,cy,3.2,'carligV'));
+
+  /* ---------- firul de sus: manetă, disc de tensiune, bara acului, ochi ---------- */
+  o.push(P(`M${XAC-96} ${levY+9} Q${XAC-74} ${levY+16} ${XAC-66} ${48}`
+          +` Q${XAC-60} ${66} ${XAC-30} ${72} L${XAC-3} ${ochi-6}`,'thrSus'));
+  /* Bucla, pas cu pas. Momentul care contează e când ea înconjoară suveica:
+     atunci firul de sus trece pe lângă firul de jos și se face nodul.
+     De aceea bucla e desenată ca un arc în jurul suveicii, care crește odată cu cârligul. */
+  if(t>=0.19&&t<0.34){
+    /* întâi doar o buclă mică lângă vârful acului */
+    const amp=lerp(3,20,faza(t,0.19,0.34));
+    o.push(P(`M${XAC-2} ${Y_PLACA+5} Q${XAC-2} ${acY+8} ${XAC+amp} ${acY+4}`
+            +` Q${XAC+amp*0.6} ${acY-6} ${XAC+3} ${Y_PLACA+5}`,'thrSus'));
+  }else if(t>=0.34&&t<0.84){
+    const a0=-115, a1=-115+360*faza(t,0.30,0.80), rr=SR+6;
+    const inchide=1-faza(t,0.76,0.84);                 /* la final bucla se strânge și iese */
+    const r=lerp(SR*0.3,rr,inchide);
+    const [sx,sy]=pe(a0,r), [ex,ey]=pe(Math.min(a1,245),r);
+    const mare=(Math.min(a1,245)-a0)>180?1:0;
+    o.push(P(`M${XAC-3} ${Y_PLACA+4} L${sx} ${sy} A${r} ${r} 0 ${mare} 1 ${ex} ${ey} L${XAC+3} ${Y_PLACA+4}`,'thrSus'));
+  }
+
+  /* ---------- piciorușul, în jurul acului, apăsând materialul ---------- */
+  o.push(P(`M${XAC-46} ${Y_SUS} h28 v-9 h36 v9 h28 v-5 a6 6 0 0 0 -6 -6 h-80 a6 6 0 0 0 -6 6 Z`,'piciorusJ'));
+
+  /* ---------- acul: bara, corpul, ochiul ---------- */
+  o.push(R(XAC-3.5,0,7,Math.max(6,acY-22),'tija'));
+  o.push(P(`M${XAC-3.2} ${acY-22} L${XAC+3.2} ${acY-22} L${XAC+1.8} ${acY} L${XAC-1.8} ${acY} Z`,'acJ'));
+  o.push(E(XAC,ochi,1.8,3.6,'ochiAc'));
+
+  /* ---------- maneta de tragere ---------- */
+  o.push(P(`M${XAC-128} ${levY+3} h26 l10 6 -10 6 h-26 Z`,'levier'));
+  o.push(C(XAC-96,levY+9,3.2,'carligV'));
+
+  /* ---------- trei etichete, atât ---------- */
+  o.push(T(14,levY-4,'maneta','start','m'));
+  o.push(T(306,Y_SUS-18,'piciorușul','end','m'));
+  o.push(T(306,SY+4,'suveica','end','m'));
+  o.push(T(24,nodY-7,'nodul','start','m'));
+  return o.join('');
+}
+
+/* ================= FIȘA: CUM SE FACE O CUSĂTURĂ (7.40) =================
+   Conținut pe care aplicația nu îl avea deloc, pentru că nu avea cu ce să-l arate.
+   Fiecare pas e aceeași scenă, oprită la momentul lui: un singur desen, șase momente. */
+/* [t, titlul pasului, explicația, ce să urmărești în desen] */
+const CUS_PASI=[
+ [0.10,'Acul coboară','Acul duce firul de sus prin amândouă straturile, până sub placa acului. Atât face acul: duce firul jos. Nodul nu se face aici.','Urmărește firul roșu: coboară odată cu acul.'],
+ [0.27,'Acul urcă puțin și se face bucla','Când acul urcă cu câțiva milimetri, firul rămâne în urmă, pentru că frecarea cu materialul îl ține pe loc. Lângă vârf apare o buclă mică. Pe asta o așteaptă mașina.','Bucla de lângă vârf: ea e tot rostul mișcării.'],
+ [0.40,'Cârligul intră în buclă','Sub placă se învârte un cârlig, legat de volant. Vârful lui ajunge exact lângă ac fix când bucla e acolo. Dacă acul e strâmb sau tocit, bucla nu se face la timp și mașina sare ochiuri: de aici vine, aproape întotdeauna.','Vârful cârligului, care intră în buclă.'],
+ [0.58,'Bucla trece în jurul suveicii','Cârligul duce bucla de jur împrejurul suveicii. În clipa asta, firul de sus trece pe lângă firul de jos și se încolăcește cu el. Aici se face, de fapt, cusătura.','Firul roșu ocolește firul albastru. Aici se face nodul.'],
+ [0.80,'Maneta strânge nodul','Maneta de sus urcă și trage firul înapoi. Nodul e tras în sus, în material. Unde se oprește depinde numai de tensiune: la mijlocul grosimii, dacă e bine reglată.','Maneta, sus în stânga, și nodul care urcă în material.'],
+ [0.96,'Transportorul avansează','Dinții de sub placă urcă, împing materialul cu lungimea unui pas și coboară la loc. Materialul e mutat de dinți, nu de mâna ta. Dacă tragi de el, pașii ies inegali și acul se poate rupe.','Dinții de sub placă și materialul care se mută.']
+];
+TECH.push({id:'cum-se-coase',sec:'stiut',t:'Cum se face o cusătură',lvl:'u',time:'5 min de privit',
+ tags:'cusătura lockstitch nod buclă cârlig suveică manetă transportor sare ochiuri mecanism cum functioneaza',
+ intro:'Mașina nu coase ca mâna. Firul de sus nu trece niciodată prin material și înapoi: el doar coboară, face o buclă, iar un cârlig o duce în jurul firului din suveică. Odată ce vezi asta o dată, înțelegi de unde vin aproape toate problemele: sărirea ochiurilor, nodurile pe dos, cusătura care se încrețește.',
+ need:['nimic, doar de privit'],
+ fig:3,
+ steps:CUS_PASI.map(([t,h,p,c])=>({h,p,
+   d:()=>anim(scenaCusatura,{h:210,tFix:t,durata:9000,par:{},
+     eticheta:'Formarea cusăturii: acul coboară, firul face o buclă, cârligul o duce în jurul suveicii, maneta strânge nodul, transportorul avansează materialul.',
+     titlu:'Momentul',legenda:tt=>cusFaza(tt)}),
+   c})),
+ errors:['Tras de material cu mâna: pașii ies inegali, iar acul se poate îndoi și rupe.',
+  'Ac tocit sau montat strâmb: bucla nu se mai face la timp, iar cârligul o ratează. Așa sare mașina ochiuri.',
+  'Suveică pusă invers: firul de jos nu mai iese pe partea bună și nodul nu se închide.',
+  'Firul de sus prins greșit în discurile de tensiune: nodul iese pe dos, oricât ai regla cadranul.']
+});
+
+/* ================= BANCUL DE PROBĂ (7.40) =================
+   Tabelul de reglaje spune „tensiunea 4”. Bancul arată ce iese din ea.
+   Două vederi, una sub alta, din aceiași parametri:
+     - de sus, fața și dosul, cu împunsăturile la lungimea aleasă;
+     - în secțiune, cu nodul exact unde l-ar trage tensiunea.
+   Diagnosticul nu e scris de mână pentru fiecare caz, ci dedus din aceleași numere,
+   deci nu poate ajunge să contrazică desenul. */
+
+function bancDiag(cfg){
+  const r=(cfg.tens-1)/6;                       /* 0 = nodul jos, 1 = nodul sus */
+  if(r>0.72)return ['Tensiunea e prea mare','Nodul e tras spre față. Firul din suveică e tras și el sus și se vede ca puncte pe față, materialul se strânge pe cusătură, iar firul de sus se rupe ușor. Coboară cadranul cu o treaptă și coase din nou pe petic.'];
+  if(r<0.28)return ['Tensiunea e prea mică','Nodul rămâne spre dos. Firul de sus rămâne lung și face bucle moi pe dos, iar cusătura se desface dacă tragi de ea. Urcă cadranul cu o treaptă.'];
+  return ['Tensiunea e bună','Nodul stă între straturi, iar împunsăturile arată la fel pe amândouă fețele. Așa trebuie să iasă pe petic înainte să începi lucrarea.'];
+}
+
+function scenaBanc(t,par){
+  const cfg=Object.assign({tens:4,pas:2.5,lat:0,gros:1},par||{});
+  const o=[];
+  const PAS=Math.max(10,15*cfg.pas/2.5), LAT=cfg.lat*4.4;
+  const X0=26, X1=270, YF=40, YD=96;            /* fața și dosul, văzute de sus */
+  const rel=Math.max(0.1,Math.min(0.9,(cfg.tens-1)/6));
+
+  /* ---------- de sus: fața ---------- */
+  o.push(R(X0,YF-16,X1-X0,32,'matSus'));
+  o.push(T(X0,YF-22,'fața','start','m'));
+  /* ---------- de sus: dosul ---------- */
+  o.push(R(X0,YD-16,X1-X0,32,'matJos'));
+  o.push(T(X0,YD-22,'dosul','start','m'));
+
+  /* împunsăturile: la zigzag acul se mută lateral, la cusătura dreaptă nu.
+     Faza t deplasează cusătura, ca și cum materialul ar curge prin mașină. */
+  const defaz=(t*PAS)%PAS;
+  let dF='',dD='';
+  for(let x=X0-PAS+defaz;x<X1;x+=PAS){
+    const k=Math.round((x-X0)/PAS), y=LAT?((k%2)?-LAT:LAT):0;
+    const xn=x+PAS, yn=LAT?(((k+1)%2)?-LAT:LAT):0;
+    if(x>=X0-PAS&&xn<=X1){
+      dF+=(dF?' L':'M')+`${Math.max(X0,x).toFixed(1)} ${(YF+y).toFixed(1)}`;
+      dD+=(dD?' L':'M')+`${Math.max(X0,x).toFixed(1)} ${(YD+y).toFixed(1)}`;
+    }
+  }
+  o.push(P(dF,'thrSus'));
+  o.push(P(dD,'firJos'));
+  /* Semnele după care se uită croitoreasa, și ele sunt pe fețe opuse:
+     - tensiune prea mare: nodul e tras sus, deci firul din suveică e tras și el sus
+       și se vede ca puncte pe FAȚĂ;
+     - tensiune prea mică: firul de sus rămâne lung și face bucle pe DOS. */
+  if(rel>0.72)for(let x=X0+PAS/2+defaz;x<X1-4;x+=PAS)o.push(C(x,YF,2.2,'punctJos'));
+  if(rel<0.28)for(let x=X0+PAS/2+defaz;x<X1-4;x+=PAS)
+    o.push(P(`M${x-4} ${YD} q4 7 8 0`,'thrSus'));
+
+  /* materialul se strânge când tensiunea e prea mare: cusătura nu mai e dreaptă */
+  if(rel>0.80){
+    /* deasupra feței, nu dedesubt: acolo trecea peste eticheta „dosul” */
+    o.push(P(`M${X0} ${YF-24} q${(X1-X0)/4} 5 ${(X1-X0)/2} 0 q${(X1-X0)/4} -5 ${(X1-X0)/2} 0`,'zz'));
+    o.push(T(316,YF-20,'se strânge','end','m'));
+  }
+
+  /* ---------- în secțiune: unde stă nodul ---------- */
+  const YS=146, STR=Math.max(7,10*cfg.gros);
+  o.push(R(X0,YS,X1-X0,STR,'matSus'));
+  o.push(R(X0,YS+STR,X1-X0,STR,'matJos'));
+  const nodY=YS+2*STR*(1-rel);
+  o.push(L(X0,YS,X1,YS,'thrSus'));
+  o.push(L(X0,YS+2*STR,X1,YS+2*STR,'firJos'));
+  for(let x=X0+PAS/2+defaz;x<X1-2;x+=PAS){
+    o.push(L(x,YS,x,nodY,'thrSus'));
+    o.push(L(x,YS+2*STR,x,nodY,'firJos'));
+    o.push(C(x,nodY,2.6,'nod'));
+  }
+  o.push(T(X0,YS-8,'în secțiune','start','m'));
+  o.push(dimV(X1+8,YS,YS+2*STR));
+  o.push(T(316,nodY+4,'nodul','end','m'));
+  o.push(T(316,YS-8,'grosimea','end','m'));
+  return o.join('');
+}
+
+/* ---- bancul, ca bloc cu reglaje mutabile, pentru fișa de tensiune și modul la mașină ---- */
+let BANC={tens:4,pas:2.5,lat:0,gros:1};
+function blocBanc(){
+  const [tit,txt]=bancDiag(BANC);
+  const r=(BANC.tens-1)/6;
+  const cls=r>0.72||r<0.28?'alert warn':'alert ok';
+  return `<section class="banc" aria-label="Bancul de probă">
+    <p class="et">Bancul de probă</p>
+    <figure class="fig">${anim(scenaBanc,{h:185,par:BANC,tFix:0.3,durata:7000,
+      eticheta:'Cusătura care iese din reglajele alese, văzută pe față, pe dos și în secțiune.'})}
+      <figcaption><b>Ce iese</b>Mută reglajele și privește unde ajunge nodul.</figcaption></figure>
+    <div class="bsl">
+      <label><span>Tensiunea<b>${BANC.tens}</b></span>
+        <input type="range" min="1" max="7" step="1" value="${BANC.tens}" data-banc="tens"></label>
+      <label><span>Pasul<b>${cm(BANC.pas)} mm</b></span>
+        <input type="range" min="1" max="4" step="0.5" value="${BANC.pas}" data-banc="pas"></label>
+      <label><span>Lățimea<b>${BANC.lat}</b></span>
+        <input type="range" min="0" max="5" step="1" value="${BANC.lat}" data-banc="lat"></label>
+    </div>
+    <div class="${cls}"><h2>${esc(tit)}</h2><p>${esc(txt)}</p></div>
+  </section>`;
+}
+function bancLeaga(reDeseneaza){
+  document.querySelectorAll('[data-banc]').forEach(inp=>{
+    inp.addEventListener('input',()=>{
+      const k=inp.dataset.banc, v=parseFloat(inp.value);
+      BANC[k]=isFinite(v)?v:BANC[k];
+      reDeseneaza();
+    });
+  });
+}
+
 /* ================= LA MAȘINĂ ================= */
+/* ================= 7.42: întărirea și încrețirea, continuu =================
+   La flip() se vedeau patru stări. Aici cusătura chiar crește sub ac, iar materialul chiar
+   se adună pe ață, puțin câte puțin. */
+
+const IT_FAZE=[[0,.32,'coși înapoi, până la margine'],[.32,1,'apoi înainte, peste întărire']];
+const itLeg=t=>(IT_FAZE.find(([a,b])=>t>=a&&t<b)||IT_FAZE[1])[2];
+
+/* Întărirea de la începutul cusăturii: pornești la 1 cm de margine, coși înapoi până la ea,
+   apoi înainte peste împunsăturile de întărire. Cele două trasee sunt desenate alăturat,
+   la 4 unități unul de altul, ca să se vadă amândouă; în realitate cad una peste alta. */
+function scenaIntarire(t){
+  const f1=faza(t,0,.32), f2=faza(t,.32,1);
+  const o=[fab(60,18,200,128),seamV(160,18,146)];
+  const yInapoi=lerp(40,22,lin(f1));
+  o.push(L(156,40,156,+yInapoi.toFixed(1),'thr'));
+  const yInainte=lerp(22,146,lin(f2));
+  if(f2>.01)o.push(L(164,22,164,+yInainte.toFixed(1),'st'));
+  /* acul, la locul în care se coase acum */
+  const ac=f2>.01?yInainte:yInapoi, ax=f2>.01?164:156;
+  o.push(L(ax,+(ac-16).toFixed(1),ax,+(ac-3).toFixed(1),'acJ')+C(ax,+ac.toFixed(1),2.6,'punctJ'));
+  o.push(C(160,40,4,'dot'));
+  o.push(dimV(92,18,40));
+  return o.join('');
+}
+
+const IC_FAZE=[[0,.18,'două rânduri de împunsături lungi'],[.18,.74,'tragi ațele de jos: materialul se adună'],[.74,1,'potrivești pe talie, încrețit egal']];
+const icLeg=t=>(IC_FAZE.find(([a,b])=>t>=a&&t<b)||IC_FAZE[2])[2];
+
+/* Încrețirea: cele două ațe de jos se trag, iar materialul se strânge pe ele. Amplitudinea
+   cutelor crește odată cu scurtarea piesei, deci lungimea de material rămâne aceeași. */
+function scenaIncretire(t){
+  const f2=faza(t,.18,.74), f3=faza(t,.74,1);
+  const u=lin(f2), o=[];
+  const x0=lerp(20,60,u), x1=lerp(280,240,u), a=lerp(0,14,u);
+  const fire=x=>P(`M${x.toFixed(1)} 64 Q${(x+16).toFixed(1)} 60 ${(x+26).toFixed(1)} 48`,'thr')
+               +P(`M${x.toFixed(1)} 72 Q${(x+18).toFixed(1)} 72 ${(x+28).toFixed(1)} 62`,'thr');
+  /* Materialul: plat la început, apoi din ce în ce mai ondulat și mai scurt. */
+  if(u<.03)o.push(P(`M20 70 L280 70`,'lay'));
+  else o.push(wave(+x0.toFixed(1),+x1.toFixed(1),70,+a.toFixed(1),26));
+  /* Cele două ațe de jos rămân drepte: materialul se adună PE ele. Asta e ideea desenului,
+     iar la prima încercare ațele dispăreau de îndată ce începea ondularea. */
+  o.push(L(+(x0+4).toFixed(1),64,+x1.toFixed(1),64,'st'));
+  o.push(L(+(x0+4).toFixed(1),76,+x1.toFixed(1),76,'st'));
+  o.push(fire(x1));
+  /* Tragi de capetele ațelor, spre exterior. Săgețile stau cât ține tragerea. */
+  if(u>.04&&u<.97){
+    o.push(A(+(x0+30).toFixed(1),108,+(x0-6).toFixed(1),108,'arrt'));
+    o.push(A(+(x1+4).toFixed(1),108,+(x1+40).toFixed(1),108,'arrt'));
+  }
+  /* talia, la care se potrivește: apare la final, cu semnele ei */
+  if(f3>.02){
+    const op=+Math.min(1,f3*3).toFixed(2);
+    o.push(`<g opacity="${op}">${fab(60,120,180,30)}${L(105,120,105,132,'mk')}${L(150,120,150,132,'mk')}${L(195,120,195,132,'mk')}</g>`);
+  }
+  return o.join('');
+}
+
 TECH.push(
 {id:'intarire',sec:'masina',t:'Întărirea la capăt',lvl:'u',time:'5 min de exersat',
  tags:'întărire început sfârșit cusătură înapoi mers înapoi să nu se desfacă nod',
@@ -1106,14 +1903,8 @@ TECH.push(
    d:()=>svg(fab(60,18,200,160)+seamV(160,18,178)+L(160,40,160,22,'thr')+A(160,40,160,24,'arrt')+T2(176,40,'înapoi','3–4 împunsături')),
    c:'Primele împunsături merg spre margine.'},
   {h:'Continuă înainte peste ele',p:'Eliberează maneta și coase înainte, peste împunsăturile de întărire, apoi mai departe pe toată cusătura.',
-   d:()=>{const B=()=>fab(60,18,200,128)+seamV(160,18,146);
-     return flip([
-       [B()+C(160,40,4,'dot')+dimV(92,18,40),'pornești la 1 cm de margine'],
-       [B()+L(160,40,160,22,'thr')+A(160,40,160,24,'arrt'),'coși înapoi până la margine'],
-       [B()+L(156,40,156,22,'thr')+L(164,22,164,140,'st')+A(186,52,186,124,'arrt'),'înainte, peste întărire'],
-       [B()+L(156,40,156,22,'thr')+L(164,22,164,146,'st')+L(160,22,160,40,'thr'),'capătul e prins, cusătura continuă']
-     ],{fix:3,h:196,sus:T2(196,64,'înainte,','peste întărire')+T2(160,164,'în realitate cele două','se suprapun','middle'),
-       eticheta:'Animație: pornești la 1 cm de margine, coși înapoi până la margine, apoi înainte peste întărire și cusătura continuă.'})},
+   d:()=>anim(scenaIntarire,{h:196,tFix:0.66,durata:5000,legenda:itLeg,
+     eticheta:'Animație: pornești la 1 cm de margine, coși înapoi până la margine, apoi înainte peste împunsăturile de întărire și mai departe pe toată cusătura. Cele două trasee sunt desenate alăturat ca să se vadă amândouă.'}),
    c:'Desenate alăturat ca să se vadă, în realitate cad una peste alta.'},
   {h:'La capăt, la fel',p:'Când ajungi la capătul cusăturii, coase 3–4 împunsături înapoi și apoi din nou înainte până la capăt. Ridică acul, ridică piciorușul și taie ațele.',
    d:()=>svg(fab(60,12,200,150)+L(160,12,160,152,'st')+L(152,152,152,132,'thr')+A(152,152,152,134,'arrt')+L(168,132,168,152,'thr')+T(160,178,'marginea de jos','middle','m')+T2(172,100,'înapoi, apoi','din nou înainte')),
@@ -1131,10 +1922,10 @@ TECH.push(
  need:['mașina, cu cusătura zigzag','piciorușul universal sau piciorușul pentru surfilat','un rest din același material, pentru probă'],
  steps:[
   {h:'Reglează cusătura',p:'Alege zigzagul cu lățimea de 3–5 mm și lungimea de 1,5–2,5 mm. Pentru materiale care se destramă ușor, alege o lungime mai mică, deci un zigzag mai des. Încearcă întâi pe un rest din același material.',
-   d:()=>svg(fab(20,40,280,110)+zigH(95,40,280,12,12)+dimV(30,83,107)+dimH(126,40,64)+T2(40,68,'lățimea 3–5 mm','')+T2(72,124,'lungimea','1,5–2,5 mm')),
+   d:()=>svg(fab(20,40,280,110)+destramV(300,40,150,1)+zigH(95,40,280,12,12)+dimV(30,83,107)+dimH(126,40,64)+T2(40,68,'lățimea 3–5 mm','')+T2(72,124,'lungimea','1,5–2,5 mm')),
    c:'Lățimea e cât de lat e zigzagul, lungimea e distanța dintre vârfuri.'},
   {h:'Împunsătura din dreapta cade lângă margine',p:'Ghidează materialul astfel încât împunsătura din stânga să intre în material, iar cea din dreapta să cadă chiar lângă marginea tăiată, puțin în afara ei. Zigzagul „îmbracă” astfel marginea.',
-   d:()=>svg(fab(20,14,170,162)+zig(186,18,172,8,10,'thr')+T2(24,110,'stânga:','în material')+A(90,106,176,98)+T2(206,56,'dreapta: lângă','margine, în aer')+A(210,76,195,86)),
+   d:()=>svg(fab(20,14,170,162)+destramV(190,14,176,1)+zig(186,18,172,8,10,'thr')+T2(24,110,'stânga:','în material')+A(90,106,176,98)+T2(206,56,'dreapta: lângă','margine, în aer')+A(210,76,195,86)),
    c:'Marginea tăiată a piesei e în dreapta.'},
   {h:'Coase fără să tragi',p:'Lasă transportorul să ducă materialul. Dacă tragi sau împingi, marginea se ondulează, mai ales la materialele elastice.',
    d:null},
@@ -1294,14 +2085,8 @@ TECH.push(
    d:()=>svg(fab(20,24,280,50)+L(90,24,90,40,'mk')+L(160,24,160,40,'mk')+L(230,24,230,40,'mk')+fab(80,120,160,40)+L(120,120,120,136,'mk')+L(160,120,160,136,'mk')+L(200,120,200,136,'mk')+A(90,80,120,114)+A(160,80,160,114)+A(230,80,200,114)+T(300,16,'piesa lungă','end','m')+T(250,150,'talia','start','m')),
    c:'Semnele de pe piesa lungă se potrivesc cu cele de pe talie.'},
   {h:'Trage ațele de jos',p:'Trage deodată cele două ațe de jos, de la bobină, de la ambele capete spre mijloc. Împinge materialul pe ață până se potrivește lungimea, apoi distribuie cutele uniform. Înfășoară capetele de ață în jurul unui ac.',
-   d:()=>{const fire=x=>P(`M${x} 64 Q${x+16} 60 ${x+26} 48`,'thr')+P(`M${x} 72 Q${x+18} 72 ${x+28} 62`,'thr');
-     return flip([
-       [P('M20 70 L280 70','lay')+L(24,64,280,64,'st')+L(24,74,280,74,'st')+fire(280),'două rânduri de împunsături lungi'],
-       [wave(20,280,70,5,26)+fire(280)+A(20,110,70,110,'arrt')+A(300,110,250,110,'arrt'),'tragi ațele de la bobină'],
-       [wave(20,280,70,14,26)+fire(280)+A(20,110,110,110,'arrt')+A(300,110,210,110,'arrt'),'materialul se adună'],
-       [wave(60,240,70,14,26)+fire(240)+fab(60,120,180,30)+L(105,120,105,132,'mk')+L(150,120,150,132,'mk')+L(195,120,195,132,'mk'),'potrivești pe talie, încrețit egal']
-     ],{fix:3,h:196,sus:T2(160,140,'trage ațele de la bobină,','de la ambele capete','middle'),
-       eticheta:'Animație: două rânduri de împunsături lungi, tragi ațele de la bobină, materialul se adună, apoi încrețitura se potrivește pe lățimea taliei.'})},
+   d:()=>anim(scenaIncretire,{h:196,tFix:0.6,durata:5600,legenda:icLeg,
+     eticheta:'Animație: pe material sunt două rânduri de împunsături lungi. Tragi de ațele de jos, de la ambele capete, iar materialul se adună pe ele, puțin câte puțin, până ajunge la lățimea taliei.'}),
    c:'Cutele se strâng pe cele două ațe.'},
   {h:'Coase cu încrețitura deasupra',p:'Coase la 1,5 cm, cu piesa încrețită deasupra, ca să vezi cutele. Ține-le drepte cu vârful unui ac, să nu intre strâmbe sub picioruș.',
    d:()=>svg(fab(20,90,280,80)+P('M20 60 Q30 46 40 60 Q50 74 60 60 Q70 46 80 60 Q90 74 100 60 Q110 46 120 60 Q130 74 140 60 Q150 46 160 60 Q170 74 180 60 Q190 46 200 60 Q210 74 220 60 Q230 46 240 60 Q250 74 260 60 Q270 46 280 60 Q290 74 300 60','lay')+L(20,100,300,100,'st')+T2(24,140,'cusătura la 1,5 cm,','sub cele două rânduri')),
@@ -1448,6 +2233,71 @@ TECH.push(
 /* ================= DE MÂNĂ ================= */
 function blanket(x0,n,dx=22,y=140,h=22){let d=`M${x0} ${y}`;for(let i=0;i<=n;i++){const x=x0+i*dx;d+=` M${x} ${y} L${x} ${y-h}`;if(i<n)d+=` M${x} ${y} L${x+dx} ${y}`}return P(d,'thr')}
 function hemCatch(x0,n,dx=40,y=110){let o='';for(let i=0;i<n;i++){const x=x0+i*dx;o+=P(`M${x} ${y} L${x+3} ${y-7} L${x+6} ${y}`,'thr');if(i<n-1)o+=P(`M${x+6} ${y+3} L${x+dx} ${y+3}`,'hid')}return o}
+/* ================= 7.42: punctul înapoi și festonatul, continuu =================
+   Acul chiar se mișcă, iar ața chiar se trage după el. La flip() se vedeau patru poziții, dar
+   nu se vedea niciodată drumul dintre ele, adică exact partea pe care mâna trebuie s-o învețe. */
+
+/* ață desenată parțial, de-a lungul unui segment: f = cât s-a tras din ea */
+const ataPart=(x1,y1,x2,y2,f,c='thr')=>f<=.02?'':L(x1,y1,+(x1+(x2-x1)*f).toFixed(1),+(y1+(y2-y1)*f).toFixed(1),c);
+
+const IP_FAZE=[[0,.34,'intri înapoi, în punctul dinainte'],[.34,.68,'pe sub material, doi pași înainte'],[.68,1,'ieși și tragi ața']];
+const ipLeg=t=>(IP_FAZE.find(([a,b])=>t>=a&&t<b)||IP_FAZE[2])[2];
+
+/* Punctul înapoi. A, B, C, D la 24 de unități unul de altul, pe linia de cusătură.
+   Un ciclu întreg: din B intri înapoi în A, mergi pe dedesubt până în C, ieși în C. */
+function scenaInapoi(t){
+  const Y=95, pA=124, pB=148, pC=172;
+  const f1=faza(t,0,.34), f2=faza(t,.34,.68), f3=faza(t,.68,1);
+  const o=[fab(40,40,240,110),seamH(Y,60,260)];
+  'ABCD'.split('').forEach((n,i)=>o.push(T(pA+i*24,80,n,'middle')));
+  /* împunsătura dinainte, deja făcută */
+  o.push(L(pA-24,Y,pA,Y,'thr'));
+  /* împunsătura în lucru: se trage de la B spre A cât acul coboară în A */
+  o.push(ataPart(pB,Y,pA,Y,lin(f1)));
+  /* drumul pe sub material, de la A la C: punctat, crește */
+  if(f2>.02){
+    const xr=lerp(pA,pC,lin(f2));
+    o.push(P(`M${pA} ${Y+4} Q${((pA+xr)/2).toFixed(1)} ${(Y+4+18*Math.min(1,(xr-pA)/(pC-pA))).toFixed(1)} ${xr.toFixed(1)} ${(Y+4).toFixed(1)}`,'hid'));
+  }
+  /* acul: coboară în A, dispare sub material, reapare urcând din C */
+  if(f3>.06){
+    o.push(needle(pC,+(Y-lerp(0,34,lin(f3))).toFixed(1),96,52));
+    o.push(C(pC,Y,3.5,'dot'));
+  }else if(f2<=.02){
+    o.push(needle(pA,+(Y-lerp(40,0,lin(f1))).toFixed(1),84,52));
+  }
+  o.push(C(pA,Y,3.5,'dot'));
+  o.push(C(pB,Y,3,'ol'));
+  return o.join('');
+}
+
+const FS_FAZE=[[0,.3,'înțepi din față, la 5 mm de margine'],[.3,.6,'ața trece pe sub vârful acului'],[.6,1,'tragi: se formează un „L”']];
+const fsLeg=t=>(FS_FAZE.find(([a,b])=>t>=a&&t<b)||FS_FAZE[2])[2];
+
+/* Punctul festonat. Marginea materialului e jos, la y 140. Acul înțeapă din față la 5 mm de
+   margine, iese pe sub margine, iar ața trecută pe sub vârful lui se așază ca un „L”. */
+function scenaFeston(t){
+  const Y=140, X=182;
+  const f1=faza(t,0,.3), f2=faza(t,.3,.6), f3=faza(t,.6,1);
+  const o=[fab(20,40,280,100),L(20,Y,300,Y,'olt')];
+  o.push(blanket(116,2));                                  /* două puncte deja făcute */
+  /* acul: coboară prin material la X, apoi iese pe sub margine */
+  const ay=lerp(lerp(Y-56,Y-18,lin(f1)),Y+16,lin(f2));
+  o.push(needle(X,+ay.toFixed(1),90,50));
+  /* ața care vine de la ultimul punct și trece pe sub vârful acului */
+  if(f2>.04){
+    const w=lin(f2);
+    o.push(P(`M160 ${Y} Q${(168+14*w).toFixed(1)} ${(Y+26*w).toFixed(1)} ${(X+6*w).toFixed(1)} ${(Y+14*w).toFixed(1)}`,'thr'));
+  }
+  /* se trage: „L”-ul se așază, piciorul vertical urcă la locul lui */
+  if(f3>.04){
+    const u=lin(f3);
+    o.push(ataPart(X,Y,X,Y-22,u));
+    o.push(L(160,Y,+lerp(168,X,u).toFixed(1),Y,'thr'));
+  }
+  return o.join('');
+}
+
 const DS={
  open:()=>svg(
    R(40,14,240,162,'fab')+L(160,14,160,54,'ol')+L(160,136,160,176,'ol')+
@@ -1535,14 +2385,8 @@ TECH.push(
    d:()=>svg(fab(40,40,240,110)+seamH(95,60,260)+C(124,95,3,'ol')+C(148,95,3.5,'dot')+T(124,80,'A','middle')+T(148,80,'B','middle')+T2(104,130,'ieși în B,','la un pas după A')),
    c:'A e începutul liniei.'},
   {h:'Intră înapoi, ieși înainte',p:'Intră înapoi în A. Pe sub material, mergi doi pași înainte și ieși în C, adică un pas după B.',
-   d:()=>{const B=()=>fab(40,40,240,110)+seamH(95,60,260)+T(124,80,'A','middle')+T(148,80,'B','middle')+T(172,80,'C','middle')+T(196,80,'D','middle');
-     return flip([
-       [B()+C(124,95,3,'ol')+C(148,95,3.5,'dot'),'ieși în B, un pas după A'],
-       [B()+C(148,95,3.5,'dot')+AC('M148 88 Q136 80 126 90','arrt')+C(124,95,3.5,'dot'),'intri înapoi, în A'],
-       [B()+L(124,95,148,95,'thr')+P('M124 99 Q148 118 172 99','hid')+C(172,95,3.5,'dot'),'pe sub material, ieși în C'],
-       [B()+L(124,95,148,95,'thr')+L(148,95,172,95,'thr')+P('M148 99 Q172 118 196 99','hid')+C(196,95,3.5,'dot'),'înapoi în B, ieși în D, și tot așa']
-     ],{fix:3,h:196,sus:T2(160,128,'pe sub material,','doi pași înainte','middle'),
-       eticheta:'Animație: ieși în B, intri înapoi în A, pe sub material ieși în C, apoi înapoi în B și ieși în D. Fiecare împunsătură se întoarce un pas și merge doi.'})},
+   d:()=>anim(scenaInapoi,{h:196,tFix:0.52,durata:5400,legenda:ipLeg,
+     eticheta:'Animație: din B acul intră înapoi în A, trece pe sub material doi pași înainte și iese în C. Ața se trage după el. Fiecare împunsătură se întoarce un pas și merge doi.'}),
    c:'Punctat: traseul aței pe dos.'},
   {h:'Repetă: înapoi în punctul anterior',p:'Intră înapoi în B, lipit de împunsătura făcută, și ieși un pas mai încolo. Continuă așa pe toată linia.',
    d:()=>{let f='',b='';for(let k=0;k<10;k++){const x=40+k*24;f+=L(x,61,x+24,61,'thr')+(k?C(x,61,1.2,'symf'):'')}
@@ -1582,14 +2426,8 @@ TECH.push(
  steps:[
   {h:'Pornește de pe margine',p:'Ascunde nodul între straturi sau pe dos și ieși pe marginea materialului.',d:null},
   {h:'Intră la 5 mm, cu ața sub vârful acului',p:'Înțeapă din față la aproximativ 5 mm de margine și 5 mm mai încolo. Scoate acul pe sub margine, trecând ața pe sub vârful lui.',
-   d:()=>{const B=()=>fab(20,40,280,100)+L(20,140,300,140,'olt');
-     return flip([
-       [B()+blanket(116,1)+P('M138 140 C 150 138, 160 112, 160 80','thr')+needle(160,118,90,50),'înțepi din față, la 5 mm de margine'],
-       [B()+blanket(116,2)+needle(160,154,90,50)+P('M160 140 Q172 170 188 160 Q200 150 182 140','thr'),'ața trece pe sub vârful acului'],
-       [B()+blanket(116,2)+P('M160 140 Q180 146 206 128','thr')+A(188,150,214,134,'arrt'),'tragi, se formează un „L”'],
-       [B()+blanket(116,4),'repeți, la același pas']
-     ],{fix:2,h:204,sus:T2(312,172,'ața trece pe sub','vârful acului','end')+T2(160,84,'5 mm de margine','','middle'),
-       eticheta:'Animație: acul înțeapă din față la 5 mm de margine, iese pe sub margine cu ața pe sub vârf, ața se trage și formează un L, apoi se repetă la același pas.'})},
+   d:()=>anim(scenaFeston,{h:204,tFix:0.46,durata:5200,legenda:fsLeg,
+     eticheta:'Animație: acul înțeapă din față la 5 mm de margine și iese pe sub ea, cu ața trecută pe sub vârful lui. Când tragi, ața se așază ca un L: un picior pe material, unul pe margine.'}),
    c:'Marginea materialului e jos.'},
   {h:'Trage și repetă',p:'Trage ața până se așază pe margine. Se formează un „L”: un picior vertical și unul pe margine. Repetă la pași egali.',
    d:()=>svg(fab(20,40,280,100)+L(20,140,300,140,'olt')+blanket(40,10,24)+T2(160,84,'aceeași înălțime,','același pas','middle')),
@@ -1734,6 +2572,35 @@ TECH.push(
 /* ================= CROȘETAT ================= */
 /* jeteu: firul trece peste croșetă, de la spate spre față */
 const yo=(x,y)=>P(`M${x+18} ${y+22} C ${x+26} ${y-6}, ${x-4} ${y-20}, ${x-8} ${y-4}`,'yarn2')+A(x-2,y-10,x-8,y-2,'arrt');
+/* ================= 7.42: jeteul tras prin două bucle, continuu =================
+   Firul chiar se înfășoară pe croșetă, croșeta chiar trage spre stânga, iar cele două bucle
+   vechi chiar alunecă spre vârf și ies de pe ea. Înainte erau patru cadre, iar între „tragi”
+   și „rămâne o buclă” nu se vedea unde s-a dus firul. */
+const JT_FAZE=[[0,.3,'jeteu: firul peste croșetă'],[.3,.74,'tragi prin ambele bucle'],[.74,1,'rămâne o singură buclă']];
+const jtLeg=t=>(JT_FAZE.find(([a,b])=>t>=a&&t<b)||JT_FAZE[2])[2];
+
+/* firul de lucru, de la ghem (jos-dreapta) la un punct de pe croșetă */
+const jtFir=(x,y)=>P(`M300 170 C 286 ${y+54}, ${(x+26).toFixed(1)} ${(y+30).toFixed(1)}, ${x} ${y}`,'yarn2');
+
+function scenaJeteu2(t){
+  const f1=faza(t,0,.3), f2=faza(t,.3,.74);
+  const o=[];
+  o.push(hookH(240,90));
+  /* cele două bucle vechi alunecă spre vârf și ies de pe croșetă */
+  const u=lin(f2), d=42*u, op=+(1-faza(u,.45,.95)).toFixed(2);
+  [222,204].forEach(x=>o.push(`<g opacity="${op}" transform="translate(${d.toFixed(1)} 0)">${hst(x,90,6,12)}</g>`));
+  /* Jeteul se face lângă capul croșetei, apoi bucla nouă călătorește spre stânga exact peste
+     locurile celor două bucle vechi: așa se vede că firul chiar trece PRIN amândouă. */
+  const jx=lerp(238,204,lin(f2));
+  o.push(jtFir(+jx.toFixed(1),90));
+  if(f1>.04){
+    /* bucla nouă: crește cât se face jeteul, apoi călătorește cu croșeta */
+    const ry=lerp(3,12,lin(f1));
+    o.push(hst(+jx.toFixed(1),90,6,+ry.toFixed(1),'yarnH'));
+  }
+  return Z(o.join(''));
+}
+
 /* vârful ochiurilor dintr-un rând: ochiuri orizontale ca un lanț */
 function tops(x,y,n,dx=26,hl=-1){let o='';for(let i=0;i<n;i++){o+=link(x+i*dx,y,dx*.56,5.5,i===hl?'yarnH':'yarn3')}return o}
 TECH.push(
@@ -1774,13 +2641,8 @@ TECH.push(
    d:()=>svg(Z(hookH(240,90)+loopsOn(222,90,2))+ZT(222,120,'1','middle')+ZT(204,120,'2','middle')+T2(20,40,'2 bucle','pe croșetă')),
    c:'Cele două bucle.'},
   {h:'Jeteu prin amândouă',p:'Fă din nou jeteu și trage prin ambele bucle. Punctul e gata. Rămâne o singură buclă pe croșetă.',
-   d:()=>flip([
-     [Z(hookH(240,90)+loopsOn(222,90,2)),'două bucle pe croșetă'],
-     [Z(hookH(240,90)+loopsOn(222,90,2)+yo(240,90)),'jeteu'],
-     [Z(hookH(240,90)+loopsOn(222,90,2)+yo(240,90)+A(236,108,196,108,'arrt')),'trage prin ambele'],
-     [Z(hookH(240,90)+loopsOn(222,90,1)),'rămâne o buclă, punctul e gata']
-   ],{fix:3,sus:T2(20,40,'jeteu, trage','prin ambele'),
-     eticheta:'Animație: pe croșetă sunt două bucle, faci jeteu, tragi firul prin amândouă, iar pe croșetă rămâne o singură buclă.'}),
+   d:()=>anim(scenaJeteu2,{h:190,tFix:0.52,durata:5200,legenda:jtLeg,
+     eticheta:'Animație: pe croșetă sunt două bucle, firul se înfășoară pe ea, croșeta îl trage spre stânga prin amândouă, iar buclele vechi ies de pe croșetă. Rămâne o singură buclă.'}),
    c:'Tragi firul prin ambele bucle deodată.'},
   {h:'Întoarcerea rândului',p:'La capătul rândului, fă 1 ol de întoarcere, întoarce lucrarea și lucrează primul pn în primul punct. Ochiul de întoarcere nu se numără ca punct.',
    d:()=>svg(chainH(60,164,8,24)+[0,1,2,3,4,5,6,7].map(i=>X(60+i*24,132,6)).join('')+sOL(60+7*24+26,118)+[0,1,2,3,4,5,6,7].map(i=>X(60+i*24,98,6)).join('')+sOL(34,84)+[0,1,2,3,4,5,6,7].map(i=>X(60+i*24,64,6)).join('')+T(20,168,'lanț','start','m')+T(20,136,'r. 1','start','m')+T(20,102,'r. 2','start','m')+T(20,68,'r. 3','start','m')+T2(252,148,'1 ol de','întoarcere')),
@@ -1875,6 +2737,120 @@ const KD={
  wrap:()=>KZ(leftN()+kneedle(300,40,154,92)+P('M140 150 C 150 116, 168 96, 176 100 C 186 106, 170 124, 160 118','yarn2')+A(164,120,158,116,'arrt')),
  trage:()=>KZ(leftN()+kneedle(300,40,190,100)+AC('M168 110 Q184 132 206 122'))
 };
+/* ================= 7.42: ochiul care se formează, continuu =================
+   KF și KD de mai sus rămân, pentru pașii în care trebuie arătată o singură poziție. Aici
+   aceleași patru mișcări sunt o singură funcție de geometrie: andreaua dreaptă chiar se
+   mișcă, firul chiar se înfășoară în jurul vârfului, bucla nouă chiar crește, iar ochiul
+   vechi chiar alunecă spre vârful andrelei stângi și cade.
+
+   De ce contează: la flip(), fiecare cadru avea alt decor (KF.cade schimba complet
+   așezarea andrelelor), deci ochiul pierdea firul la fiecare trecere. Aici camera e
+   aceeași tot timpul și nimic nu sare. */
+
+const KN_FAZE=[[0,.22,'intri prin ochi'],[.22,.40,'înfășori firul'],[.40,.68,'tragi bucla nouă'],[.68,1,'ochiul vechi cade']];
+const knLeg=t=>(KN_FAZE.find(([a,b])=>t>=a&&t<b)||KN_FAZE[3])[2];
+
+/* Firul de lucru, de la ghem (jos, în dreapta) până la vârful andrelei. Ocolește pe dedesubt
+   și urcă spre vârf pe STÂNGA lui: la prima încercare mergea exact peste andreaua dreaptă și
+   părea că andreaua e înfășurată în fir pe toată lungimea. */
+const knFir=(x,y)=>P(`M306 188 C 244 196, 176 162, ${(x-8).toFixed(1)} ${(y+30).toFixed(1)} C ${(x-11).toFixed(1)} ${(y+15).toFixed(1)}, ${(x-7).toFixed(1)} ${(y+5).toFixed(1)}, ${x} ${y}`,'yarn2');
+
+/* Ochiul vechi care cade: alunecă spre vârful andrelei stângi, iar după ce trece de el pică
+   în jos și se stinge. Fără căderea pe verticală, ajungea exact peste bucla nouă. */
+function knCade(f){
+  const u=lin(f), dx=30*u, dy=u<=.56?0:34*Math.pow((u-.56)/.44,1.7);
+  return {dx:+dx.toFixed(1),dy:+dy.toFixed(1),op:+(1-faza(u,.62,1)).toFixed(2)};
+}
+
+/* bucla care se înfășoară pe vârf: un arc în jurul punctului, care crește.
+   `sens` 1 e invers acelor de ceasornic (ochiul pe față), -1 invers (ochiul pe dos). */
+function knWrap(x,y,f,sens=1,r=9.5){
+  if(f<=0.01)return '';
+  const a0=-25*sens, a1=a0+sens*335*Math.min(1,f);
+  const pe=a=>[x+r*Math.cos(a*Math.PI/180),y+r*Math.sin(a*Math.PI/180)];
+  const [sx,sy]=pe(a0),[ex,ey]=pe(a1);
+  const mare=Math.abs(a1-a0)>180?1:0, dir=sens>0?1:0;
+  return P(`M${sx.toFixed(1)} ${sy.toFixed(1)} A${r} ${r} 0 ${mare} ${dir} ${ex.toFixed(1)} ${ey.toFixed(1)}`,'yarn2');
+}
+
+/* bucla nouă, pe andreaua dreaptă: un inel perpendicular pe andrea, la 15 unități de vârf */
+function knBucla(tx,ty,ax,ay,f){
+  if(f<=0.02)return '';
+  const d=Math.hypot(tx-ax,ty-ay)||1, ux=(tx-ax)/d, uy=(ty-ay)/d;
+  const cx=tx-ux*15, cy=ty-uy*15, unghi=Math.atan2(uy,ux)*180/Math.PI;
+  return E(+cx.toFixed(1),+cy.toFixed(1),5.5,+lerp(2.5,11,f).toFixed(1),'yarn3',+(unghi+90).toFixed(1));
+}
+
+/* Ochiul pe față. Andreaua dreaptă vine din dreapta-jos, intră prin fața ochiului de lucru,
+   prinde firul și îl trage spre tine. */
+function scenaOchiFata(t){
+  const f1=faza(t,0,.22), f2=faza(t,.22,.40), f3=faza(t,.40,.68), f4=faza(t,.68,1);
+  const o=[];
+  o.push(kneedle(20,84,190,84));
+  for(let i=0;i<4;i++)o.push(kst(84+i*20,84));
+  /* ochiul în care se lucrează e galben, ca peste tot în aplicație */
+  const c=knCade(f4);
+  const vechi=g=>`<g opacity="${c.op}" transform="translate(${c.dx} ${c.dy})">${g}</g>`;
+  o.push(vechi(kst(164,84,'yarnH')));
+  /* andreaua dreaptă: coboară prin ochi, apoi se retrage spre dreapta-sus cu bucla nouă */
+  const tx=lerp(lerp(182,150,lin(f1)),198,lin(f3));
+  const ty=lerp(lerp(108,74,lin(f1)),56,lin(f3));
+  const ay=lerp(182,118,lin(f3));
+  o.push(kneedle(300,ay,+tx.toFixed(1),+ty.toFixed(1)));
+  /* piciorul din față al ochiului, repus peste andrea: dovada că ea a trecut pe dedesubt */
+  if(f1>.45&&c.dy<2)o.push(vechi(kfront(164,84,'yarnH')));
+  o.push(knFir(+tx.toFixed(1),+ty.toFixed(1)));
+  o.push(knWrap(tx,ty,f2,1));
+  o.push(knBucla(tx,ty,300,ay,lin(f3)));
+  return KZ(o.join(''));
+}
+
+/* Ochiul pe dos. Firul stă în fața lucrării, andreaua dreaptă intră prin fața ochiului de la
+   dreapta spre stânga, iar bucla e împinsă spre spate. */
+function scenaOchiDos(t){
+  const f1=faza(t,0,.22), f2=faza(t,.22,.40), f3=faza(t,.40,.68), f4=faza(t,.68,1);
+  const o=[];
+  o.push(kneedle(20,84,190,84));
+  for(let i=0;i<4;i++)o.push(kst(84+i*20,84));
+  const c=knCade(f4);
+  const vechi=g=>`<g opacity="${c.op}" transform="translate(${c.dx} ${c.dy})">${g}</g>`;
+  o.push(vechi(kst(164,84,'yarnH')));
+  /* aici andreaua vine de sus, din dreapta: vârful coboară spre ochi, apoi împinge spre spate */
+  const tx=lerp(lerp(180,154,lin(f1)),196,lin(f3));
+  const ty=lerp(lerp(74,92,lin(f1)),108,lin(f3));
+  const ay=lerp(36,52,lin(f3));
+  o.push(kneedle(300,ay,+tx.toFixed(1),+ty.toFixed(1)));
+  if(f1>.45&&c.dy<2)o.push(vechi(kfront(164,84,'yarnH')));
+  o.push(knFir(+tx.toFixed(1),+ty.toFixed(1)));
+  o.push(knWrap(tx,ty,f2,-1));
+  o.push(knBucla(tx,ty,300,ay,lin(f3)));
+  return KZ(o.join(''));
+}
+
+/* Închiderea: ochiul dinspre coada andrelei drepte e ridicat peste vecinul lui și lăsat să
+   cadă. Traseul e un arc: urcă, trece peste, coboară pe cealaltă parte, apoi pică de pe andrea. */
+const IN_FAZE=[[0,.3,'ridici primul ochi'],[.3,.68,'îl treci peste al doilea'],[.68,1,'cade, rămâne unul']];
+const inLeg=t=>(IN_FAZE.find(([a,b])=>t>=a&&t<b)||IN_FAZE[2])[2];
+
+function scenaInchidere(t){
+  const f1=faza(t,0,.3), f2=faza(t,.3,.68), f3=faza(t,.68,1);
+  const o=[leftN(4,150),kneedle(310,84,180,84),kst(204,84)];
+  /* ochiul care se închide: se ridică de pe andrea, trece peste vecin, apoi cade */
+  const u1=lin(f1), u2=lin(f2), u3=lin(f3);
+  const x=lerp(224,204,u2);
+  const sus=24*u1*(1-u2);                         /* cât e ridicat deasupra andrelei */
+  const jos=40*Math.pow(u3,1.8);                  /* cât a căzut sub ea */
+  const y=84-sus+jos;
+  const op=+(1-faza(u3,.45,1)).toFixed(2);
+  o.push(`<g opacity="${op}">${kst(+x.toFixed(1),+y.toFixed(1),'yarnH')}</g>`);
+  /* vârful andrelei stângi, care face ridicarea: vine de jos-stânga și atinge ochiul */
+  if(f1>.05&&f3<.4){
+    const nx=lerp(238,x+10,Math.min(1,u1+u2)), ny=lerp(120,y+9,Math.min(1,u1+u2));
+    o.push(kneedle(nx+70,ny+54,+nx.toFixed(1),+ny.toFixed(1)));
+  }
+  return KZ(o.join(''));
+}
+
 TECH.push(
 {id:'montare',sec:'tricot',t:'Montarea ochiurilor',lvl:'m',time:'20 min de exersat',
  tags:'montare montaj ochiuri început tricotat degetul mare fir dublu andrele',
@@ -1918,8 +2894,8 @@ TECH.push(
    d:()=>svg(KF.cade()+T2(68,150,'ochiuri de lucrat','','middle')+T2(230,150,'ochi lucrat','','middle')),
    c:'Ochiurile trec, unul câte unul, de pe andreaua stângă pe cea dreaptă.'},
   {h:'Tot ochiul, în mișcare',p:'Cele patru mișcări de mai sus, una după alta: intri, înfășori, tragi, lași să cadă. Urmărește-le de câteva ori, apoi fă-le încet pe lucru, spunându-le în gând în aceeași ordine.',
-   d:()=>flip([[KF.intra(),'intri din față spre spate'],[KF.wrap(),'înfășori firul'],[KF.trage(),'tragi bucla spre tine'],[KF.cade(),'lași ochiul vechi să cadă']],
-     {h:196,fix:3,eticheta:'Animație: ochiul pe față în patru mișcări. Andreaua dreaptă intră din față spre spate, firul se înfășoară, bucla e trasă spre tine, iar ochiul vechi cade de pe andreaua stângă.'}),
+   d:()=>anim(scenaOchiFata,{h:196,tFix:0.62,durata:6200,legenda:knLeg,
+     eticheta:'Animație: ochiul pe față, de la cap la coadă. Andreaua dreaptă intră din față spre spate prin ochi, firul se înfășoară pe vârful ei, bucla nouă e trasă spre tine, iar ochiul vechi alunecă de pe andreaua stângă și cade.'}),
    c:'Ochiul pe față, de la intrare până cade ochiul vechi.'}
  ],
  errors:['Firul lăsat în față: apare un ochi în plus și o gaură.','Intri prin spatele ochiului: ochiul se răsucește.','Lucrezi pe vârful subțire al andrelei: ochiurile ies prea strânse. Formează-le pe partea groasă.']
@@ -1940,8 +2916,8 @@ TECH.push(
    d:()=>svg(KD.trage()+T2(20,150,'bucla trece','prin ochi, spre spate')),
    c:'Ochiul nou trece pe andreaua dreaptă.'},
   {h:'Tot ochiul pe dos, în mișcare',p:'Aceleași patru mișcări, pentru ochiul pe dos: intri prin față, de la dreapta, înfășori, împingi bucla spre spate, lași ochiul vechi să cadă. Firul stă tot timpul în față.',
-   d:()=>flip([[KD.intra(),'intri de la dreapta, prin față'],[KD.wrap(),'înfășori firul'],[KD.trage(),'împingi bucla spre spate'],[KF.cade(),'lași ochiul vechi să cadă']],
-     {h:196,fix:3,eticheta:'Animație: ochiul pe dos în patru mișcări. Andreaua dreaptă intră prin fața ochiului, de la dreapta, firul se înfășoară, bucla e împinsă spre spate, iar ochiul vechi cade de pe andreaua stângă.'}),
+   d:()=>anim(scenaOchiDos,{h:196,tFix:0.62,durata:6200,legenda:knLeg,
+     eticheta:'Animație: ochiul pe dos, de la cap la coadă. Andreaua dreaptă intră prin fața ochiului, de la dreapta, firul se înfășoară pe vârful ei, bucla e împinsă spre spate, iar ochiul vechi alunecă de pe andreaua stângă și cade.'}),
    c:'Ochiul pe dos, de la intrare până cade ochiul vechi.'},
   {h:'Jerseul: față și dos alternat',p:'Tricotează un rând pe față, un rând pe dos, și tot așa. Pe fața lucrării apar coloane de V-uri, pe dos rânduri de mici bucle.',
    d:()=>{let f='',b='';for(let j=0;j<4;j++)for(let i=0;i<5;i++){f+=P(`M${38+i*20} ${56+j*22} L${46+i*20} ${70+j*22} L${54+i*20} ${56+j*22}`,'yarn2')}
@@ -1961,14 +2937,8 @@ TECH.push(
    d:()=>svg(KZ(leftN(4,150)+kneedle(310,84,180,84)+kst(204,84)+kst(224,84,'yarnH'))+T(242,134,'1','middle')+T(218,134,'2','middle')+T2(252,164,'2 ochiuri pe','andreaua dreaptă','middle')),
    c:'Ochiul evidențiat e primul lucrat.'},
   {h:'Trece primul peste al doilea',p:'Cu vârful andrelei stângi, ridică primul ochi, cel mai depărtat de vârf, peste al doilea și scoate-l de pe andrea. Rămâne un singur ochi pe andreaua dreaptă.',
-   d:()=>{const B=()=>leftN(4,150)+kneedle(310,84,180,84);
-     return flip([
-       [KZ(B()+kst(204,84)+kst(224,84,'yarnH')),'două ochiuri pe andreaua dreaptă'],
-       [KZ(B()+kst(204,84)+kst(224,84,'yarnH')+AC('M224 76 Q214 40 196 72')),'ridici primul ochi'],
-       [KZ(B()+kst(204,84)+E(204,76,10,5,'yarnH')),'îl treci peste al doilea'],
-       [KZ(B()+kst(204,84)+E(204,106,8,3.6,'yarnH')),'cade, rămâne un singur ochi']
-     ],{fix:2,sus:T2(200,30,'peste al doilea,','și jos de pe andrea','middle'),
-       eticheta:'Animație: pe andreaua dreaptă sunt două ochiuri, primul e ridicat peste al doilea și lăsat să cadă, iar pe andrea rămâne un singur ochi.'})},
+   d:()=>anim(scenaInchidere,{h:190,tFix:0.46,durata:4800,legenda:inLeg,
+     eticheta:'Animație: pe andreaua dreaptă sunt două ochiuri. Vârful andrelei stângi ridică ochiul dinspre coadă, îl trece peste vecinul lui și îl lasă să cadă de pe andrea. Rămâne un singur ochi.'}),
    c:'Primul ochi trece peste al doilea.'},
   {h:'Repetă',p:'Tricotează încă un ochi și trece din nou ochiul anterior peste el. Repetă până mai rămâne un singur ochi.',d:null},
   {h:'Blochează ultimul ochi',p:'Taie firul la 15 cm, trece capătul prin ultimul ochi și strânge. Ascunde capătul în lucrare cu acul bont.',
@@ -2187,6 +3157,29 @@ TECH.push(
 );
 
 /* ================= BUNE DE ȘTIUT ================= */
+/* ================= 7.42: butonul de tensiune, care chiar se rotește =================
+   Scala e cea desenată deja din 7.16: nouă numere, de la 0 la 8, pe 270 de grade, cu 4 exact
+   în sus. Reperul se plimbă între 3 și 5, adică exact ce spune pasul: jumătate de treaptă
+   o dată, nu dintr-o extremă în alta. Nu se inventează nicio poziție: unghiul fiecărui număr
+   vine din aceeași formulă ca semnele de pe cadran. */
+const tensUnghi=v=>-Math.PI*1.25+v*Math.PI*1.5/8;
+const tensLeg=t=>'butonul e pe '+(3+2*dute(t,0,1)).toFixed(1).replace('.',',');
+
+function scenaTensiune(t){
+  const cx=160, cy=96, v=3+2*dute(t,0,1), a=tensUnghi(v);
+  const o=[C(cx,cy,54,'btn'),C(cx,cy,8,'symf')];
+  for(let i=0;i<=8;i++){
+    const ai=tensUnghi(i), aproape=Math.abs(i-v)<.34;
+    o.push(L(+(cx+40*Math.cos(ai)).toFixed(1),+(cy+40*Math.sin(ai)).toFixed(1),
+            +(cx+50*Math.cos(ai)).toFixed(1),+(cy+50*Math.sin(ai)).toFixed(1),'ol'));
+    o.push(T(+(cx+65*Math.cos(ai)).toFixed(1),+(cy+65*Math.sin(ai)+4).toFixed(1),String(i),'middle',aproape?'':'m'));
+  }
+  o.push(L(cx,cy,+(cx+46*Math.cos(a)).toFixed(1),+(cy+46*Math.sin(a)).toFixed(1),'mk'));
+  o.push(AC('M92 72 A 74 74 0 0 0 98 142','arrt'),AC('M228 72 A 74 74 0 0 1 222 142','arrt'));
+  o.push(T2(20,170,'mai mic: slăbește',''),T2(300,170,'mai mare: strânge','','end'));
+  return o.join('');
+}
+
 TECH.push(
 {id:'depanare',sec:'stiut',t:'Depanarea mașinii',lvl:'u',time:'de citit când se strică ceva',
  tags:'probleme mașina sare cusătura ață încâlcită cuib de pasăre ac rupt nu avansează tensiune se rupe ața defect',
@@ -2246,14 +3239,8 @@ TECH.push(
      T2(262,134,'ața de jos','se vede pe față','middle')),
    c:'Secțiune prin cele două straturi. Linia continuă e ața de sus, cea punctată ața din bobină.'},
   {h:'Reglează de sus, puțin câte puțin',p:'Mută butonul de tensiune cu o jumătate de treaptă și coase din nou proba. Numerele mai mari strâng, cele mai mici slăbesc. Majoritatea mașinilor cos bine între 3 și 5 pe materiale obișnuite.',
-   d:()=>svg(C(160,96,54,'btn')+C(160,96,8,'symf')+
-     [0,1,2,3,4,5,6,7,8].map(i=>{const a=-Math.PI*1.25+i*Math.PI*1.5/8;
-       return L(160+40*Math.cos(a),96+40*Math.sin(a),160+50*Math.cos(a),96+50*Math.sin(a),'ol')
-         +T(160+65*Math.cos(a),96+65*Math.sin(a)+4,String(i),'middle','m')}).join('')+
-     L(160,96,160,50,'mk')+
-     /* numerele cresc în sensul acelor de ceasornic: spre stânga slăbești, spre dreapta strângi */
-     AC('M92 72 A 74 74 0 0 0 98 142','arrt')+AC('M228 72 A 74 74 0 0 1 222 142','arrt')+
-     T2(20,170,'mai mic: slăbește','')+T2(300,170,'mai mare: strânge','','end')),
+   d:()=>anim(scenaTensiune,{h:190,tFix:0.25,durata:5600,legenda:tensLeg,
+     eticheta:'Animație: butonul de tensiune al aței de sus. Reperul se plimbă încet între 3 și 5, cu câte o jumătate de treaptă, ca să se vadă cât de mic e un reglaj bun. Numerele cresc spre dreapta: spre stânga slăbești, spre dreapta strângi.'}),
    c:'Butonul de tensiune al aței de sus.'},
   {h:'Atinge bobina doar la final',p:'Șurubul de pe cutia bobinei se mișcă foarte puțin, un sfert de tură o dată, și numai dacă reglajul de sus nu rezolvă. Ține cutia deasupra unei cutii, ca să nu pierzi șurubul.',d:null},
   {h:'Notează ce merge',p:'Scrie pe fișa materialului ce tensiune și ce lungime de împunsătură au ieșit bine. Data viitoare pornești de acolo, nu de la zero.',d:null}
@@ -2280,9 +3267,10 @@ TECH.push(
      T2(66,132,'45°','','middle')),
    c:'Direcțiile în care se întinde o țesătură.',tech:'biais'},
   {h:'Testul de destrămare',p:'Freacă marginea tăiată între degete. Dacă firele ies imediat, materialul cere finisare: zigzag, surfilat sau cusătură franțuzească. Inul și pânzele rare se destramă cel mai tare.',
-   d:()=>svg(fab(50,40,200,110)+
-     [0,1,2,3,4,5].map(i=>L(250,58+i*16,250+14+i%3*10,58+i*16,'thr')).join('')+
-     T2(262,166,'firele ies','din margine','middle')),
+   /* 7.41: firele scăpate se desenează cu destramV, în culoarea urzelii. Erau desenate cu
+      clasa „thr”, deci ieșeau roșii, ca ața de cusut, nu ca firele materialului. */
+   d:()=>svg(fab(50,40,200,110)+destramV(250,40,150,1,5)+
+     T2(272,166,'firele ies','din margine','middle')),
    c:'Marginea tăiată a unei pânze rare.',tech:'zigzag'},
   {h:'Intrarea la apă: spală înainte',p:'Bumbacul și inul intră la prima spălare, de obicei între 2 și 5%, uneori mai mult. La o rochie de 100 cm asta înseamnă până la 5 cm. Spală și calcă materialul înainte de croit, exact cum vei spăla haina gata făcută. Sinteticele nu intră, dar se deformează la călcat fierbinte.',
    d:()=>svg(R(30,40,120,110,'fab')+R(180,48,104,94,'fab')+
@@ -2967,6 +3955,73 @@ function drawLayout(pack,W){
   ],{h:ly+48,fix:2,eticheta:'Animație: materialul se întinde cu liziera pe margini, tiparele se așază cu săgeata pe firul drept, se prind cu ace și se taie pe contur.'});
 }
 
+/* ================= 7.42: compasul fustei cerc, continuu =================
+   Partea care merită văzută aici e trasarea: ața legată de creion se rotește din colțul
+   pliurilor, iar cele două arce se desenează sub ea. La flip() arcele apăreau dintr-o dată. */
+
+const CP_FAZE=[[0,.18,'întinzi materialul'],[.18,.4,'îl pliezi în două'],[.4,.56,'și încă o dată, în patru'],[.56,1,'trasezi talia și tivul, ca un compas']];
+const cpLeg=t=>(CP_FAZE.find(([a,b])=>t>=a&&t<b)||CP_FAZE[3])[2];
+const SC_FAZE=[[0,.2,'întinzi materialul'],[.2,.44,'îl pliezi o dată, în două'],[.44,.84,'trasezi talia și tivul, ca un compas'],[.84,1,'desfaci: un semicerc']];
+const scLeg=t=>(SC_FAZE.find(([a,b])=>t>=a&&t<b)||SC_FAZE[3])[2];
+
+/* dreptunghi interpolat între două stări, ca plierea să nu sară */
+const rectI=(a,b,u)=>[lerp(a[0],b[0],u),lerp(a[1],b[1],u),lerp(a[2],b[2],u),lerp(a[3],b[3],u)].map(v=>+v.toFixed(1));
+
+/* Fusta cerc: pliere în patru, apoi compasul din colțul pliurilor. */
+function scenaCerc(t){
+  const f2=faza(t,.18,.4), f3=faza(t,.4,.56), f4=faza(t,.56,1);
+  const cx=240, cy=160, r1=36, r2=128;
+  let R=[80,14,160,160];
+  if(f3>0)R=rectI([80,54,160,80],[100,20,140,140],lin(f3));
+  else if(f2>0)R=rectI([80,14,160,160],[80,54,160,80],lin(f2));
+  const o=[fab(R[0],R[1],R[2],R[3])];
+  /* muchiile pliate: cea de jos apare la prima pliere, cea din dreapta la a doua */
+  if(f2>.06)o.push(`<g opacity="${Math.min(1,f2*3).toFixed(2)}">${L(R[0],R[1]+R[3],R[0]+R[2],R[1]+R[3],'olt')}</g>`);
+  if(f3>.06)o.push(`<g opacity="${Math.min(1,f3*3).toFixed(2)}">${L(R[0]+R[2],R[1],R[0]+R[2],R[1]+R[3],'olt')}</g>`);
+  if(f3>.5||f4>0)o.push(C(cx,cy,4,'dot'));
+  if(f4>.01){
+    const u=lin(f4), a=lerp(180,270,u), ra=a*Math.PI/180;
+    o.push(arcP(cx,cy,r1,180,270,u));
+    o.push(arcP(cx,cy,r2,180,270,u));
+    /* ața legată de creion: de la colțul pliurilor până pe arcul de tiv */
+    o.push(L(cx,cy,+(cx+r2*Math.cos(ra)).toFixed(1),+(cy+r2*Math.sin(ra)).toFixed(1),'thr'));
+    o.push(C(+(cx+r2*Math.cos(ra)).toFixed(1),+(cy+r2*Math.sin(ra)).toFixed(1),3.5,'dot'));
+    if(u>.4){o.push(T(250,128,'talia','start','m'));o.push(T(250,40,'tivul','start','m'))}
+  }
+  if(f3>.5&&f4<.05)o.push(T(170,180,'colțul pliurilor','middle','m'));
+  return o.join('');
+}
+
+/* Fusta semicerc: o singură pliere, compasul din capătul de sus al pliului, apoi desfacerea. */
+function scenaSemicerc(t){
+  const f2=faza(t,.2,.44), f3=faza(t,.44,.84), f4=faza(t,.84,1);
+  const cx=160, cy=20, r1=24, r2=94;
+  let R=[60,20,200,150];
+  if(f2>0)R=rectI([60,20,200,150],[60,20,100,150],lin(f2));
+  const o=[];
+  const opPliat=+(1-faza(t,.86,1)).toFixed(2);
+  o.push(`<g opacity="${opPliat}">`);
+  o.push(fab(R[0],R[1],R[2],R[3]));
+  if(f2>.06)o.push(`<g opacity="${Math.min(1,f2*3).toFixed(2)}">${L(R[0]+R[2],R[1],R[0]+R[2],R[1]+R[3],'olt')}</g>`);
+  if(f2>.5)o.push(C(cx,cy,3.5,'dot'));
+  if(f3>.01){
+    const u=lin(f3), a=lerp(180,90,u), ra=a*Math.PI/180;
+    o.push(arcP(cx,cy,r1,180,90,u));
+    o.push(arcP(cx,cy,r2,180,90,u));
+    o.push(L(cx,cy,+(cx+r2*Math.cos(ra)).toFixed(1),+(cy+r2*Math.sin(ra)).toFixed(1),'thr'));
+    o.push(C(+(cx+r2*Math.cos(ra)).toFixed(1),+(cy+r2*Math.sin(ra)).toFixed(1),3,'dot'));
+  }
+  o.push('</g>');
+  /* desfacerea: semicercul întreg, în jurul aceluiași punct */
+  if(f4>.02){
+    const half=r=>`M${cx-r} ${cy} A${r} ${r} 0 0 0 ${cx+r} ${cy}`;
+    o.push(`<g opacity="${Math.min(1,f4*2.5).toFixed(2)}">`
+      +P(`${half(r2)} L${cx+r1} ${cy} A${r1} ${r1} 0 0 1 ${cx-r1} ${cy} Z`,'fab')
+      +L(cx,cy+r1,cx,cy+r2,'seam')+T(cx+6,cy+r2-10,'pliul','start','m')+'</g>');
+  }
+  return o.join('');
+}
+
 /* cum se taie fusta cerc: pliat în patru și compasul din colțul pliurilor (7.23).
    La semicerc se pliază o singură dată, iar compasul pornește din capătul de sus al pliului. */
 function cercAnim(tip){
@@ -2974,20 +4029,12 @@ function cercAnim(tip){
   if(tip==='cerc'){
     /* la pașii 3 și 4, pătratul pliat e desenat mărit, ca arcele să se vadă bine */
     const cx=240,cy=160,r1=36,r2=128,arc=r=>`M${cx-r} ${cy} A${r} ${r} 0 0 1 ${cx} ${cy-r}`,Q=()=>fab(100,20,140,140)+L(100,160,240,160,'olt')+L(240,20,240,160,'olt');
-    return flip([
-      [fab(80,14,160,160),'întinzi materialul'],
-      [fab(80,54,160,80)+L(80,134,240,134,'olt'),'îl pliezi în două'],
-      [Q()+C(cx,cy,4,'dot')+n(170,180,'colțul pliurilor','middle'),'și încă o dată, în patru'],
-      [Q()+P(arc(r1),'st')+P(arc(r2),'st')+L(cx,cy,cx-r2*.707,cy-r2*.707,'thr')+C(cx-r2*.707,cy-r2*.707,3.5,'dot')+C(cx,cy,4,'dot')+n(250,128,'talie')+n(250,40,'tiv'),'trasezi talia și tivul, ca un compas']
-    ],{fix:4,h:204,eticheta:'Animație: materialul se pliază în două, apoi în patru. Din colțul pliurilor, cu o ață legată de un creion, se trasează arcul taliei și arcul tivului.'});
+    return anim(scenaCerc,{h:204,tFix:0.92,durata:6400,legenda:cpLeg,
+      eticheta:'Animație: materialul se pliază în două, apoi în patru. Din colțul pliurilor, cu o ață legată de un creion, se rotește și se trasează arcul taliei și arcul tivului.'});
   }
   const cx=160,cy=20,r1=24,r2=94,arc=r=>`M${cx-r} ${cy} A${r} ${r} 0 0 0 ${cx} ${cy+r}`,half=r=>`M${cx-r} ${cy} A${r} ${r} 0 0 0 ${cx+r} ${cy}`;
-  return flip([
-    [fab(60,20,200,150),'întinzi materialul'],
-    [fab(60,20,100,150)+L(160,20,160,170,'olt')+C(cx,cy,3.5,'dot')+n(168,34,'capătul pliului'),'îl pliezi o dată, în două'],
-    [fab(60,20,100,150)+L(160,20,160,170,'olt')+P(arc(r1),'st')+P(arc(r2),'st')+L(cx,cy,cx-r2*.707,cy+r2*.707,'thr')+C(cx-r2*.707,cy+r2*.707,3,'dot')+C(cx,cy,3.5,'dot'),'trasezi talia și tivul, ca un compas'],
-    [P(`${half(r2)} L${cx+r1} ${cy} A${r1} ${r1} 0 0 1 ${cx-r1} ${cy} Z`,'fab')+L(cx,cy+r1,cx,cy+r2,'seam')+n(cx+6,cy+r2-10,'pliul'),'desfaci: un semicerc']
-  ],{fix:3,h:200,eticheta:'Animație: materialul se pliază o dată. Din capătul de sus al pliului, cu o ață legată de un creion, se trasează arcul taliei și arcul tivului. Desfăcut, e un semicerc.'});
+  return anim(scenaSemicerc,{h:200,tFix:0.8,durata:6400,legenda:scLeg,
+    eticheta:'Animație: materialul se pliază o dată. Din capătul de sus al pliului, cu o ață legată de un creion, se rotește și se trasează arcul taliei și arcul tivului. Desfăcut, materialul e un semicerc.'});
 }
 
 /* --- schema pieselor, desenată la scară din cotele calculate ---
@@ -4159,7 +5206,64 @@ function dUnaInAlta(){
     +L(60,30,260,30,'st')+T2(160,186,'coși gura, apoi întorci prin deschidere','','middle')+T2(130,132,'deschiderea','','start'),198);
 }
 
+/* ================= 7.42: întoarcerea pe față, continuu =================
+   Secțiune printr-un tub cusut pe dos. Pliul călătorește: peretele dinspre deschidere e încă
+   pe dos (ocru), iar în spatele pliului materialul e deja pe față (albastru). Asta e tot
+   lucrul pe care îl face întoarcerea, și e greu de arătat într-un desen fix. */
+const IO_FAZE=[[0,.12,'piesa, cusută pe dos'],[.12,.82,'împingi prin deschidere: pliul înaintează'],[.82,1,'totul e pe față']];
+const ioLeg=t=>(IO_FAZE.find(([a,b])=>t>=a&&t<b)||IO_FAZE[2])[2];
+
+function scenaIntoarce(t){
+  /* Compoziția e mutată spre stânga ca partea deja întoarsă să aibă loc să se adune în dreapta
+     deschiderii: altfel piesa părea că dispare în loc să se întoarcă. */
+  const Y=100, h1=16, h2=7, xL=26, xR=150;
+  const f1=faza(t,.12,.82), f2=faza(t,.82,1);
+  const u=lin(f1), xf=lerp(xL,xR-8,u);
+  const o=[], opP=+(1-faza(t,.86,1)).toFixed(2);
+  o.push(`<g opacity="${opP}">`);
+  /* Materialul se conservă: cât a trecut pliul de la stânga, atât a ieșit pe deschidere.
+     Fără regula asta piesa părea că se micșorează în loc să se întoarcă. */
+  const xO=xf+(xf-xL);
+  /* peretele de sus: din deschidere spre stânga, pliu, înapoi spre dreapta pe dinăuntru */
+  const perete=sus=>{const k=sus?-1:1;
+    return lay(`M${xR} ${Y+k*h1} L${xf.toFixed(1)} ${Y+k*h1} Q${(xf-13).toFixed(1)} ${(Y+k*(h1+h2)/2).toFixed(1)} ${xf.toFixed(1)} ${(Y+k*h2).toFixed(1)} L${xO.toFixed(1)} ${(Y+k*h2).toFixed(1)}`,'lay2');};
+  o.push(perete(true),perete(false));
+  /* partea deja întoarsă, pe față: se desenează peste peretele dinăuntru, de la pliu încolo */
+  if(u>.04){
+    o.push(lay(`M${xf.toFixed(1)} ${(Y-h2).toFixed(1)} L${xO.toFixed(1)} ${(Y-h2).toFixed(1)}`));
+    o.push(lay(`M${xf.toFixed(1)} ${(Y+h2).toFixed(1)} L${xO.toFixed(1)} ${(Y+h2).toFixed(1)}`));
+  }
+  /* bețișorul bont, care împinge dinăuntru */
+  if(u>.02&&u<.96)o.push(L(+(xO+56).toFixed(1),Y,+(xf+14).toFixed(1),Y,'tija'));
+  /* deschiderea, marcată pe muchia din dreapta */
+  o.push(L(xR,Y-h1,xR,Y-h2,'olt'),L(xR,Y+h2,xR,Y+h1,'olt'));
+  o.push(T(xR,Y-h1-28,'deschiderea','middle','m'));
+  o.push(T(40,Y-h1-10,'pe dos','start','m'));
+  if(u>.3&&f2<.02)o.push(T(+Math.min(250,xf+14).toFixed(1),Y+h1+22,'pe față','start','m'));
+  o.push('</g>');
+  /* la final: tubul întreg, pe față. Eticheta lui stă jos, ca să nu cadă peste „pe dos”. */
+  /* La final piesa e pe față, iar capătul închis a ajuns în dreapta: întoarcerea o inversează
+     cap la cap, nu doar pe fețe. Deschiderea rămâne acolo unde era pliul. */
+  if(f2>.02){const a1=xR-8, a2=a1+(a1-xL);
+    o.push(`<g opacity="${Math.min(1,f2*3).toFixed(2)}">`
+      +lay(`M${a1.toFixed(1)} ${Y-h1} L${a2.toFixed(1)} ${Y-h1} Q${(a2+14).toFixed(1)} ${Y} ${a2.toFixed(1)} ${Y+h1} L${a1.toFixed(1)} ${Y+h1}`)
+      +T(+((a1+a2)/2).toFixed(1),Y+h1+22,'tot pe față','middle','m')+'</g>');}
+  return o.join('');
+}
+
 const PSD={
+ /* 7.42: întoarcerea pe față, animată. Se pune pe titlurile care chiar întorc piesa printr-o
+    deschidere. „Taie colțurile și întoarce” își păstrează desenul colțurilor: acolo subiectul
+    pasului e tăietura, nu întoarcerea. */
+ 'Întoarce și închide':{d:()=>anim(scenaIntoarce,{h:176,tFix:0.5,durata:5800,legenda:ioLeg,
+   eticheta:'Animație: secțiune prin piesă. Pliul înaintează dinspre capătul închis spre deschidere, iar în spatele lui materialul e deja pe față. La final totul e pe față, iar capătul închis a ajuns la celălalt capăt.'}),
+   c:'Secțiune: pliul înaintează, iar în spatele lui materialul e pe față.'},
+ 'Întoarce și fixează gura':{d:()=>anim(scenaIntoarce,{h:176,tFix:0.5,durata:5800,legenda:ioLeg,
+   eticheta:'Animație: secțiune prin piesă. Pliul înaintează dinspre capătul închis spre deschidere, iar în spatele lui materialul e deja pe față.'}),
+   c:'Secțiune: pliul înaintează, iar în spatele lui materialul e pe față.'},
+ 'Întoarce, calcă și prinde':{d:()=>anim(scenaIntoarce,{h:176,tFix:0.5,durata:5800,legenda:ioLeg,
+   eticheta:'Animație: secțiune prin piesă. Pliul înaintează dinspre capătul închis spre deschidere, iar în spatele lui materialul e deja pe față.'}),
+   c:'Secțiune: pliul înaintează, iar în spatele lui materialul e pe față.'},
  'Pregătește betelia':{d:()=>dBetelie(),c:'Betelia cusută în inel și pliată în două.'},
  'Betelia și elasticul':{d:()=>dBetelie('elastic'),c:'Betelia pliată devine tunelul elasticului.'},
  'Pune manșetele':{d:()=>dBetelie(),c:'Manșeta, ca o betelie mică: inel, apoi pliată în două.'},
@@ -4596,6 +5700,59 @@ function blocReglaje(p,o,m,mat){
     <p>Taie un petic din materialul tău, îndoaie-l în două și coase o palmă de cusătură cu reglajele de mai sus. Uită-te pe amândouă fețele: împunsăturile trebuie să arate la fel sus și jos, iar materialul să nu se strângă. Dacă nu arată bine, schimbă întâi tensiunea, apoi lungimea pasului.</p>
     <p class="who">Literele selectorului sunt cele de pe <a href="#/t/janome-1522">Janome 1522</a>. Pentru tensiune, vezi <a href="#/t/tensiune">Reglarea tensiunii</a>.</p>
    </details>`;
+}
+
+/* ================= MODUL „LA MAȘINĂ” (7.39) =================
+   Cât coase, Irina are mâinile ocupate și telefonul pe masă, la o jumătate de metru.
+   Pagina asta arată doar cifrele de pe cadrane, cât se poate de mari, cu ecranul ținut
+   aprins. Nimic altceva: nicio listă, niciun pas, nimic de citit. */
+
+function masinaProj(){
+  /* proiectul la care lucrează acum; dacă nu e niciunul, reglajele obișnuite */
+  const R=S.recent||{}, p=R.p&&projById(R.p.id);
+  if(!p)return null;
+  const per=activePerson(), st=pState(p,per);
+  return {p,per,st,mat:st.mat||masClasa(p.id)};
+}
+
+function modMasina(){
+  const x=masinaProj();
+  const mat=x?x.mat:(S.settings.matUlt||'mediu');
+  const p=x?x.p:null;
+  const r=p?reglaje(p,x.st.opts,x.per?x.per.m:{},mat)
+          :{tens:MATCL[mat].tens,pas:MATCL[mat].pas,sel:'A',lat:'0',cl:MATCL[mat],baza:[],extra:[]};
+  const cadran=(et,val,jos)=>`<div class="cd"><p class="et">${esc(et)}</p><b>${esc(val)}</b>${jos?`<span>${esc(jos)}</span>`:''}</div>`;
+  app.innerHTML=`<div class="view masina-mod">
+   <div class="mm-top"><a class="pm-x" href="${p?'#/p/'+p.id:'#/mai-mult'}" aria-label="Ieși din modul la mașină">✕</a>
+     <span class="mm-t">${esc(p?p.t:'Reglaje')}</span>
+     <button class="mm-led" id="aprins" aria-pressed="false">Ecran aprins</button></div>
+   <div class="cadrane">
+     ${cadran('Tensiunea firului',r.tens,MATCL[mat].t.toLowerCase())}
+     ${cadran('Lungimea pasului',r.pas+' mm','cadranul LENGTH')}
+     <div class="cd2">${cadran('Selectorul',r.sel,'')}${cadran('Lățimea',r.lat,'')}</div>
+   </div>
+   <p class="mm-l">Materialul din care coși</p>
+   <div class="seg" role="group" aria-label="Materialul din care coși">
+     ${MATORD.map(k=>`<button class="btn${k===mat?' pri':''}" data-mmat="${k}">${esc(MATCL[k].t)}</button>`).join('')}</div>
+   ${r.extra.length?`<hr class="cus"><p class="et">Și pentru pașii acestui proiect</p>
+     <ul class="reg">${r.extra.map(([k,v])=>`<li><span class="reg-k">${esc(k)}</span><small>${esc(v)}</small></li>`).join('')}</ul>`:''}
+   <hr class="cus">
+   ${typeof blocBanc==='function'?blocBanc():''}
+   <hr class="cus">
+   <p class="mm-l">${esc(MATCL[mat].obs)}</p>
+   <p class="who">Literele sunt de pe <a href="#/t/janome-1522">Janome 1522</a>. Pentru tensiune, vezi <a href="#/t/tensiune">Reglarea tensiunii</a>.</p>
+  </div>`;
+  app.querySelectorAll('[data-mmat]').forEach(b=>b.onclick=()=>{
+    const v=b.dataset.mmat;
+    if(x){x.st.mat=v}else{S.settings.matUlt=v}
+    save();modMasina();});
+  if(typeof bancLeaga==='function'){bancLeaga(()=>modMasina());if(typeof animLeaga==='function')animLeaga()}
+  const led=document.getElementById('aprins');
+  led.onclick=async()=>{const on=led.getAttribute('aria-pressed')!=='true';
+    const ok=await tineAprins(on);
+    if(on&&!ok){led.textContent='Telefonul nu permite';return}
+    led.setAttribute('aria-pressed',String(on));
+    led.textContent=on?'Ecranul rămâne aprins':'Ecran aprins';};
 }
 
 /* ================= COPIEZ CEVA CE AM DEJA =================
@@ -5416,7 +6573,10 @@ function contor(id){
     if(g)g.textContent=`rândul ${((c.n-1)%c.grup+c.grup)%c.grup+1} din grupul de ${c.grup}`;
     const b=app.querySelector('.prog-b span');
     if(b)b.style.width=(c.tinta?Math.min(100,Math.round(c.n/c.tinta*100)):0)+'%';};
-  document.getElementById('plus').onclick=()=>{c.n++;if(navigator.vibrate)navigator.vibrate(12);scrie()};
+  document.getElementById('plus').onclick=()=>{c.n++;if(navigator.vibrate)navigator.vibrate(12);scrie();
+    /* 7.42: numărul sare puțin, ca să se vadă că rândul a fost înregistrat chiar dacă
+       telefonul nu vibrează. Clasa se scoate și se repune, altfel animația nu repornește. */
+    if(S.settings.motion!=='nu'){nr.classList.remove('salt');void nr.offsetWidth;nr.classList.add('salt')}};
   document.getElementById('minus').onclick=()=>{c.n=Math.max(0,c.n-1);scrie()};
   document.getElementById('reset').onclick=async()=>{
     if(await confirma('Pui contorul pe zero?','Numele și ținta rămân.','Pune pe zero')){c.n=0;scrie()}};
@@ -5438,6 +6598,11 @@ function contor(id){
 
 /*@@CONTENT_END@@*/
 /* ================= secțiuni și ordine ================= */
+/* 7.43.1: starea înregistrării service workerului. Declarată AICI, nu lângă codul care o
+   scrie, de la finalul fișierului: `diag()` o citește, iar dacă aplicația e deschisă direct
+   pe #/diagnostic, route() ajunge la ea înainte ca un `let` de la final să fie inițializat.
+   Exact capcana care a omorât Nivelo la v1.30. */
+var SW_STARE='nu s-a încercat';
 const SECT=[
  {id:'masina',t:'La mașină'},
  {id:'mana',t:'De mână'},
@@ -5450,33 +6615,56 @@ const ORDER={
  mana:['inainte','inapoi','tiv-ascuns','cusatura-scara','feston','nasture','capse','petice','insailare','punct-cruce','copci','stopat','broderie'],
  croset:['lant','punct-nedesfacut','semistalp','stalp','inel-magic','cresteri-croset','schimb-culoare','capete'],
  tricot:['montare','fata','dos','inchidere','cresteri-tricot','blocare'],
- stiut:['depanare','janome-1522','tensiune','materiale','ace-masina','presare','termoadeziv','banderola','densitate']
+ stiut:['cum-se-coase','depanare','janome-1522','tensiune','materiale','ace-masina','presare','termoadeziv','banderola','densitate']
 };
 const LVL={u:'Ușor',m:'Mediu',a:'Avansat'};
 const NIV={u:1,m:2,a:3};
 const lvlTag=l=>`<span class="lvl ${l}"><i aria-hidden="true">${'●'.repeat(NIV[l])}${'○'.repeat(3-NIV[l])}</i>${LVL[l]}</span>`;
 /* pictograma și accentul fiecărei secțiuni */
 const I24={
- persoane:'<svg viewBox="0 0 24 24"><circle cx="9.2" cy="7.8" r="3.4" class="f"/><path d="M3.4 19.2c.5-3.4 2.9-5.2 5.8-5.2s5.3 1.8 5.8 5.2z" class="f"/><path d="M16.4 5.4a3 3 0 0 1 0 5.4"/><path d="M18 13.6c2 .7 3.2 2.3 3.5 4.6"/></svg>',
- poza:'<svg viewBox="0 0 24 24"><rect x="2.8" y="6.4" width="18.4" height="13.4" rx="2.4" class="f"/><circle cx="12" cy="13.1" r="3.6" class="hole"/><path d="M8.4 6.4 9.9 3.9h4.2l1.5 2.5"/></svg>',
- backup:'<svg viewBox="0 0 24 24"><path d="M12 3.6v9.6"/><path d="M8.2 9.8 12 13.6l3.8-3.8"/><rect x="3.6" y="15.2" width="16.8" height="5" rx="1.8" class="f"/></svg>',
- setari:'<svg viewBox="0 0 24 24"><path d="M10.6 3.2h2.8l.4 2.2 1.9.8 1.9-1.2 2 2-1.2 1.9.8 1.9 2.2.4v2.8l-2.2.4-.8 1.9 1.2 1.9-2 2-1.9-1.2-1.9.8-.4 2.2h-2.8l-.4-2.2-1.9-.8-1.9 1.2-2-2 1.2-1.9-.8-1.9-2.2-.4v-2.8l2.2-.4.8-1.9L3.4 7l2-2 1.9 1.2 1.9-.8z" class="f"/><circle cx="12" cy="12" r="2.8" class="hole"/></svg>',
- nou:'<svg viewBox="0 0 24 24"><path d="M12 2.8 14.3 8l5.7 1-4.2 4.2 1 5.9L12 16.3 7.2 19.1l1-5.9L4 9l5.7-1z" class="f"/></svg>',
- legenda:'<svg viewBox="0 0 24 24"><rect x="3.2" y="4.8" width="17.6" height="14.4" rx="2.2" class="f"/><path d="M6.8 9.4h5M6.8 12.8h10M6.8 16h6" class="hole-s"/></svg>',
- depanare:'<svg viewBox="0 0 24 24"><path d="M15.2 3.8a4.8 4.8 0 0 0-6 6.2l-6 6V20h4l6-6a4.8 4.8 0 0 0 6.2-6l-3.1 3.1-2.8-2.8z" class="f"/><circle cx="6.6" cy="17.4" r="1" class="hole"/></svg>',
- masina2:'<svg viewBox="0 0 24 24"><rect x="2.6" y="14.6" width="18.8" height="4.8" rx="1.6" class="f"/><path d="M5.6 14.6V6.4h9.2a2.2 2.2 0 0 1 2.2 2.2v2.6" class="f2"/><path d="M8.2 11v3.6"/><circle cx="17" cy="12.6" r="1.2" class="hole"/></svg>',
+ /* 7.41: setul de iconițe, refăcut din obiecte de atelier. Până acum erau obiecte generice de
+    aplicație (casă, carte, creion, roată dințată), care nu spuneau nimic despre croitorie.
+    Vocabularul de desen e același: viewBox 24×24, contur de 1,5 px, clasele .f .f2 .hole
+    .hole-s .s2 .s3, deci merg în ambele teme fără nicio culoare scrisă aici. */
+ persoane:'<svg viewBox="0 0 24 24"><path d="M10.9 2.9h2.2v2.1c3.5.6 5.5 2.8 5.5 5.6 0 2.6-2.2 4-3.2 5.8H8.6c-1-1.8-3.2-3.2-3.2-5.8 0-2.8 2-5 5.5-5.6z" class="f"/><path d="M12 16.4v3.3"/><path d="M9 20.8h6" class="s2"/></svg>',
+ poza:'<svg viewBox="0 0 24 24"><circle cx="8.2" cy="9" r="6.1" class="f"/><circle cx="8.2" cy="9" r="2" class="hole"/><path d="M9.6 14.2h11.8v5.4H9.6z" class="f"/><path d="M12.4 14.2v2.6M15.1 14.2v1.7M17.8 14.2v2.6M20.4 14.2v1.7" class="hole-s"/></svg>',
+ backup:'<svg viewBox="0 0 24 24"><path d="M12 2.6v6.3"/><path d="M9 5.9 12 8.9l3-3"/><path d="M3.6 11.4h16.8l-1 2.2H4.6z" class="f2"/><path d="M4.6 13.6h14.8v6a1.4 1.4 0 0 1-1.4 1.4H6a1.4 1.4 0 0 1-1.4-1.4z" class="f"/><path d="M10 16.9h4" class="hole-s"/></svg>',
+ setari:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.9" class="f"/><circle cx="12" cy="12" r="3" class="hole"/><path d="M12 4.1v1.8M12 18.1v1.8M4.1 12h1.8M18.1 12h1.8M6.4 6.4 7.7 7.7M16.3 16.3l1.3 1.3M17.6 6.4l-1.3 1.3M7.7 16.3l-1.3 1.3" class="hole-s"/><path d="M12 12V7.4" class="s2"/></svg>',
+ nou:'<svg viewBox="0 0 24 24"><path d="M5.4 4h8.4M5.4 19.4h8.4" class="s2"/><path d="M7.2 4.2h4.8v15H7.2z" class="f"/><path d="M7.2 7.6h4.8M7.2 10.6h4.8M7.2 13.6h4.8M7.2 16.6h4.8" class="hole-s"/><path d="m18.6 6 .9 2.2 2.2.9-2.2.9-.9 2.2-.9-2.2-2.2-.9 2.2-.9z" class="f"/></svg>',
+ /* 7.43.5: pliantul cu trei panouri, câte unul pentru fiecare fel de a folosi aplicația:
+    caut o tehnică, încep un proiect, copiez din poză. Până acum rândul cerea „invat”,
+    care există doar printre iconițele barei de jos (IC), nu aici, deci locul rămânea gol. */
+ ajutor:'<svg viewBox="0 0 24 24"><path d="M3 6.4 9 4.6v14.8l-6 1.8z" class="f"/><path d="m9 4.6 6 1.8V21l-6-1.8z" class="f2"/><path d="M15 6.4l6-1.8v14.8L15 21z" class="f"/><path d="m4.8 10.2 2.4-.7M4.8 13.2l2.4-.7" class="hole-s"/><path d="m10.8 9.6 2.4.7M10.8 12.6l2.4.7" class="hole-s"/><path d="m16.8 10.2 2.4-.7M16.8 13.2l2.4-.7" class="hole-s"/></svg>',
+ legenda:'<svg viewBox="0 0 24 24"><rect x="3.4" y="4.4" width="17.2" height="15.2" rx="2" class="f"/><path d="M6.8 9h10.4" stroke-dasharray="2.6 2.2"/><path d="m6.8 12.6 2-2 2 2 2-2 2 2 2-2 1.4 1.4"/><path d="M6.8 16.8h10.4" stroke-dasharray="0.1 3.4"/></svg>',
+ depanare:'<svg viewBox="0 0 24 24"><path d="m3.4 20.6 1.4-3.6 2.2 2.2z" class="f"/><path d="M5.6 18.4 13.4 10.6" class="s2"/><path d="m12.6 9.8 3.4-3.4 2.6 2.6-3.4 3.4z" class="f"/><path d="m16.8 5.6 2-2 2.6 2.6-2 2z" class="f2"/></svg>',
+ masina2:'<svg viewBox="0 0 24 24"><path d="M2.6 15.2h18.8v3.2a1.4 1.4 0 0 1-1.4 1.4H4a1.4 1.4 0 0 1-1.4-1.4z" class="f"/><path d="M5.6 15.2V5.6h9.6A2.4 2.4 0 0 1 17.6 8v3.1" class="f2"/><path d="M17.6 11.1v2.7" class="s2"/><path d="M17.6 13.8v1.4" class="hole-s"/><circle cx="8" cy="8.6" r="1.5" class="hole"/></svg>',
+ /* mașina ei, privită din față: panoul cu programe și butonul rotund de selecție.
+    Trebuie să se deosebească de „masina2” la 26 px, nu doar la mărit. */
+ janome:'<svg viewBox="0 0 24 24"><path d="M3.4 4.6h17.2a1.4 1.4 0 0 1 1.4 1.4v11.4a1.4 1.4 0 0 1-1.4 1.4H3.4A1.4 1.4 0 0 1 2 17.4V6a1.4 1.4 0 0 1 1.4-1.4z" class="f"/><circle cx="16.4" cy="11.6" r="3.4" class="hole"/><path d="M16.4 11.6V8.8" class="s2"/><path d="M5.4 8.4h6.4M5.4 11.6h5M5.4 14.8h6.4" class="hole-s"/></svg>',
  diagnostic:'<svg viewBox="0 0 24 24"><rect x="2.8" y="5.2" width="18.4" height="13.6" rx="2.4" class="f"/><path d="M5.8 12.4h2.8l1.8-4.2 2.8 8 1.8-3.8h3.2" class="hole-s"/></svg>',
- contor:'<svg viewBox="0 0 24 24"><rect x="3.6" y="4.2" width="16.8" height="15.6" rx="2.6" class="f"/><path d="M7.6 9.2h8.8M7.6 13.4h5.4" class="hole-s"/></svg>',
- tehnica:'<svg viewBox="0 0 24 24"><path d="M3.6 5.2h6.6A1.9 1.9 0 0 1 12 7v12.4a2 2 0 0 0-1.6-1.4H3.6z" class="f"/><path d="M20.4 5.2h-6.6A1.9 1.9 0 0 0 12 7v12.4a2 2 0 0 1 1.6-1.4h6.8z" class="f2"/></svg>',
- proiect:'<svg viewBox="0 0 24 24"><path d="M4.6 19.4c3-6.2 8-11.2 14.2-14.2"/><path d="M3.9 20.1 8 18.4l-1.6-3.7z" class="f"/><circle cx="17.6" cy="6.4" r="2.4" class="f"/></svg>',
- masuri:'<svg viewBox="0 0 24 24"><rect x="2.6" y="8.4" width="18.8" height="7.2" rx="2" class="f"/><path d="M6.4 8.4v3M9.6 8.4v4.4M12.8 8.4v3M16 8.4v4.4M19.2 8.4v3" class="hole-s"/></svg>'
+ contor:'<svg viewBox="0 0 24 24"><path d="M9.4 20.8 17 6.6" class="s2"/><path d="M17 6.6c.9-1.3 2.8-.9 3 .6.2 1.1-.7 2-1.9 1.8"/><path d="M4 10.2h3.4M4 13.6h3.4M4 17h3.4" class="hole-s"/></svg>',
+ tehnica:'<svg viewBox="0 0 24 24"><path d="M7.6 19 16.2 8" class="s2"/><path d="m5.9 21.2 1-3.4 2.3 1.8z" class="f"/><ellipse cx="17.3" cy="6.6" rx="2.1" ry="1.2" transform="rotate(-52 17.3 6.6)" class="hole"/><path d="M19.2 7.8c1.7 2.1.4 5-2.4 5.2-2.1.2-3.6-1.1-3.7-2.8" class="s3"/></svg>',
+ proiect:'<svg viewBox="0 0 24 24"><path d="M6 3.8h7.6c3.2 2.6 4.8 6 4.8 10.2 0 2.4-.4 4.4-1.2 6H6z" class="f"/><path d="M10.6 7.8v8M9.2 9l1.4-1.4L12 9M9.2 14.6l1.4 1.4 1.4-1.4" class="hole-s"/></svg>',
+ masuri:'<svg viewBox="0 0 24 24"><path d="M2.6 8.6h14.2a3.4 3.4 0 0 1 0 6.8H2.6z" class="f"/><path d="M5.4 8.6v3.2M8.4 8.6v2M11.4 8.6v3.2M14.4 8.6v2" class="hole-s"/><circle cx="17" cy="12" r="1.4" class="hole"/></svg>'
 };
 /* mici ilustrații pentru ecranele goale, din același vocabular de desen */
 const GOL={
  ghem:()=>svg(C(160,96,46,'yarn')+P('M120 74 C 150 90, 170 104, 200 118','yarn2')+P('M128 116 C 156 100, 178 86, 196 74','yarn2')+
    P('M206 96 C 240 96, 250 130, 226 140','yarn2'),180),
  foaie:()=>svg(R(96,34,128,120,'fab')+P('M120 66 H200 M120 90 H200 M120 114 H176','seam'),180),
- manechin:()=>svg(P(BODY.form,'form')+L(150,188,150,206,'stand')+P('M132 210 L168 210','stand'),222)
+ manechin:()=>svg(P(BODY.form,'form')+L(150,188,150,206,'stand')+P('M132 210 L168 210','stand'),222),
+ /* 7.43: până acum doar trei ecrane goale aveau desen, iar restul rămâneau text gol.
+    Cele trei de mai jos le completează pe toate. */
+ /* căutare fără rezultat: o bucată de material privită cu lupa, și nimic pe ea */
+ cautare:()=>svg(fab(60,42,150,106)+C(188,98,34,'lupa')+L(212,122,244,154,'tija'),180),
+ /* niciun favorit încă: periniţa de ace, cu acele puse alături, neînfipte */
+ perinita:()=>svg(P('M64 44c26-7 62-7 88 0 7 26 7 62 0 88-26 7-62 7-88 0-7-26-7-62 0-88z','fab2')+
+   P('M98 78 q10 6 20 0 M98 102 q10 6 20 0','seam')+
+   pin(196,56,266)+pin(196,88,272)+pin(196,120,260),180),
+ /* le-ai exersat pe toate: un eşantion terminat, cu patru feluri de cusături pe el */
+ gata:()=>svg(fab(56,34,208,122)+run(74,246,60)+zigH(88,74,246,6,11)+
+   L(74,116,246,116,'st')+P('M74 142 H246','seam')+
+   [0,1,2,3,4,5,6,7].map(i=>L(80+i*22,142,80+i*22,128,'thr')).join(''),180)
 };
 const ecranGol=(desen,text,buton)=>`<section class="gol">${GOL[desen]?GOL[desen]():''}
   <p>${esc(text)}</p>${buton||''}</section>`;
@@ -5512,6 +6700,16 @@ const inSec=s=>ORDER[s].map(byId);
 
 /* ================= ce e nou ================= */
 const NOUTATI=[
+ {v:'7.43.5',l:['Rândul „Cum folosești aplicația” din Mai mult are acum iconița lui: un pliant cu trei panouri, câte unul pentru fiecare fel de a folosi aplicația.']},
+ {v:'7.43.4',l:['Identitatea aplicației e scrisă acum relativ, deci același pachet merge de pe orice adresă, nu doar din dosarul „atelier”. Util dacă e nevoie să fie mutată.']},
+ {v:'7.43.3',l:['Aplicația are o identitate nouă pentru telefon, ca să poată fi instalată din nou pe un telefon pe care Chrome rămăsese agățat de o instalare veche, ștearsă.','Datele tale nu se ating: notițele, măsurile, proiectele și contoarele sunt legate de adresa site-ului, nu de aplicația instalată, deci se regăsesc toate.']},
+ {v:'7.43.2',l:['Diagnosticul nu mai verifică doar dacă iconițele se descarcă, ci și dacă se deschid ca imagini, la mărimea potrivită. Un fișier urcat greșit dă „200” și pare bun, dar telefonul nu poate construi din el aplicația instalabilă.','Verifică și iconițele scurtăturilor, fiindcă intră în același pachet pe Android.']},
+ {v:'7.43.1',l:['Dacă aplicația nu se mai poate instala din Chrome, pagina „Diagnostic tehnic” îți spune acum și de ce: scrie pe un rând ce a pățit înregistrarea părții care o ține offline.','Tot acolo e un buton nou, „Repornește service workerul”, pentru cazul în care browserul rămâne blocat cu o versiune stricată. Notițele, măsurile și proiectele tale nu se ating.']},
+ {v:'7.43',l:['Litera A de la „Atelier”, de pe prima pagină, e desenată acum, nu scrisă: două picioare trasate ca din creion și bara cusută cu puncte de ață, la fel ca pe iconița aplicației.','Bara de jos ia culoarea secțiunii în care ești: verde la mașină, roșu la croșetat, ocru la cusutul de mână. Și paginile grupurilor de proiecte au acum culoarea lor.','Fiecare ecran gol are desenul lui. Când o căutare nu găsește nimic vezi o bucată de material privită cu lupa, la favorite goale o periniță cu acele alături, iar când ai exersat toate fișele, un eșantion terminat.']},
+ {v:'7.42',l:['Ochiul pe față și cel pe dos se mișcă de-adevăratelea. Andreaua intră prin ochi, firul se înfășoară pe vârful ei, bucla nouă crește, iar ochiul vechi alunecă și cade. Poți opri mișcarea oriunde, sau o poți trage cu degetul, încet, cât îți trebuie.','La fel și la croșetat: se vede cum firul trece chiar prin amândouă buclele. Și punctul înapoi, punctul festonat, închiderea ochiurilor, întărirea cusăturii și încrețirea.','Fusta cerc și cea semicerc: ața legată de creion se rotește din colțul pliurilor, iar talia și tivul se trasează sub ea.','Desen nou pentru întoarcerea pe față, în secțiune: se vede cum pliul înaintează și cum materialul rămâne pe față în urma lui.','La reglarea tensiunii, reperul butonului se plimbă între 3 și 5, cu jumătate de treaptă, cât e un reglaj bun.','Aplicația se mișcă altfel: paginile vin spre tine când intri mai adânc, „Am exersat” se bifează cu o cusătură care se trage, bara de progres e un tiv, iar desenul mărit crește din figura pe care ai atins-o.','Dacă nu vrei mișcare, din Setări o oprești pe toată, iar desenele rămân exact la fel, doar nemișcate.']},
+ {v:'7.41',l:['Aplicația are iconițe noi, toate din lucruri de atelier. Jos sunt acum un ghem de ață, o carte cu semn, o foarfecă de croitorie și trei nasturi. Pe rânduri găsești manechinul, metrul-panglică, croșeta, cutia de cusut și rotița de tensiune.','Materialul din desene chiar e țesut: se văd firele care trec unul peste altul. Marginea tăiată se destramă acolo unde fișa vorbește despre o margine netivită.','Ața are grosime, nu mai e o linie: are o margine mai închisă și o lumină pe mijloc, ca un fir răsucit adevărat.','Iconița aplicației instalate e desenată din nou, cu material țesut și cu ața în relief. Dacă vrei să o vezi schimbată pe telefon, aplicația trebuie dezinstalată și pusă la loc, după o copie de siguranță.']},
+ {v:'7.40',l:['Fișă nouă, „Cum se face o cusătură”, în Bune de știut. Vezi ce se întâmplă de fapt la o împunsătură: acul coboară, firul face o buclă, un cârlig o duce în jurul suveicii, maneta strânge nodul, transportorul avansează. De aici vin aproape toate problemele mașinii.','Desenele animate se pot trage cu degetul. Poți opri mișcarea exact în momentul care te interesează, iar sub desen scrie ce se întâmplă acolo.','Bancul de probă, în „La mașină”: muți tensiunea, pasul și lățimea și vezi cusătura care iese, pe față, pe dos și în secțiune, cu nodul exact unde ar sta. Îți spune și ce e de corectat.']},
+ {v:'7.39',l:['Aplicația arată altfel. Hârtie caldă în loc de alb, titluri cu literă de carte, iar cele patru secțiuni din Învăț sunt acum plăci de culoare, nu cartonașe la fel.','Fiecare proiect are desenul lucrului gata făcut. Se vede din listă ce iese, nu doar cum se cheamă.','Mod nou, „La mașină”: tensiunea, lungimea pasului, selectorul și lățimea, cu cifre mari, de citit de la un metru, și cu ecranul ținut aprins. Îl găsești pe pagina proiectului și în „Mai mult”.','Fonturile nu se mai descarcă de pe internet, deci aplicația arată la fel de la prima deschidere.']},
  {v:'7.38',l:['Verificare mare înainte de folosire pe telefon. Pe ecran îngust cu textul mărit, butoanele de la animații ieșeau din ecran, iar bifa lecției și butonul „Măsor din poză” erau prea mici pentru deget. Reparate.','Datele salvate sunt verificate la pornire: o copie de siguranță dintr-o altă versiune, sau editată, nu mai poate lăsa o pagină goală și nici nu mai poate da bucăți cu dimensiuni negative.','O persoană adăugată fără nume nu mai lasă un rând gol în listă.']},
  {v:'7.37',l:['Fiecare proiect are acum o secțiune nouă, „Reglajele mașinii”: tensiunea firului, lungimea pasului, selectorul, lățimea, acul, ața și piciorușul, cu câte o explicație scurtă la fiecare.','Alegi materialul din care coși, subțire, mediu, gros sau tricot, iar valorile se schimbă după el. Fiecare proiect pornește de la materialul lui obișnuit.','Sub cadrane apar și reglajele speciale ale pașilor pe care îi are chiar acel proiect, de exemplu zigzagul pentru margini, încrețiturile sau piciorușul de fermoar.','Un desen arată cele patru cadrane cu valorile puse, iar la final e proba pe petic, înainte de lucrare.']},
  {v:'7.36',l:['La pisicuța de agățat scrie acum, la fiecare pas, cu ce cusătură coși. Un pas nou, „Vezi ce cusături folosești”, le arată pe toate trei într-un desen: cea care închide corpul, tighelul bentiței și cusătura scară de la final.','Alegere nouă: coși corpul la mașină sau de mână. Pașii și desenele se schimbă după ea.','Lăbuțele au desenul lor, în patru pași: bucățica pliată pe lungime, cusută, întoarsă cu bețișorul și așezată cu capătul deschis pe marginea corpului.','Șorțulețul are și el un desen nou, cu șorțul și bentița așezate pe bucata din față, și un text care spune exact cum se îndoaie bentița și unde ajung capetele ei.']},
@@ -5758,8 +6956,9 @@ function continua(){
   if(R.p&&projById(R.p.id)){const p=projById(R.p.id),per=activePerson(),st=S.proj[pKey(p,per)];
     const n=st&&st.done?st.done.length:0;
     const tot=(()=>{try{return p.pasi(per?per.m:{},pState(p,per).opts).length}catch(e){return 0}})();
-    items.push({ts:R.p.ts,href:'#/p/'+p.id,et:'Proiect',t:p.t,
-      s:tot?`${n} din ${tot} ${tot===1?'pas':'pași'}`:'de continuat'})}
+    items.push({ts:R.p.ts,href:'#/p/'+p.id,et:'Proiect',t:p.t,sil:p.id,
+      s:tot?`${n} din ${tot} ${tot===1?'pas':'pași'}`:'de continuat',
+      pr:tot?Math.round(n/tot*100):0})}
   /* cursul început și neterminat (7.34) */
   {const cc=S.curs&&S.curs.activ&&cursById(S.curs.activ);if(cc){const u=cursUrm(cc);if(u>=0&&cursProgres(cc)>0)items.push({ts:S.curs.ts||0,href:lectieHref(cc.lectii[u]),et:'Curs',t:cc.t,s:`lecția ${u+1} din ${cc.lectii.length}`})}}
   if(R.c&&copieById(R.c.id)){const c=copieById(R.c.id);
@@ -5769,17 +6968,21 @@ function continua(){
   items.sort((a,b)=>b.ts-a.ts);
   return `<section class="cont" aria-label="Ce ai lăsat neterminat"><h2>Continuă de unde ai rămas</h2>
    <ul class="list">${items.slice(0,3).map(i=>`<li><a class="row" href="${i.href}">
-     <span class="row-t">${esc(i.t)}<small>${esc(i.et)} · ${esc(cand(i.ts))} · ${esc(i.s)}</small></span>
+     ${i.sil?silueta(i.sil,58):''}
+     <span class="row-t">${esc(i.t)}<small>${esc(i.et)} · ${esc(cand(i.ts))} · ${esc(i.s)}</small>
+       ${i.pr?`<i class="mini" aria-hidden="true"><span style="width:${i.pr}%"></span></i>`:''}</span>
      <span class="marks" aria-hidden="true">→</span></a></li>`).join('')}</ul></section>`;
 }
 
 /* ================= cele patru pagini ================= */
 const IC={
- acasa:'<svg viewBox="0 0 24 24"><path d="M3.4 10.8 12 3.6l8.6 7.2" class="s"/><path d="M5.6 10v9.6a.8.8 0 0 0 .8.8h11.2a.8.8 0 0 0 .8-.8V10" class="f"/><path d="M9.8 20.4v-5.2a.8.8 0 0 1 .8-.8h2.8a.8.8 0 0 1 .8.8v5.2" class="hole"/></svg>',
- invat:'<svg viewBox="0 0 24 24"><path d="M12 6.6C10.2 5.2 7.6 4.6 3.6 4.8v13.4c4-.2 6.6.4 8.4 1.8z" class="f"/><path d="M12 6.6c1.8-1.4 4.4-2 8.4-1.8v13.4c-4-.2-6.6.4-8.4 1.8z" class="f2"/><path d="M12 6.6V20" class="s"/></svg>',
- fac:'<svg viewBox="0 0 24 24"><path d="M4.4 19.6 16.8 7.2" class="s2"/><path d="M16.8 7.2 20.4 3.6" class="s"/><ellipse cx="18.6" cy="5.4" rx="2" ry="1.3" transform="rotate(-45 18.6 5.4)" class="hole"/><path d="M3.4 20.6 6.9 19.4 5.7 15.9z" class="f"/><path d="M12.6 11.4c-2.8.8-3.4 3.4-1.2 4.6" class="s3"/></svg>',
- mult:'<svg viewBox="0 0 24 24"><circle cx="5.4" cy="12" r="2.1" class="f"/><circle cx="12" cy="12" r="2.1" class="f"/><circle cx="18.6" cy="12" r="2.1" class="f"/></svg>'
+ /* 7.41: ghem de ață, carte cu semn, foarfecă de croitorie, trei nasturi */
+ acasa:'<svg viewBox="0 0 24 24"><circle cx="11.2" cy="13" r="7.4" class="f"/><path d="M4.9 9c3.9 1.5 6.8 5 7.8 9.4M10 5.7c2.5 3.1 3.9 7 4.1 11.2" class="s3"/><path d="M17.1 7.3c1.1-1.6 2.4-2.3 3.9-2.1" class="s3"/></svg>',
+ invat:'<svg viewBox="0 0 24 24"><path d="M12 6.6C10.2 5.2 7.6 4.6 3.6 4.8v13.4c4-.2 6.6.4 8.4 1.8z" class="f"/><path d="M12 6.6c1.8-1.4 4.4-2 8.4-1.8v13.4c-4-.2-6.6.4-8.4 1.8z" class="f2"/><path d="M12 6.6V20" class="s2"/><path d="M16.2 4.9v6.3l1.6-1.5 1.6 1.5V4.7" class="hole"/></svg>',
+ fac:'<svg viewBox="0 0 24 24"><circle cx="6.3" cy="18.1" r="2.6" class="f"/><circle cx="17.7" cy="18.1" r="2.6" class="f"/><path d="M8.3 16.3 18.5 4.1M15.7 16.3 5.5 4.1" class="s2"/></svg>',
+ mult:'<svg viewBox="0 0 24 24"><circle cx="5.2" cy="12" r="2.9" class="f"/><circle cx="12" cy="12" r="2.9" class="f"/><circle cx="18.8" cy="12" r="2.9" class="f"/><circle cx="5.2" cy="12" r=".85" class="hole"/><circle cx="12" cy="12" r=".85" class="hole"/><circle cx="18.8" cy="12" r=".85" class="hole"/></svg>'
 };
+
 const PAGINI=[
  {h:'#/',t:'Acasă',i:'acasa'},
  {h:'#/tehnici',t:'Învăț',i:'invat'},
@@ -5792,6 +6995,16 @@ function bara(activ){
   const n=document.getElementById('bara');
   n.innerHTML=PAGINI.map(p=>`<a href="${p.h}" class="tb${p.h===activ?' on':''}"${p.h===activ?' aria-current="page"':''}>
     ${IC[p.i]}<span>${p.t}</span></a>`).join('');
+}
+/* 7.43: bara de jos ia culoarea secțiunii în care ești. Accentul nu se recalculează aici după
+   adresă, ca să nu existe două hărți care pot ajunge să nu se potrivească: se citește exact
+   valoarea pe care CSS-ul a calculat-o deja pe `.view`, din clasa `sec-…` sau `grp-…`.
+   Pe paginile fără secțiune, `--acc` lipsește și bara revine la ața de indigo. */
+function baraAcc(){
+  const n=document.getElementById('bara'), v=app.querySelector('.view');
+  let c='';
+  if(v){try{c=getComputedStyle(v).getPropertyValue('--acc').trim()}catch(e){c=''}}
+  if(c)n.style.setProperty('--tb-acc',c); else n.style.removeProperty('--tb-acc');
 }
 
 
@@ -5829,6 +7042,7 @@ function maiMult(){
     ${rand('#/persoane','Persoane și măsuri',S.people.length?S.people.map(x=>esc(x.nume)).join(', '):'niciuna salvată',0,'persoane')}
     ${rand('#/copii','Copiile din poză',`${(S.copii||[]).length} ${(S.copii||[]).length===1?'copie salvată':'copii salvate'}`,0,'poza')}
     ${rand('#/contoare','Contor de rânduri',(S.contoare||[]).length?`${S.contoare.length} ${S.contoare.length===1?'contor':'contoare'}`:'pentru croșetat și tricotat',0,'contor')}
+    ${rand('#/masina','La mașină','tensiunea și reglajele, mari, cu ecranul aprins',0,'masina2')}
     ${rand('#/setari','Copie de siguranță',lb?`ultima ${cand(lb)}`:'nu ai salvat încă niciuna',!lb||zile>30,'backup')}
    </ul></section>
    <section class="sec"><div class="sec-h"><h2>Aplicația</h2></div><ul class="list">
@@ -5836,10 +7050,10 @@ function maiMult(){
     ${rand('#/noutati','Ce e nou',`versiunea ${APP_VER}`,0,'nou')}
    </ul></section>
    <section class="sec"><div class="sec-h"><h2>Ajutor</h2></div><ul class="list">
-    ${rand('#/bunvenit','Cum folosești aplicația','cele trei feluri, pe scurt',0,'tehnica')}
+    ${rand('#/bunvenit','Cum folosești aplicația','cele trei feluri, pe scurt',0,'ajutor')}
     ${rand('#/legenda','Cum citești desenele','semnele folosite în toate figurile',0,'legenda')}
     ${rand('#/t/depanare','Depanarea mașinii','ce verifici când ceva nu merge',0,'depanare')}
-    ${rand('#/t/janome-1522','Mașina ta, Janome 1522GN','reglajele ei, pas cu pas',0,'masina2')}
+    ${rand('#/t/janome-1522','Mașina ta, Janome 1522GN','reglajele ei, pas cu pas',0,'janome')}
     ${rand('#/diagnostic','Diagnostic tehnic','dacă aplicația nu se instalează sau nu merge offline',0,'diagnostic')}
    </ul></section>
    <section class="set"><h2>Despre</h2>
@@ -5858,10 +7072,23 @@ function tabs(cur){
    <a href="#/proiecte" class="tab${cur==='p'?' on':''}"${cur==='p'?' aria-current="page"':''}><b>Fac</b><span>proiecte cu măsurile mele</span></a>
   </nav>`;
 }
+/* 7.43: litera A a mastheadului, desenată. E aceeași literă ca pe iconița aplicației: două
+   picioare groase, trasate ca din creion, și bara orizontală cusută, cu puncte de ață. Apare
+   numai la titlul „Atelier”, adică o dată, pe prima pagină: e un masthead, nu o regulă de
+   tipografie. Dimensiunea e în `em`, deci urcă și coboară odată cu mărimea textului din Setări.
+   Cititorul de ecran aude tot „Atelier”, fiindcă litera desenată stă lângă un „A” ascuns. */
+const mastA=()=>'<span class="sr">A</span><svg class="mA" viewBox="0 0 30 44" aria-hidden="true" focusable="false">'
+  +'<path class="mA-p" d="M4.2 39.5 L15 7.5 L25.8 39.5"/>'
+  /* Bara stă la 64% din înălțimea literei și se oprește EXACT sub picioare: la prima
+     încercare ieșea în afara lor și arăta ca o tăietură peste literă. */
+  +'<path class="mA-t" d="M8.6 28.2 H21.4"/></svg>';
+
 function mast(titlu,sub,rigla){
   const news=NEWS.length?`<section class="alert ok" aria-label="Ce e nou"><h2>Ce e nou în Atelier ${APP_VER}</h2>
     <ul>${NEWS.flatMap(n=>n.l).map(x=>`<li>${esc(x)}</li>`).join('')}</ul><button id="newsOk">Am înțeles</button></section>`:'';
-  return `<header class="mast"><div class="mast-t"><h1>${esc(titlu||'Atelier')}</h1>
+  const t=titlu||'Atelier';
+  const h1=t==='Atelier'?`<h1 class="mast-brand">${mastA()}<span>telier</span></h1>`:`<h1>${esc(t)}</h1>`;
+  return `<header class="mast"><div class="mast-t">${h1}
    <p>${esc(sub||'Manual de tehnici de cusut, croșetat și tricotat, pas cu pas, cu desene.')}</p>
    ${rigla?'<div class="tape" aria-hidden="true"></div>':''}</div></header>${news}`;
 }
@@ -5895,10 +7122,12 @@ function randuri(arr){
 function list(){
   const res=document.getElementById('res');
   if(!Q&&FILTER==='all'){
-    res.innerHTML=`<ul class="grid">${SECT.map(s=>{
+    /* secțiunile ca plăci de culoare, două pe rând: culoarea e informația, nu o dungă (7.39) */
+    res.innerHTML=`<ul class="grid doi">${SECT.map((s,i)=>{
       const all=inSec(s.id), nd=all.filter(t=>S.done[t.id]).length;
-      return `<li><a class="card sec-${s.id}" href="#/s/${s.id}"><span class="ic">${SIC[s.id]}</span>
-        <b>${esc(s.t)}</b><span>${all.length} ${all.length===1?'fișă':'fișe'}${nd?`, ${nd} ${nd===1?'exersată':'exersate'}`:''}</span>
+      return `<li${i===SECT.length-1&&SECT.length%2?' class="lat"':''}><a class="card plin sec-${s.id}" href="#/s/${s.id}">
+        <span class="pt"><b>${esc(s.t)}</b><span>${all.length} ${all.length===1?'fișă':'fișe'}${nd?`, ${nd} ${nd===1?'exersată':'exersate'}`:''}</span></span>
+        <span class="ic">${SIC[s.id]}</span>
         ${nd?`<i class="trk" aria-hidden="true"><em style="width:${Math.round(nd/all.length*100)}%"></em></i>`:''}</a></li>`}).join('')}</ul>`;
     return;
   }
@@ -5911,30 +7140,31 @@ function list(){
     out+=`<section class="sec"><div class="sec-h"><h2>${s.t}</h2><span>${shown.length} ${shown.length===1?'rezultat':'rezultate'}</span></div>`+randuri(shown)+`</section>`;
   });
   if(!total){
-    if(Q)out=`<p class="empty">Nicio tehnică pentru „${esc(Q)}”. Proiectele se caută în partea „Fac”.</p>`;
-    else if(FILTER==='fav')out=`<p class="empty">Nicio fișă la favorite încă. Deschide o fișă și apasă „Favorit”.</p>`;
-    else out=`<p class="empty">Le-ai exersat pe toate.</p>`;
+    if(Q)out=ecranGol('cautare',`Nicio tehnică pentru „${Q}”. Proiectele se caută în partea „Fac”.`);
+    else if(FILTER==='fav')out=ecranGol('perinita','Nicio fișă la favorite încă. Deschide o fișă și apasă „Favorit”.');
+    else out=ecranGol('gata','Le-ai exersat pe toate.');
   }
   res.innerHTML=out;
 }
 function sectiune(id){
   const s=SECT.find(x=>x.id===id); if(!s){location.hash='#/tehnici';return}
   const all=inSec(s.id), nd=all.filter(t=>S.done[t.id]).length;
-  app.innerHTML=`<div class="view"><a class="back" href="#/tehnici">← Învăț</a>
+  app.innerHTML=`<div class="view sec-${s.id}"><a class="back" href="#/tehnici">← Învăț</a>
    <header class="head sec-${s.id}"><div class="meta"><span class="ic">${SIC[s.id]}</span>
    <span>${all.length} ${all.length===1?'fișă':'fișe'}</span><span>${nd} exersate</span></div>
    <h1>${esc(s.t)}</h1></header>
    ${s.id==='croset'||s.id==='tricot'?`<section class="a3s a3one" aria-label="Unealtă"><a class="a3" href="#/contoare">${ic('contor')}<span class="txt"><b>Contor de rânduri</b><span>numeri rândurile cât lucrezi</span></span></a></section>`:''}
    ${randuri(all)}</div>`;
 }
-/* iconițele grupurilor de proiecte, în același stil cu cele ale secțiunilor (7.22) */
+/* iconițele grupurilor de proiecte (7.22), redesenate la 7.41 ca să stea în același
+   vocabular cu restul setului: fustă, bluză, sacoșă, body de bebeluș, ursuleț, pernă. */
 const GIC={
- fuste:'<svg viewBox="0 0 24 24"><path d="M8 4h8l3.6 15.4a1 1 0 0 1-1 1.2H5.4a1 1 0 0 1-1-1.2z" class="f"/><path d="M8 7.2h8"/><path d="M12 7.2v13.4M9.2 7.2 7.4 20.6M14.8 7.2l1.8 13.4" class="f2"/></svg>',
- purtat:'<svg viewBox="0 0 24 24"><path d="M8.6 3.8 3.8 6.6l1.9 4.1 2.1-1.1V20.4h8.4V9.6l2.1 1.1 1.9-4.1-4.8-2.8c-.6 1.6-1.9 2.5-3.4 2.5s-2.8-.9-3.4-2.5z" class="f"/></svg>',
- genti:'<svg viewBox="0 0 24 24"><path d="M4.8 8.6h14.4l-1.3 11a1 1 0 0 1-1 .9H7.1a1 1 0 0 1-1-.9z" class="f"/><path d="M9 8.6V7a3 3 0 0 1 6 0v1.6"/></svg>',
- copii:'<svg viewBox="0 0 24 24"><path d="M8.2 3.6h7.6l3.4 3.2-2.1 2.6-1.3-1V14l-1.6 6.4h-4.4L8.2 14V8.4l-1.3 1-2.1-2.6z" class="f"/><path d="M9.8 3.6a2.2 2.2 0 0 0 4.4 0"/><circle cx="12" cy="11" r=".7" class="hole-s"/><circle cx="12" cy="13.6" r=".7" class="hole-s"/></svg>',
- jucarii:'<svg viewBox="0 0 24 24"><path d="M7.4 8.4 8.8 3.2l2.4 3.2q.8.4 1.6 0l2.4-3.2 1.4 5.2c1.2 2.6 1.2 9.2-.2 11.2q-.6 1-2 1H9.6q-1.4 0-2-1c-1.4-2-1.4-8.6-.2-11.2z" class="f"/><path d="M10.9 5.4a1.3 1.3 0 0 1 2.2 0"/><circle cx="10.2" cy="11.4" r=".8" class="hole-s"/><circle cx="13.8" cy="11.4" r=".8" class="hole-s"/><path d="M7.1 15.4c2.6 1.1 7.2 1.1 9.8 0" class="f2"/></svg>',
- casa:'<svg viewBox="0 0 24 24"><path d="M4.6 6.2c2.4-1.2 12.4-1.2 14.8 0 1.2 2.4 1.2 9.2 0 11.6-2.4 1.2-12.4 1.2-14.8 0-1.2-2.4-1.2-9.2 0-11.6z" class="f"/><circle cx="12" cy="12" r="1.3"/><path d="M4.6 6.2 8 9.4M19.4 6.2 16 9.4M4.6 17.8 8 14.6M19.4 17.8 16 14.6" class="f2"/></svg>'
+ fuste:'<svg viewBox="0 0 24 24"><path d="M8.6 4.4h6.8l5 15.2H3.6z" class="f"/><path d="M8.6 7.2h6.8" class="hole-s"/></svg>',
+ purtat:'<svg viewBox="0 0 24 24"><path d="M9.4 4.2 4.4 6.8l1.6 3.4 2.4-1v10.2a1.4 1.4 0 0 0 1.4 1.4h4.4a1.4 1.4 0 0 0 1.4-1.4V9.2l2.4 1 1.6-3.4-5-2.6z" class="f"/><path d="M9.4 4.2c.6 1.5 1.5 2.3 2.6 2.3s2-.8 2.6-2.3" class="hole-s"/></svg>',
+ genti:'<svg viewBox="0 0 24 24"><path d="M4 8.6h16l-1.4 11.2a1.4 1.4 0 0 1-1.4 1.2H6.8a1.4 1.4 0 0 1-1.4-1.2z" class="f"/><path d="M8.6 8.6V6.4a3.4 3.4 0 0 1 6.8 0v2.2"/></svg>',
+ copii:'<svg viewBox="0 0 24 24"><path d="M9.1 3.6 4.9 5.9l1.5 3.2 2.1-1v3.6c0 2.6-.7 3.7-.7 5.3 0 1.5 1.1 2.4 2.5 2.4 1.1 0 1.6-.6 1.7-1.6.1 1 .6 1.6 1.7 1.6 1.4 0 2.5-.9 2.5-2.4 0-1.6-.7-2.7-.7-5.3V8.1l2.1 1 1.5-3.2-4.2-2.3z" class="f"/><path d="M9.1 3.6c.5 1.4 1.5 2.2 2.9 2.2s2.4-.8 2.9-2.2" class="hole-s"/></svg>',
+ jucarii:'<svg viewBox="0 0 24 24"><circle cx="6.6" cy="7" r="2.9" class="f2"/><circle cx="17.4" cy="7" r="2.9" class="f2"/><circle cx="12" cy="13.2" r="6.4" class="f"/><circle cx="9.9" cy="12" r="1" class="hole"/><circle cx="14.1" cy="12" r="1" class="hole"/><path d="M12 14.6c-.9 0-1.5.6-1.5 1.3 0 .8.7 1.4 1.5 1.4s1.5-.6 1.5-1.4c0-.7-.6-1.3-1.5-1.3z" class="hole"/></svg>',
+ casa:'<svg viewBox="0 0 24 24"><path d="M5.6 5.6c4.4-1.1 8.4-1.1 12.8 0 1.1 4.4 1.1 8.4 0 12.8-4.4 1.1-8.4 1.1-12.8 0-1.1-4.4-1.1-8.4 0-12.8z" class="f"/><path d="M12 10.4v3.2M10.4 12h3.2" class="hole-s"/></svg>'
 };
 const PGRP=[
  {id:'fuste',t:'Fuste',ids:['fusta-cerc','fusta-increțita','fusta-clini','fusta-dreapta']},
@@ -5959,16 +7189,19 @@ function projects(){
 function pRanduri(arr,per){
   return `<ul class="list">${arr.map(p=>{
     const st=S.proj[pKey(p,per)], n=st&&st.done?st.done.length:0;
-    return `<li><a class="row" href="#/p/${p.id}"><span class="row-t">${esc(p.t)}<small>${esc(p.time)}</small></span>
-      ${n?`<span class="marks">${n} ${n===1?'pas':'pași'}</span>`:''}
-      ${lvlTag(p.lvl)}</a></li>`}).join('')}</ul>`;
+    /* silueta lucrului gata: se vede din listă ce iese, nu doar cum se cheamă (7.39) */
+    return `<li><a class="row" href="#/p/${p.id}">${silueta(p.id,62)}
+      <span class="row-t">${esc(p.t)}<small>${esc(p.time)}</small>${lvlTag(p.lvl)}</span>
+      ${n?`<span class="marks">${n} ${n===1?'pas':'pași'}</span>`:''}</a></li>`}).join('')}</ul>`;
 }
 function projList(){
   const per=activePerson(), res=document.getElementById('pres');
   if(!PQ){
     res.innerHTML=`<ul class="grid">${PGRP.map(g=>{
       const n=g.ids.length, porn=g.ids.filter(id=>{const st=S.proj[id+'|'+(per?per.id:'-')];return st&&st.done&&st.done.length}).length;
-      return `<li><a class="card pgc" href="#/g/${g.id}"><span class="ic">${GIC[g.id]||''}</span><b>${esc(g.t)}</b>
+      /* nu plăci pline, ca la secțiuni: numele grupurilor sunt lungi și s-ar rupe urât.
+         Culoarea rămâne informația, pe marginea vopsită a foii (7.39). */
+      return `<li><a class="card pgc grp-${g.id}" href="#/g/${g.id}"><span class="ic">${GIC[g.id]||''}</span><b>${esc(g.t)}</b>
         <span>${n} ${n===1?'proiect':'proiecte'}${porn?`, ${porn} ${porn===1?'început':'începute'}`:''}</span>
         ${porn?`<i class="trk" aria-hidden="true"><em style="width:${Math.round(porn/n*100)}%"></em></i>`:''}</a></li>`}).join('')}</ul>`;
     return;
@@ -5976,12 +7209,12 @@ function projList(){
   const gasite=PROJ.filter(p=>matches(norm(p.t+' '+p.intro),PQ));
   res.innerHTML=gasite.length
     ?`<section class="sec"><div class="sec-h"><h2>Rezultate</h2><span>${gasite.length}</span></div>${pRanduri(gasite,per)}</section>`
-    :`<p class="empty">Niciun proiect pentru „${esc(PQ)}”. Tehnicile se caută în partea „Învăț”.</p>`;
+    :ecranGol('cautare',`Niciun proiect pentru „${PQ}”. Tehnicile se caută în partea „Învăț”.`);
 }
 function grup(id){
   const g=PGRP.find(x=>x.id===id); if(!g){location.hash='#/proiecte';return}
   const per=activePerson(), arr=g.ids.map(projById).filter(Boolean);
-  app.innerHTML=`<div class="view"><a class="back" href="#/proiecte">← Fac</a>
+  app.innerHTML=`<div class="view grp-${g.id}"><a class="back" href="#/proiecte">← Fac</a>
    <header class="head"><div class="meta"><span>${arr.length} ${arr.length===1?'proiect':'proiecte'}</span>
    ${per?`<span>măsurile ${esc(per.nume)}</span>`:''}</div>
    <h1>${esc(g.t)}</h1></header>${pRanduri(arr,per)}</div>`;
@@ -5992,7 +7225,7 @@ function sheet(id,pasEvid){
   const sec=SECT.find(s=>s.id===t.sec), arr=ORDER[t.sec], k=arr.indexOf(id);
   const n=SECT.indexOf(sec)+1, fig=k+1;
   const prev=k>0?byId(arr[k-1]):null, next=k<arr.length-1?byId(arr[k+1]):null;
-  let h=`<div class="view"><a class="back" href="#/tehnici">← Toate tehnicile</a>
+  let h=`<div class="view sec-${t.sec}"><a class="back" href="#/tehnici">← Toate tehnicile</a>
    <header class="head sec-${t.sec}"><div class="meta"><span class="ic">${SIC[t.sec]}</span><span>${sec.t}</span>${lvlTag(t.lvl)}<span>${t.time}</span></div>
    <h1>${esc(t.t)}</h1></header>
    <p class="intro">${esc(t.intro)}</p>
@@ -6034,7 +7267,12 @@ function sheet(id,pasEvid){
   bf.onclick=()=>{S.fav[t.id]?delete S.fav[t.id]:S.fav[t.id]=1;save();
     bf.setAttribute('aria-pressed',String(!!S.fav[t.id]));bf.textContent=S.fav[t.id]?'★ Favorit':'☆ Favorit'};
   bd.onclick=()=>{S.done[t.id]?delete S.done[t.id]:S.done[t.id]=1;save();
-    bd.setAttribute('aria-pressed',String(!!S.done[t.id]));bd.textContent=S.done[t.id]?'✓ Exersat':'Am exersat'};
+    bd.setAttribute('aria-pressed',String(!!S.done[t.id]));bd.textContent=S.done[t.id]?'✓ Exersat':'Am exersat';
+    /* 7.42: când bifezi, peste buton se trage o cusătură. Clasa se scoate la bifarea inversă
+       și se repune de fiecare dată, ca animația să pornească din nou. */
+    bd.classList.remove('cusut');
+    if(S.done[t.id]&&S.settings.motion!=='nu'){void bd.offsetWidth;bd.classList.add('cusut')}};
+  if(S.done[t.id])bd.classList.add('cusut');
 }
 
 function legend(){
@@ -6159,8 +7397,14 @@ const ICZ={
  plus:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>',
  minus:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg>'
 };
-function zoomFig(svgHtml,cap){
+function zoomFig(svgHtml,cap,sursa){
   const w=document.createElement('div');w.className='zfull';
+  /* 7.42: de unde crește lupa. Centrul figurii atinse, în procente din ecran. */
+  if(sursa&&sursa.getBoundingClientRect){const r=sursa.getBoundingClientRect();
+    if(r.width&&r.height){
+      w.style.setProperty('--zx',(r.left+r.width/2)/innerWidth*100+'%');
+      w.style.setProperty('--zy',(r.top+r.height/2)/innerHeight*100+'%');
+    }}
   w.innerHTML=`<div class="zf-top" role="dialog" aria-modal="true" aria-label="Desen mărit">
       <p class="zf-cap">${esc(cap||'')}</p>
       <button class="zf-b" data-close aria-label="Închide">${ICZ.x}</button></div>
@@ -6253,7 +7497,7 @@ function bindZoom(){
     f.classList.add('zoomable');f.tabIndex=0;f.setAttribute('role','button');f.setAttribute('aria-label','Mărește desenul');
     const go=()=>{const c=f.querySelector('figcaption');
       const cap=c?[...c.childNodes].map(n=>n.textContent).join(' ').replace(/\s+/g,' ').trim():'';
-      zoomFig(f.querySelector('svg').outerHTML,cap)};
+      zoomFig(f.querySelector('svg').outerHTML,cap,f)};
     f.onclick=go;f.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}};
   });
 }
@@ -6390,6 +7634,9 @@ function bodyFig(active){
 }
 
 /* ================= proiecte ================= */
+/* 7.43: grupul din care face parte un proiect. Până acum culoarea grupului se vedea numai pe
+   cardul din lista „Fac”; pagina grupului și pagina proiectului erau neutre. */
+const grupulLui=id=>{const g=PGRP.find(x=>x.ids.indexOf(id)>=0);return g?g.id:''};
 function pKey(p,per){return p.id+'|'+(per?per.id:'-')}
 function pState(p,per){const k=pKey(p,per);if(!S.proj[k])S.proj[k]={opts:{},done:[],W:140};
   const st=S.proj[k];p.opts.forEach(o=>{if(st.opts[o.k]===undefined)st.opts[o.k]=o.input?o.def:o.v[0][0]});return st}
@@ -6399,9 +7646,9 @@ function project(id){
   const per=activePerson(), st=pState(p,per);
   const need=p.needM||[];
   const lipsa=need.filter(k=>!(per&&per.m[k]>0));
-  let h=`<div class="view"><a class="back" href="#/proiecte">← Toate proiectele</a>
+  let h=`<div class="view grp-${grupulLui(p.id)}"><a class="back" href="#/proiecte">← Toate proiectele</a>
    <header class="head"><div class="meta"><span>Proiect</span>${lvlTag(p.lvl)}<span>${esc(p.time)}</span></div>
-   <h1>${esc(p.t)}</h1></header>
+   <div class="hero"><div class="hero-t"><h1>${esc(p.t)}</h1></div>${silueta(p.id,104)}</div></header>
    <p class="intro">${esc(p.intro)}</p>`;
   if(need.length){
     h+=`<section class="set"><h2>Măsurile</h2>`;
@@ -6492,10 +7739,12 @@ function project(id){
         <label><input type="checkbox" data-s="${i}"${st.done.includes(i)?' checked':''}>
         <span><b>${esc(s.h)}</b>${esc(s.p)}${s.tech&&byId(s.tech)?` <a href="#/t/${s.tech}">Vezi tehnica: ${esc(byId(s.tech).t)}</a>`:''}</span></label>${figPas(s,i)}</li>`).join('')}</ol>
       <div class="seg"><a class="btn pri" href="#/pas/p/${p.id}/0">Mod pas cu pas</a>
+       <a class="btn" href="#/masina">La mașină</a>
        <button class="btn" id="reset">Șterge bifele</button></div></details>`;
     rez.querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>{st.W=+b.dataset.w;save();render()});
     rez.querySelectorAll('[data-mat]').forEach(b=>b.onclick=()=>{st.mat=b.dataset.mat;save();render()});
     bindZoom();
+    if(typeof animLeaga==='function')animLeaga();
     pasi.querySelectorAll('[data-s]').forEach(c=>c.onchange=()=>{const i=+c.dataset.s;
       st.done=c.checked?[...new Set([...st.done,i])]:st.done.filter(x=>x!==i);save();render()});
     document.getElementById('reset').onclick=async()=>{
@@ -6510,7 +7759,8 @@ async function diag(){
    <header class="head"><h1>Diagnostic tehnic</h1></header>
    <p class="intro">Verific pe rând tot ce îi trebuie telefonului ca să poată instala aplicația.</p>
    <ul class="diag" id="dg"><li>Verific…</li></ul>
-   <div class="seg" style="margin-top:18px"><button class="btn pri" id="cp">Copiază raportul</button></div>
+   <div class="seg" style="margin-top:18px"><button class="btn pri" id="cp">Copiază raportul</button>
+    <button class="btn" id="swrep">Repornește service workerul</button></div>
    <p class="msg" id="dgMsg" role="status"></p></div>`;
   const rows=[],ul=document.getElementById('dg');
   const add=(ok,k,v)=>{rows.push([ok,k,v]);
@@ -6542,11 +7792,29 @@ async function diag(){
     add(disp?1:0,'display',man.display+(disp?'':': instalarea cere standalone'));
     const any=(man.icons||[]).filter(i=>!i.purpose||i.purpose.includes('any'));
     const s192=any.some(i=>/(^|\s)192x192(\s|$)/.test(i.sizes)),s512=any.some(i=>/(^|\s)512x512(\s|$)/.test(i.sizes));
+    /* 7.43.3: identitatea aplicației, ca să se vadă cu ce o compară Chrome când spune
+       „e deja instalată”. */
+    add(man.id?1:2,'Identitatea (id)',man.id?String(man.id):'nescrisă: Chrome o deduce din start_url');
     add(s192&&s512?1:0,'Iconițe declarate',`${(man.icons||[]).length} în manifest; 192 ${s192?'da':'nu'}, 512 ${s512?'da':'nu'}`);
-    for(const ic of (man.icons||[])){
-      try{const r=await fetch(url(ic.src),{cache:'no-store'});
-        add(r.ok?1:0,'Iconița '+ic.src,`${r.status}, tip ${r.headers.get('content-type')||'necunoscut'}`)}
-      catch(e){add(0,'Iconița '+ic.src,'eroare: '+e.message)}
+    /* 7.43.2: nu e de ajuns ca iconița să se descarce, trebuie să se și DECODEZE la mărimea
+       declarată. Un fișier binar urcat greșit (prin interfața web, ca text) dă 200 și tipul
+       corect, dar nu e o imagine validă, iar Android refuză atunci să construiască aplicația
+       instalabilă. Verificăm și iconițele scurtăturilor: intră în același pachet. */
+    const ICO=[...(man.icons||[]).map(i=>[i.src,i.sizes,'']),
+      ...(man.shortcuts||[]).flatMap(sc=>(sc.icons||[]).map(i=>[i.src,i.sizes,' (scurtătură)']))];
+    for(const [src,sizes,et] of ICO){
+      try{const r=await fetch(url(src),{cache:'no-store'});
+        if(!r.ok){add(0,'Iconița '+src+et,`${r.status}: nu se descarcă`);continue}
+        const bl=await r.blob();
+        let dim='';
+        try{const bm=await createImageBitmap(bl);dim=bm.width+'×'+bm.height;bm.close&&bm.close()}
+        catch(e){dim=''}
+        const cerut=String(sizes||'').split('x');
+        const bun=dim&&(!cerut[0]||dim===cerut[0]+'×'+(cerut[1]||cerut[0]));
+        add(bun?1:0,'Iconița '+src+et,dim
+          ? `${r.status}, ${Math.round(bl.size/1024)} kB, ${dim}${bun?'':' dar manifestul cere '+sizes}`
+          : `${r.status}, ${Math.round(bl.size/1024)} kB, NU SE DECODEAZĂ ca imagine`)}
+      catch(e){add(0,'Iconița '+src+et,'eroare: '+e.message)}
     }
     try{const r=await fetch(url(man.start_url||'./'),{cache:'no-store'});
       add(r.ok?1:0,'start_url se deschide',`${man.start_url} → ${r.status}`)}
@@ -6572,6 +7840,10 @@ async function diag(){
       if(c)add(c==='atelier-v'+APP_VER?1:2,'Versiunea din cache',c.replace('atelier-v','')+' față de '+APP_VER);
     }catch(e){add(2,'Cache-uri Atelier','eroare: '+e.message)}
   }
+  /* 7.43.1: ce a pățit chiar înregistrarea service workerului. Stă în afara oricărui `try` și
+     a verificării „browserul acceptă”, fiindcă exact în cazurile în care acelea cad (file://,
+     service worker indisponibil) rândul ăsta e singurul care spune motivul. */
+  add(/EȘUAT|sărit|nu acceptă/.test(SW_STARE)?0:(/înregistrat,/.test(SW_STARE)?1:2),'Înregistrarea, pe scurt',SW_STARE);
   try{const e=await navigator.storage.estimate();
     add(2,'Spațiu folosit',`${Math.round((e.usage||0)/1024)} kB din ${Math.round((e.quota||0)/1048576)} MB`)}catch(e){}
   add(2,'Versiunea aplicației',APP_VER);
@@ -6582,17 +7854,33 @@ async function diag(){
     try{await navigator.clipboard.writeText(raport());m.textContent='Raportul e copiat. Trimite-l mai departe.'}
     catch(e){const ta=document.createElement('textarea');ta.value=raport();ta.style.cssText='width:100%;min-height:200px;margin-top:10px';
       m.textContent='Nu am putut copia. Selectează textul de mai jos:';m.after(ta);ta.select()}};
+  /* 7.43.1: reparația pentru cazul în care Chrome rămâne cu un service worker stricat și nu mai
+     oferă instalarea. Șterge DOAR ce ține de Atelier: înregistrările al căror scope acoperă
+     adresa asta și cache-urile cu prefixul „atelier-”. Notițele, măsurile și proiectele stau în
+     localStorage și NU se ating. */
+  document.getElementById('swrep').onclick=async()=>{
+    /* `confirma` colorează butonul în roșu, ca la ștergeri. Aici nu se pierde nimic din datele
+       ei, deci folosim direct `dialog`, fără „pericol”. */
+    if(!await dialog({titlu:'Repornesc service workerul?',text:'Se șterge doar partea care ține aplicația offline, apoi pagina se reîncarcă. Notițele, măsurile și proiectele tale rămân neatinse.',ok:'Repornește'}))return;
+    let n=0,c=0;
+    try{const regs=await navigator.serviceWorker.getRegistrations();
+      for(const r of regs)if(location.href.startsWith(r.scope)){await r.unregister();n++}}catch(e){}
+    try{for(const k of await caches.keys())if(k.startsWith('atelier-')){await caches.delete(k);c++}}catch(e){}
+    m.textContent=`Am șters ${n} ${n===1?'înregistrare':'înregistrări'} și ${c} ${c===1?'cache':'cache-uri'}. Reîncarc…`;
+    setTimeout(()=>location.reload(),900);
+  };
 }
 
 /* ================= rute ================= */
 const ADANC=h=>h==='#/'?0:(h==='#/tehnici'||h==='#/proiecte'||h==='#/mai-mult')?1
-  :(h.startsWith('#/s/')||h.startsWith('#/g/')||h==='#/copii'||h==='#/contoare')?2:3;
+  :(h.startsWith('#/s/')||h.startsWith('#/g/')||h==='#/copii'||h==='#/contoare'||h==='#/masina')?2:3;
 let ULT_AD=0;
 function route(){
   const h=location.hash||'#/';
   if(h.startsWith('#/t/')){const p=h.slice(4).split('/');sheet(decodeURIComponent(p[0]),+p[1]||0)}
   else if(h==='#/tehnici')tehnici();
   else if(h==='#/contoare')contoare();
+  else if(h==='#/masina')modMasina();
   else if(h.startsWith('#/contor/'))contor(h.slice(9));
   else if(h.startsWith('#/pas/')){const [tip,id,n]=h.slice(6).split('/');pasCuPas(tip,decodeURIComponent(id),n)}
   else if(h.startsWith('#/s/'))sectiune(h.slice(4));
@@ -6617,7 +7905,9 @@ function route(){
   ULT_AD=ad;
   window.scrollTo(0,0);
   bara(PAG_PENTRU(h));
+  baraAcc();
   bindZoom();
+  if(typeof animLeaga==='function')animLeaga();   /* desenele animate din anim.js (7.40) */
 }
 let PREV_H='',CUR_H=location.hash||'#/',PERS_DIN='';
 window.addEventListener('hashchange',()=>{PREV_H=CUR_H;CUR_H=location.hash||'#/';route()});
@@ -6625,15 +7915,20 @@ route();
 PORNIT=true;
 
 /* ================= versiune nouă ================= */
+if(!('serviceWorker' in navigator))SW_STARE='browserul nu acceptă service worker';
+else if(location.protocol!=='https:')SW_STARE='sărit: aplicația îl înregistrează doar pe https, iar adresa e '+location.protocol;
+else if(/claude(usercontent)?\.(ai|site)/.test(location.hostname))SW_STARE='sărit intenționat: în previzualizarea claude.ai';
 if('serviceWorker' in navigator&&location.protocol==='https:'&&!/claude(usercontent)?\.(ai|site)/.test(location.hostname)){
+  SW_STARE='se înregistrează…';
   navigator.serviceWorker.register('sw.js',{scope:'./'}).then(reg=>{
+    SW_STARE='înregistrat, scope '+reg.scope;
     const show=w=>{const b=document.getElementById('updbar');b.classList.add('on');
       document.getElementById('updgo').onclick=()=>w.postMessage('skip')};
     if(reg.waiting&&navigator.serviceWorker.controller)show(reg.waiting);
     reg.addEventListener('updatefound',()=>{const w=reg.installing;if(!w)return;
       w.addEventListener('statechange',()=>{if(w.state==='installed'&&navigator.serviceWorker.controller)show(w)})});
     reg.update().catch(()=>{});
-  }).catch(()=>{});
+  }).catch(e=>{SW_STARE='A EȘUAT: '+(e&&e.name?e.name+': ':'')+(e&&e.message?e.message:String(e))});
   let reloading=false;
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloading)return;reloading=true;location.reload()});
 }
